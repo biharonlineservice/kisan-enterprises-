@@ -1,0 +1,55 @@
+<?php
+
+return [
+    'nav' => [
+        'home' => 'Home',
+        'products' => 'Products & Supply',
+        'procurement' => 'Selling Your Crop',
+        'farmer_register' => 'Farmer Registration',
+        'contact' => 'Contact Us',
+        'login' => 'Staff Login',
+        'portal' => 'ERP Portal',
+    ],
+    'hero' => [
+        'badge' => 'Direct Procurement & Bulk Supply',
+        'title' => 'Empowering Farmers, Supplying Quality Grain to Leading Mills',
+        'subtitle' => 'Fair weighment, transparent quality inspection, and guaranteed same-day payment for agricultural producers across Uttar Pradesh and Bihar.',
+        'register_btn' => 'Register as Farmer',
+        'products_btn' => 'Bulk Grain Supply',
+    ],
+    'features' => [
+        'title' => 'Why Farmers & Millers Trust Kisan Enterprises',
+        'subtitle' => 'Built on integrity, digital weighbridge accuracy, and trusted trade relations.',
+        'f1_title' => 'Electronic Weighbridge',
+        'f1_desc' => 'Certified digital scale weighment with instant computerized weigh slips for full transparency.',
+        'f2_title' => 'Fair Moisture & Quality',
+        'f2_desc' => 'Calibrated digital moisture meters and transparent grading ensure you receive top market value.',
+        'f3_title' => 'Guaranteed Fast Payment',
+        'f3_desc' => 'Instant electronic bank transfer (NEFT/RTGS) or cash payment directly upon receipt finalization.',
+        'f4_title' => 'Bulk Mill Supply',
+        'f4_desc' => 'Reliable, lab-tested paddy, wheat, and maize delivered in bulk to flour mills and rice processors.',
+    ],
+    'farmer_reg' => [
+        'title' => 'Farmer Online Registration',
+        'subtitle' => 'Register your details to enjoy priority weighment and direct bank payments during harvest season.',
+        'submit_btn' => 'Submit Registration',
+        'success_title' => 'Registration Successful!',
+        'success_msg' => 'Welcome to Kisan Enterprises! Your Farmer ID is :id. We look forward to trading with you.',
+    ],
+    'contact' => [
+        'title' => 'Get in Touch',
+        'subtitle' => 'Have questions regarding grain supply, mandi rates, or partnership? Contact our team.',
+        'name' => 'Your Name',
+        'phone' => 'Phone Number',
+        'message' => 'Message / Inquiry',
+        'send_btn' => 'Send Inquiry',
+        'success' => 'Thank you! Your message has been sent. Our team will contact you shortly.',
+    ],
+    'footer' => [
+        'about' => 'Kisan Enterprises is a premier agricultural commodity trading enterprise connecting regional farmers with commercial processors and rice mills.',
+        'quick_links' => 'Quick Links',
+        'contact_info' => 'Mandi Hub & Office',
+        'terms' => 'Terms of Trade',
+        'privacy' => 'Privacy Policy',
+    ],
+];
