@@ -1,6 +1,6 @@
 # ----------------------------------------------------------------------
 # Kisan Enterprises ERP & Business Website
-# XAMPP & Shared Hosting Root Forwarder & Security Rules
+# Production & Shared Hosting Root Forwarder & Security Rules
 # ----------------------------------------------------------------------
 
 <IfModule mod_rewrite.c>
@@ -12,9 +12,9 @@
     RewriteRule ^package(-lock)?\.json - [F,L,NC]
     RewriteRule ^(\.git|storage|bootstrap\/cache) - [F,L,NC]
 
-    # Automatically redirect requests from the project root into public/
-    RewriteCond %{REQUEST_URI} !/public/ [NC]
-    RewriteRule ^(.*)$ "/kisan enterprises/public/$1" [L,R=302,NE]
+    # Clean forward to public folder
+    RewriteCond %{REQUEST_URI} !^/public/
+    RewriteRule ^(.*)$ public/$1 [L]
 </IfModule>
 
 Options -Indexes
