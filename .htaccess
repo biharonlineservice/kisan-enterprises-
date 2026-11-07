@@ -1,6 +1,6 @@
 # ----------------------------------------------------------------------
 # Kisan Enterprises ERP & Business Website
-# Production & Shared Hosting Root Forwarder & Security Rules
+# Universal Root Forwarder (Auto-detects Local XAMPP vs Production Hostinger)
 # ----------------------------------------------------------------------
 
 <IfModule mod_rewrite.c>
@@ -12,8 +12,16 @@
     RewriteRule ^package(-lock)?\.json - [F,L,NC]
     RewriteRule ^(\.git|storage|bootstrap\/cache) - [F,L,NC]
 
-    # Clean forward to public folder
-    RewriteCond %{REQUEST_URI} !^/public/
+    # 1. Localhost / XAMPP Subfolder Forwarder:
+    # Automatically redirects requests from /kisan enterprises/ to /kisan enterprises/public/
+    RewriteCond %{HTTP_HOST} ^(localhost|127\.0\.0\.1)(:\d+)?$ [NC]
+    RewriteCond %{REQUEST_URI} !/public/ [NC]
+    RewriteRule ^(.*)$ "/kisan enterprises/public/$1" [L,R=302,NE]
+
+    # 2. Production Domain Root (Hostinger / Live Server):
+    # Transparently forwards requests into public/ without changing the URL
+    RewriteCond %{HTTP_HOST} !^(localhost|127\.0\.0\.1)(:\d+)?$ [NC]
+    RewriteCond %{REQUEST_URI} !^/public/ [NC]
     RewriteRule ^(.*)$ public/$1 [L]
 </IfModule>
 
