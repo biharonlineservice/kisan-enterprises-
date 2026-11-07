@@ -373,6 +373,46 @@
             </div>
         </div>
 
+        {{-- Firm Bank Account for Remittance --}}
+        @if(setting('business.account_number'))
+        <div class="card shadow-sm mb-4 border-start border-success border-3">
+            <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
+                <h5 class="card-title h6 mb-0 text-success"><i class="bi bi-bank2 me-1"></i> Remittance Bank Account</h5>
+                <span class="badge bg-success-subtle text-success">NEFT / RTGS / UPI</span>
+            </div>
+            <div class="card-body small">
+                <div class="d-flex justify-content-between mb-2">
+                    <span class="text-muted">Account Name:</span>
+                    <strong class="text-success">{{ setting('business.account_name', setting('business.name', 'Kisan Enterprises')) }}</strong>
+                </div>
+                <div class="d-flex justify-content-between mb-2">
+                    <span class="text-muted">Bank Name:</span>
+                    <strong class="text-dark">{{ setting('business.bank_name', 'State Bank of India') }}</strong>
+                </div>
+                <div class="d-flex justify-content-between mb-2">
+                    <span class="text-muted">Account No:</span>
+                    <strong class="font-monospace fs-6 text-dark">{{ setting('business.account_number') }}</strong>
+                </div>
+                <div class="d-flex justify-content-between mb-2">
+                    <span class="text-muted">IFSC Code:</span>
+                    <strong class="font-monospace text-primary">{{ setting('business.ifsc_code') }}</strong>
+                </div>
+                @if(setting('business.bank_branch'))
+                <div class="d-flex justify-content-between mb-2">
+                    <span class="text-muted">Branch:</span>
+                    <span>{{ setting('business.bank_branch') }}</span>
+                </div>
+                @endif
+                @if(setting('business.upi_id'))
+                <div class="d-flex justify-content-between pt-2 border-top">
+                    <span class="text-muted">UPI ID:</span>
+                    <strong class="font-monospace text-success">{{ setting('business.upi_id') }}</strong>
+                </div>
+                @endif
+            </div>
+        </div>
+        @endif
+
         {{-- Buyer Details --}}
         <div class="card shadow-sm mb-4">
             <div class="card-header bg-white py-3">

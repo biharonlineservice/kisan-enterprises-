@@ -133,6 +133,14 @@ return [
         'business.pan' => null,
         'business.state' => null,
 
+        // Bank remittance details
+        'business.bank_name' => 'State Bank of India',
+        'business.account_name' => 'Kisan Enterprises',
+        'business.account_number' => '32109876543',
+        'business.ifsc_code' => 'SBIN0001234',
+        'business.bank_branch' => 'Krishi Upaj Mandi Samiti, Chandauli',
+        'business.upi_id' => 'kisanenterprises@sbi',
+
         // Documents
         'documents.invoice_header' => null,
         'documents.invoice_footer' => 'This is a computer generated document.',

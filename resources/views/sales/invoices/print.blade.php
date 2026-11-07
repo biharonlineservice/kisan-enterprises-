@@ -201,6 +201,9 @@
                     @if(setting('business.email')) | Email: {{ setting('business.email') }} @endif<br>
                     @if(setting('business.gstin')) <strong>GSTIN:</strong> {{ setting('business.gstin') }} @endif
                     @if(setting('business.pan')) | <strong>PAN:</strong> {{ setting('business.pan') }} @endif
+                    @if(setting('business.account_number'))
+                        <br><strong>Bank A/C:</strong> {{ setting('business.bank_name', 'State Bank of India') }} &bull; A/C: <strong>{{ setting('business.account_number') }}</strong> &bull; IFSC: <strong>{{ setting('business.ifsc_code') }}</strong>
+                    @endif
                 </div>
             </td>
             <td style="vertical-align: top; width: 40%; text-align: right;">
@@ -279,6 +282,44 @@
     <table style="width: 100%; margin-bottom: 20px;">
         <tr>
             <td style="width: 55%; vertical-align: top; padding-right: 15px;">
+                @if(setting('business.account_number'))
+                    <div style="background: #fbfdfc; border: 1px solid #c9d8ce; border-left: 3px solid #155B36; border-radius: 4px; padding: 10px 12px; font-size: 11px; margin-bottom: 12px;">
+                        <div style="font-size: 10.5px; font-weight: bold; color: #155B36; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; border-bottom: 1px dashed #d4ded7; padding-bottom: 4px;">
+                            Bank Account Details for Payment (NEFT / RTGS / IMPS / UPI)
+                        </div>
+                        <table style="width: 100%; font-size: 11px; border-collapse: collapse; line-height: 1.6;">
+                            <tr>
+                                <td style="width: 38%; color: #555;">Account Name:</td>
+                                <td style="font-weight: bold; color: #155B36;">{{ setting('business.account_name', setting('business.name', 'Kisan Enterprises')) }}</td>
+                            </tr>
+                            <tr>
+                                <td style="color: #555;">Bank Name:</td>
+                                <td style="font-weight: bold; color: #24332A;">{{ setting('business.bank_name', 'State Bank of India') }}</td>
+                            </tr>
+                            <tr>
+                                <td style="color: #555;">Account Number:</td>
+                                <td style="font-weight: bold; font-family: monospace; font-size: 12px; color: #155B36; letter-spacing: 0.5px;">{{ setting('business.account_number') }}</td>
+                            </tr>
+                            <tr>
+                                <td style="color: #555;">IFSC Code:</td>
+                                <td style="font-weight: bold; font-family: monospace; font-size: 11.5px; color: #24332A;">{{ setting('business.ifsc_code') }}</td>
+                            </tr>
+                            @if(setting('business.bank_branch'))
+                            <tr>
+                                <td style="color: #555;">Branch:</td>
+                                <td>{{ setting('business.bank_branch') }}</td>
+                            </tr>
+                            @endif
+                            @if(setting('business.upi_id'))
+                            <tr>
+                                <td style="color: #555;">UPI ID:</td>
+                                <td style="font-weight: bold; color: #155B36; font-family: monospace;">{{ setting('business.upi_id') }}</td>
+                            </tr>
+                            @endif
+                        </table>
+                    </div>
+                @endif
+
                 @if($invoice->remarks)
                     <div style="font-size: 11px; color: #555; background: #fafafa; border: 1px solid #e3e9e4; padding: 10px; border-radius: 4px; margin-bottom: 10px;">
                         <strong>Remarks:</strong> {{ $invoice->remarks }}

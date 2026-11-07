@@ -97,6 +97,12 @@ class SettingsController extends Controller
             'business_email' => ['nullable', 'email', 'max:150'],
             'business_gstin' => ['nullable', 'regex:/^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z][1-9A-Z]Z[0-9A-Z]$/'],
             'business_pan' => ['nullable', 'regex:/^[A-Z]{5}[0-9]{4}[A-Z]$/'],
+            'business_bank_name' => ['nullable', 'string', 'max:120'],
+            'business_account_name' => ['nullable', 'string', 'max:150'],
+            'business_account_number' => ['nullable', 'string', 'max:50'],
+            'business_ifsc_code' => ['nullable', 'string', 'max:20'],
+            'business_bank_branch' => ['nullable', 'string', 'max:150'],
+            'business_upi_id' => ['nullable', 'string', 'max:100'],
             'logo' => ['nullable', 'file', 'mimes:png,jpg,jpeg,webp', 'max:1024', 'dimensions:max_width=2000,max_height=2000'],
             'remove_logo' => ['nullable', 'boolean'],
         ], [
@@ -107,7 +113,7 @@ class SettingsController extends Controller
         ]);
 
         $values = [];
-        foreach (['name', 'tagline', 'address', 'state', 'phone', 'alt_phone', 'email', 'gstin', 'pan'] as $f) {
+        foreach (['name', 'tagline', 'address', 'state', 'phone', 'alt_phone', 'email', 'gstin', 'pan', 'bank_name', 'account_name', 'account_number', 'ifsc_code', 'bank_branch', 'upi_id'] as $f) {
             $values["business.$f"] = $data["business_$f"] ?? null;
         }
 

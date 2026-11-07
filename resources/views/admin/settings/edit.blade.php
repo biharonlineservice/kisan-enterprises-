@@ -373,6 +373,115 @@
                     </div>
                 </div>
 
+                {{-- Group: Bank Account & Payment Remittance Details --}}
+                <div class="p-3 rounded-3 bg-light border mb-4">
+                    <h6 class="fw-bold text-dark mb-3 d-flex align-items-center gap-2">
+                        <i class="bi bi-bank2 text-success"></i>
+                        <span>Bank Account & Payment Remittance Details (बैंक खाता एवं भुगतान विवरण)</span>
+                    </h6>
+                    <div class="row g-3">
+                        <div class="col-12 col-md-6">
+                            <label for="business_account_name" class="form-label fw-bold text-dark">
+                                Account Holder / Beneficiary Name (खाताधारक का नाम)
+                            </label>
+                            <input type="text"
+                                   id="business_account_name"
+                                   name="business_account_name"
+                                   value="{{ old('business_account_name', $s['business.account_name'] ?? 'Kisan Enterprises') }}"
+                                   class="form-control @error('business_account_name') is-invalid @enderror"
+                                   placeholder="e.g. Kisan Enterprises"
+                                   maxlength="150">
+                            @error('business_account_name')
+                                <div class="text-danger small mt-1">{{ $message }}</div>
+                            @enderror
+                            <div class="form-text text-muted">Legal firm name matching the bank account records.</div>
+                        </div>
+
+                        <div class="col-12 col-md-6">
+                            <label for="business_bank_name" class="form-label fw-bold text-dark">
+                                Bank Name (बैंक का नाम)
+                            </label>
+                            <input type="text"
+                                   id="business_bank_name"
+                                   name="business_bank_name"
+                                   value="{{ old('business_bank_name', $s['business.bank_name'] ?? 'State Bank of India') }}"
+                                   class="form-control @error('business_bank_name') is-invalid @enderror"
+                                   placeholder="e.g. State Bank of India, HDFC Bank, Punjab National Bank"
+                                   maxlength="120">
+                            @error('business_bank_name')
+                                <div class="text-danger small mt-1">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="col-12 col-md-6">
+                            <label for="business_account_number" class="form-label fw-bold text-dark">
+                                Bank Account Number (बैंक खाता संख्या)
+                            </label>
+                            <input type="text"
+                                   id="business_account_number"
+                                   name="business_account_number"
+                                   value="{{ old('business_account_number', $s['business.account_number'] ?? '32109876543') }}"
+                                   class="form-control font-monospace @error('business_account_number') is-invalid @enderror"
+                                   placeholder="Current/Cash Credit Account Number"
+                                   maxlength="50">
+                            @error('business_account_number')
+                                <div class="text-danger small mt-1">{{ $message }}</div>
+                            @enderror
+                            <div class="form-text text-muted">Printed on sales invoices & receipts for buyer RTGS/NEFT/IMPS transfers.</div>
+                        </div>
+
+                        <div class="col-12 col-md-6">
+                            <label for="business_ifsc_code" class="form-label fw-bold text-dark">
+                                IFSC Code (आईएफएससी कोड)
+                            </label>
+                            <input type="text"
+                                   id="business_ifsc_code"
+                                   name="business_ifsc_code"
+                                   value="{{ old('business_ifsc_code', $s['business.ifsc_code'] ?? 'SBIN0001234') }}"
+                                   class="form-control text-uppercase font-monospace @error('business_ifsc_code') is-invalid @enderror"
+                                   placeholder="e.g. SBIN0001234"
+                                   maxlength="20">
+                            @error('business_ifsc_code')
+                                <div class="text-danger small mt-1">{{ $message }}</div>
+                            @enderror
+                            <div class="form-text text-muted">11-character Indian Financial System Code.</div>
+                        </div>
+
+                        <div class="col-12 col-md-6">
+                            <label for="business_bank_branch" class="form-label fw-bold text-dark">
+                                Branch Name (बैंक शाखा)
+                            </label>
+                            <input type="text"
+                                   id="business_bank_branch"
+                                   name="business_bank_branch"
+                                   value="{{ old('business_bank_branch', $s['business.bank_branch'] ?? 'Krishi Upaj Mandi Samiti, Chandauli') }}"
+                                   class="form-control @error('business_bank_branch') is-invalid @enderror"
+                                   placeholder="e.g. Mandi Branch, GT Road, Chandauli"
+                                   maxlength="150">
+                            @error('business_bank_branch')
+                                <div class="text-danger small mt-1">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="col-12 col-md-6">
+                            <label for="business_upi_id" class="form-label fw-bold text-dark">
+                                UPI ID / VPA (यूपीआई आईडी)
+                            </label>
+                            <input type="text"
+                                   id="business_upi_id"
+                                   name="business_upi_id"
+                                   value="{{ old('business_upi_id', $s['business.upi_id'] ?? 'kisanenterprises@sbi') }}"
+                                   class="form-control font-monospace @error('business_upi_id') is-invalid @enderror"
+                                   placeholder="e.g. kisanenterprises@sbi, 9876543210@paytm"
+                                   maxlength="100">
+                            @error('business_upi_id')
+                                <div class="text-danger small mt-1">{{ $message }}</div>
+                            @enderror
+                            <div class="form-text text-muted">Optional: Displayed on invoices for instant QR / UPI app transfers.</div>
+                        </div>
+                    </div>
+                </div>
+
                 {{-- Group 3: Business Logo & Branding --}}
                 <div class="p-3 rounded-3 bg-light border mb-4">
                     <h6 class="fw-bold text-dark mb-3 d-flex align-items-center gap-2">
