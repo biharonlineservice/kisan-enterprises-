@@ -35,17 +35,20 @@
                     {{ $customSubtitle ?: __('website.hero.subtitle') }}
                 </p>
 
-                <div class="d-flex flex-column flex-sm-row flex-wrap gap-2 gap-sm-3 mb-3">
-                    <a href="{{ route('website.farmer.register') }}" class="btn btn-primary px-3 px-sm-4 py-2 rounded-pill shadow-sm hero-cta-btn">
-                        <i class="bi bi-person-plus-fill"></i> {{ __('website.hero.register_btn') }}
+                <div class="hero-cta-group mb-3">
+                    <a href="{{ route('website.farmer.register') }}" class="btn btn-primary hero-cta-btn shadow-sm">
+                        <i class="bi bi-person-plus-fill"></i>
+                        <span>{{ __('website.hero.register_btn') }}</span>
                     </a>
                     @if($priceTrends->isNotEmpty())
-                        <a href="#price-trend" class="btn btn-outline-primary px-3 px-sm-4 py-2 rounded-pill hero-cta-btn bg-white">
-                            <i class="bi bi-graph-up-arrow"></i> {{ $isHindi ? 'भाव ग्राफ देखें' : 'Price Trend Graph' }}
+                        <a href="#price-trend" class="btn btn-outline-primary hero-cta-btn bg-white">
+                            <i class="bi bi-graph-up-arrow"></i>
+                            <span>{{ $isHindi ? 'भाव ग्राफ देखें' : 'Price Trend Graph' }}</span>
                         </a>
                     @endif
-                    <a href="{{ route('website.products') }}" class="btn btn-light px-3 px-sm-4 py-2 rounded-pill hero-cta-btn border">
-                        <i class="bi bi-building"></i> {{ __('website.hero.products_btn') }}
+                    <a href="{{ route('website.products') }}" class="btn btn-light hero-cta-btn border">
+                        <i class="bi bi-building"></i>
+                        <span>{{ __('website.hero.products_btn') }}</span>
                     </a>
                 </div>
 
@@ -754,11 +757,55 @@
         line-height: 1.2;
         word-break: break-word;
     }
+    .hero-cta-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    @media (min-width: 576px) {
+        .hero-cta-group {
+            flex-direction: row;
+            flex-wrap: nowrap;
+            align-items: center;
+            gap: 0.55rem;
+        }
+    }
+    .hero-cta-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.42rem;
+        font-size: 0.88rem;
+        font-weight: 600;
+        padding: 0.52rem 0.95rem;
+        border-radius: 999px !important;
+        white-space: nowrap;
+        text-decoration: none;
+        transition: transform 0.15s ease, box-shadow 0.15s ease;
+        line-height: 1.25;
+        flex-shrink: 0;
+    }
+    .hero-cta-btn:hover {
+        transform: translateY(-1px);
+    }
+    .hero-cta-btn i {
+        font-size: 0.95rem;
+    }
+    @media (min-width: 1200px) {
+        .hero-cta-group {
+            gap: 0.65rem;
+        }
+        .hero-cta-btn {
+            font-size: 0.92rem;
+            padding: 0.55rem 1.15rem;
+            gap: 0.5rem;
+        }
+    }
     @media (max-width: 575.98px) {
         .hero-cta-btn {
             width: 100%;
-            font-size: 0.95rem;
-            padding: 0.68rem 1rem;
+            font-size: 0.92rem;
+            padding: 0.65rem 1rem;
         }
         .hero-trust-tile {
             flex-direction: column;
