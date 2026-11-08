@@ -211,6 +211,12 @@
     <table style="width: 100%; border-bottom: 2px solid #21864B; padding-bottom: 10px; margin-bottom: 15px;">
         <tr>
             <td style="vertical-align: top;">
+                @php $receiptLogo = setting('business.logo'); @endphp
+                @if($receiptLogo)
+                    <div style="margin-bottom: 6px;">
+                        <img src="{{ isset($isPdf) && $isPdf ? public_path('uploads/' . $receiptLogo) : asset('uploads/' . $receiptLogo) }}" alt="{{ setting('business.name') }}" style="max-height: 44px; max-width: 200px; object-fit: contain;">
+                    </div>
+                @endif
                 <div class="company-name">{{ setting('business.name', 'Kisan Enterprises') }}</div>
                 <div class="company-tagline">{{ setting('business.tagline', __('app.tagline')) }}</div>
                 <div class="company-contact">

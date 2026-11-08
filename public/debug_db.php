@@ -33,3 +33,4 @@ try {
 } catch (\Throwable $e) {
     echo "Laravel error: " . $e->getMessage() . "\n";
 }
+

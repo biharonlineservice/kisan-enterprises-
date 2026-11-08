@@ -25,6 +25,10 @@
         {{-- Header --}}
         <div class="d-flex justify-content-between align-items-center border-bottom pb-3 mb-3">
             <div>
+                @php $farmerCardLogo = setting('business.logo'); @endphp
+                @if($farmerCardLogo)
+                    <img src="{{ asset('uploads/' . $farmerCardLogo) }}" alt="{{ setting('business.name') }}" class="header-logo mb-1" style="max-height: 44px; width: auto; object-fit: contain;"><br>
+                @endif
                 <h3 class="fw-bold mb-0 text-success">{{ setting('business.name', 'Kisan Enterprises') }}</h3>
                 <small class="text-muted">{{ setting('business.tagline', 'Agricultural Crop Trading') }}</small>
                 <div class="small text-muted mt-1">{{ setting('business.address') }} @if(setting('business.phone')) &bull; Ph: {{ setting('business.phone') }} @endif</div>

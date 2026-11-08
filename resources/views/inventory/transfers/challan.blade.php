@@ -215,6 +215,12 @@
     <table class="header-table">
         <tr>
             <td style="width: 58%; vertical-align: top;">
+                @php $transferLogo = setting('business.logo'); @endphp
+                @if($transferLogo)
+                    <div style="margin-bottom: 6px;">
+                        <img src="{{ isset($isPdf) && $isPdf ? public_path('uploads/' . $transferLogo) : asset('uploads/' . $transferLogo) }}" alt="{{ setting('business.name') }}" style="max-height: 44px; max-width: 200px; object-fit: contain;">
+                    </div>
+                @endif
                 <div class="company-name">{{ setting('business.name', 'Kisan Enterprises') }}</div>
                 <div class="company-tagline">{{ setting('business.tagline', 'Agricultural Crop Trading & Grain Supply') }}</div>
                 <div style="font-size: 11px; color: #555;">

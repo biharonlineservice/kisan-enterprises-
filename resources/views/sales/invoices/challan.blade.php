@@ -232,6 +232,12 @@
     <table class="header-table">
         <tr>
             <td style="width: 58%; vertical-align: top;">
+                @php $challanLogo = setting('business.logo'); @endphp
+                @if($challanLogo)
+                    <div style="margin-bottom: 6px;">
+                        <img src="{{ isset($isPdf) && $isPdf ? public_path('uploads/' . $challanLogo) : asset('uploads/' . $challanLogo) }}" alt="{{ setting('business.name') }}" style="max-height: 44px; max-width: 200px; object-fit: contain;">
+                    </div>
+                @endif
                 <div class="company-name">{{ setting('business.name', 'Kisan Enterprises') }}</div>
                 <div class="company-tagline">{{ setting('business.tagline', 'Agricultural Crop Trading & Grain Supply') }}</div>
                 <div class="company-contact">

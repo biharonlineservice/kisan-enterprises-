@@ -193,6 +193,12 @@
     <table class="header-table">
         <tr>
             <td style="vertical-align: top; width: 60%;">
+                @php $invLogo = setting('business.logo'); @endphp
+                @if($invLogo)
+                    <div style="margin-bottom: 6px;">
+                        <img src="{{ isset($isPdf) && $isPdf ? public_path('uploads/' . $invLogo) : asset('uploads/' . $invLogo) }}" alt="{{ setting('business.name') }}" style="max-height: 46px; max-width: 220px; object-fit: contain;">
+                    </div>
+                @endif
                 <div class="company-name">{{ setting('business.name', 'Kisan Enterprises') }}</div>
                 <div class="company-tagline">{{ setting('business.tagline', __('app.tagline')) }}</div>
                 <div class="company-contact">

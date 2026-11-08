@@ -124,7 +124,7 @@ return [
         // Business profile (Legal Entity & ERP Documents)
         'business.name' => 'Kisan Enterprises',
         'business.tagline' => 'Agricultural Crop Trading',
-        'business.logo' => null,
+        'business.logo' => 'branding/kisanhub-logo.png',
         'business.address' => null,
         'business.phone' => null,
         'business.alt_phone' => null,

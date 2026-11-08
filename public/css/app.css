@@ -255,8 +255,13 @@ a { text-decoration: none; }
         cursor: pointer;
     }
     html.sidebar-collapsed .sidebar-brand .brand-mark,
-    body.sidebar-collapsed .sidebar-brand .brand-mark {
+    body.sidebar-collapsed .sidebar-brand .brand-mark,
+    html.sidebar-collapsed .sidebar-brand img,
+    body.sidebar-collapsed .sidebar-brand img {
         margin: 0 auto;
+        max-width: 36px;
+        height: 36px;
+        object-fit: contain;
     }
     html.sidebar-collapsed .sidebar-brand .overflow-hidden,
     body.sidebar-collapsed .sidebar-brand .overflow-hidden,

@@ -107,6 +107,20 @@
             box-shadow: 0 4px 10px rgba(33, 134, 75, 0.25);
             flex-shrink: 0;
         }
+        .site-header-logo {
+            height: 48px;
+            max-height: 50px;
+            width: auto;
+            max-width: 220px;
+            object-fit: contain;
+        }
+        @media (max-width: 575.98px) {
+            .site-header-logo {
+                height: 38px;
+                max-height: 40px;
+                max-width: 170px;
+            }
+        }
         .public-nav-offcanvas {
             z-index: 1065 !important;
             border-left: 1px solid var(--ke-border);
@@ -326,15 +340,20 @@
         <div class="container d-flex align-items-center justify-content-between flex-nowrap py-2" style="min-height: 60px;">
             {{-- Brand Link --}}
             <a class="navbar-brand site-brand d-flex align-items-center gap-2 m-0 text-decoration-none flex-shrink-0" href="{{ route('home') }}">
-                <div class="site-brand-logo">
-                    <i class="bi bi-tree-fill fs-5"></i>
-                </div>
-                <div class="min-w-0">
-                    <div class="site-brand-title fw-bold text-dark lh-1 text-truncate" style="font-size: 1.14rem; letter-spacing: -0.2px;">{{ setting('website.brand_name', 'KisanHub') }}</div>
-                    <small class="text-muted d-block text-truncate mt-1" style="font-size: 0.71rem;" title="{{ setting('business.tagline', $layoutHindi ? 'प्रत्यक्ष फसल खरीद एवं थोक अनाज व्यापार' : 'Agricultural Crop Trading & Warehousing') }}">
-                        {{ setting('business.tagline', $layoutHindi ? 'प्रत्यक्ष फसल खरीद एवं थोक अनाज व्यापार' : 'Agricultural Crop Trading & Warehousing') }}
-                    </small>
-                </div>
+                @php $siteLogo = setting('business.logo'); @endphp
+                @if($siteLogo)
+                    <img src="{{ asset('uploads/' . $siteLogo) }}" alt="{{ setting('website.brand_name', 'KisanHub') }}" class="site-header-logo">
+                @else
+                    <div class="site-brand-logo">
+                        <i class="bi bi-tree-fill fs-5"></i>
+                    </div>
+                    <div class="min-w-0">
+                        <div class="site-brand-title fw-bold text-dark lh-1 text-truncate" style="font-size: 1.14rem; letter-spacing: -0.2px;">{{ setting('website.brand_name', 'KisanHub') }}</div>
+                        <small class="text-muted d-block text-truncate mt-1" style="font-size: 0.71rem;" title="{{ setting('business.tagline', $layoutHindi ? 'प्रत्यक्ष फसल खरीद एवं थोक अनाज व्यापार' : 'Agricultural Crop Trading & Warehousing') }}">
+                            {{ setting('business.tagline', $layoutHindi ? 'प्रत्यक्ष फसल खरीद एवं थोक अनाज व्यापार' : 'Agricultural Crop Trading & Warehousing') }}
+                        </small>
+                    </div>
+                @endif
             </a>
 
             {{-- Desktop Horizontal Navigation (>= 992px) --}}
@@ -386,13 +405,17 @@
     <div class="offcanvas offcanvas-end public-nav-offcanvas d-lg-none" tabindex="-1" id="publicNavOffcanvas" aria-labelledby="publicNavOffcanvasLabel" style="width: 310px; max-width: 86vw;">
         <div class="offcanvas-header border-bottom bg-light py-3">
             <div class="d-flex align-items-center gap-2" id="publicNavOffcanvasLabel">
-                <div class="site-brand-logo" style="width: 34px; height: 34px; border-radius: 9px;">
-                    <i class="bi bi-tree-fill fs-6"></i>
-                </div>
-                <div>
-                    <div class="fw-bold text-dark lh-1" style="font-size: 1rem;">{{ setting('website.brand_name', 'KisanHub') }}</div>
-                    <small class="text-muted" style="font-size: 0.72rem;">{{ $layoutHindi ? 'कृषि व्यापार एवं फसल खरीद' : 'Crop Trading & Bulk Supply' }}</small>
-                </div>
+                @if($siteLogo)
+                    <img src="{{ asset('uploads/' . $siteLogo) }}" alt="{{ setting('website.brand_name', 'KisanHub') }}" style="height: 38px; max-width: 190px; width: auto; object-fit: contain;">
+                @else
+                    <div class="site-brand-logo" style="width: 34px; height: 34px; border-radius: 9px;">
+                        <i class="bi bi-tree-fill fs-6"></i>
+                    </div>
+                    <div>
+                        <div class="fw-bold text-dark lh-1" style="font-size: 1rem;">{{ setting('website.brand_name', 'KisanHub') }}</div>
+                        <small class="text-muted" style="font-size: 0.72rem;">{{ $layoutHindi ? 'कृषि व्यापार एवं फसल खरीद' : 'Crop Trading & Bulk Supply' }}</small>
+                    </div>
+                @endif
             </div>
             <button type="button" class="btn-close shadow-none" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
@@ -515,10 +538,16 @@
             <div class="row g-4">
                 <div class="col-12 col-md-4">
                     <div class="d-flex align-items-center gap-2 mb-3">
-                        <div class="bg-white text-success rounded-3 p-1 d-flex align-items-center justify-content-center" style="width: 34px; height: 34px;">
-                            <i class="bi bi-tree-fill fs-5"></i>
-                        </div>
-                        <h5 class="text-white mb-0 fw-bold">{{ setting('website.brand_name', 'KisanHub') }}</h5>
+                        @if($siteLogo)
+                            <div class="bg-white rounded-3 px-2 py-1 shadow-sm d-inline-block">
+                                <img src="{{ asset('uploads/' . $siteLogo) }}" alt="{{ setting('website.brand_name', 'KisanHub') }}" style="height: 38px; width: auto; max-width: 190px; object-fit: contain;">
+                            </div>
+                        @else
+                            <div class="bg-white text-success rounded-3 p-1 d-flex align-items-center justify-content-center" style="width: 34px; height: 34px;">
+                                <i class="bi bi-tree-fill fs-5"></i>
+                            </div>
+                            <h5 class="text-white mb-0 fw-bold">{{ setting('website.brand_name', 'KisanHub') }}</h5>
+                        @endif
                     </div>
                     <p class="small text-white-50 mb-3">
                         {{ __('website.footer.about') }}
