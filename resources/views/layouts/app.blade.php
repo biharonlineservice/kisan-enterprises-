@@ -46,20 +46,18 @@
                 } elseif (file_exists(public_path('images/kisanhub-logo.png'))) {
                     $sidebarLogoUrl = asset('images/kisanhub-logo.png');
                 }
+                $emblemUrl = asset('images/kisanhub-emblem.png');
             @endphp
-            @if($sidebarLogoUrl)
-                <a href="{{ route('dashboard') }}" class="d-flex align-items-center text-decoration-none flex-grow-1 overflow-hidden" title="{{ setting('business.name', 'Kisan Enterprises') }}">
-                    <img src="{{ $sidebarLogoUrl }}" alt="{{ setting('business.name') }}">
-                </a>
-            @else
-                <div class="brand-mark overflow-hidden p-0" title="{{ setting('business.name', 'Kisan Enterprises') }}">
-                    <img src="{{ asset('images/kisanhub-emblem.png') }}" alt="{{ setting('business.name') }}" style="width: 100%; height: 100%; object-fit: contain;">
-                </div>
-                <div class="overflow-hidden flex-grow-1" style="min-width: 0;">
-                    <div class="brand-name text-truncate">{{ setting('business.name', 'Kisan Enterprises') }}</div>
-                    <div class="brand-sub text-truncate">{{ setting('business.tagline', __('app.tagline')) }}</div>
-                </div>
-            @endif
+            <a href="{{ route('dashboard') }}" class="sidebar-brand-link" title="{{ setting('business.name', 'Kisan Enterprises') }}">
+                @if($sidebarLogoUrl)
+                    <img src="{{ $sidebarLogoUrl }}" alt="{{ setting('business.name') }}" class="sidebar-logo-full">
+                    <img src="{{ $emblemUrl }}" alt="{{ setting('business.name') }}" class="sidebar-logo-mini">
+                @else
+                    <div class="brand-mark p-0" title="{{ setting('business.name', 'Kisan Enterprises') }}">
+                        <img src="{{ $emblemUrl }}" alt="{{ setting('business.name') }}" style="width: 100%; height: 100%; object-fit: contain;">
+                    </div>
+                @endif
+            </a>
             <button type="button" class="sidebar-hide-btn ms-auto d-lg-none" data-sidebar-toggle aria-label="{{ __('app.hide_sidebar') }}" title="{{ __('app.hide_sidebar') }}">
                 <i class="bi bi-x-lg fs-6"></i>
             </button>
