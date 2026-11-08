@@ -36,13 +36,23 @@
     {{-- Desktop / Tablet Sidebar --}}
     <aside class="app-sidebar">
         <div class="sidebar-brand">
-            @php $logo = setting('business.logo'); @endphp
-            @if($logo)
-                <img src="{{ asset('uploads/' . $logo) }}" alt="{{ setting('business.name') }}">
+            @php
+                $sidebarLogo = setting('business.logo');
+                $sidebarLogoUrl = null;
+                if ($sidebarLogo && file_exists(public_path('uploads/' . $sidebarLogo))) {
+                    $sidebarLogoUrl = asset('uploads/' . $sidebarLogo);
+                } elseif (file_exists(public_path('uploads/branding/kisanhub-logo.png'))) {
+                    $sidebarLogoUrl = asset('uploads/branding/kisanhub-logo.png');
+                } elseif (file_exists(public_path('images/kisanhub-logo.png'))) {
+                    $sidebarLogoUrl = asset('images/kisanhub-logo.png');
+                }
+            @endphp
+            @if($sidebarLogoUrl)
+                <img src="{{ $sidebarLogoUrl }}" alt="{{ setting('business.name') }}">
             @else
-                    <div class="brand-mark" title="{{ setting('business.name', 'Kisan Enterprises') }}">
-                        <i class="bi bi-tree"></i>
-                    </div>
+                <div class="brand-mark overflow-hidden p-0" title="{{ setting('business.name', 'Kisan Enterprises') }}">
+                    <img src="{{ asset('images/kisanhub-emblem.png') }}" alt="{{ setting('business.name') }}" style="width: 100%; height: 100%; object-fit: contain;">
+                </div>
             @endif
             <div class="overflow-hidden flex-grow-1" style="min-width: 0;">
                 <div class="brand-name text-truncate">{{ setting('business.name', 'Kisan Enterprises') }}</div>

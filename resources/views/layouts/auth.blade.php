@@ -18,15 +18,32 @@
 <body class="bg-light">
     <div class="auth-wrap">
         <aside class="auth-aside">
+            @php
+                $authLogo = setting('business.logo');
+                $authLogoUrl = null;
+                if ($authLogo && file_exists(public_path('uploads/' . $authLogo))) {
+                    $authLogoUrl = asset('uploads/' . $authLogo);
+                } elseif (file_exists(public_path('uploads/branding/kisanhub-logo.png'))) {
+                    $authLogoUrl = asset('uploads/branding/kisanhub-logo.png');
+                } elseif (file_exists(public_path('images/kisanhub-logo.png'))) {
+                    $authLogoUrl = asset('images/kisanhub-logo.png');
+                }
+            @endphp
             <div>
                 <div class="d-flex align-items-center gap-2 mb-4">
-                    <div class="brand-mark">
-                        <i class="bi bi-tree"></i>
-                    </div>
-                    <div>
-                        <h4 class="mb-0 text-white fw-bold">{{ setting('business.name', 'Kisan Enterprises') }}</h4>
-                        <small class="text-white-50">{{ setting('business.tagline', __('app.tagline')) }}</small>
-                    </div>
+                    @if($authLogoUrl)
+                        <div class="bg-white rounded-3 px-2 py-1 shadow-sm d-inline-block">
+                            <img src="{{ $authLogoUrl }}" alt="{{ setting('business.name') }}" style="height: 42px; width: auto; max-width: 200px; object-fit: contain;">
+                        </div>
+                    @else
+                        <div class="brand-mark overflow-hidden p-0">
+                            <img src="{{ asset('images/kisanhub-emblem.png') }}" alt="{{ setting('business.name') }}" style="width: 100%; height: 100%; object-fit: contain;">
+                        </div>
+                        <div>
+                            <h4 class="mb-0 text-white fw-bold">{{ setting('business.name', 'Kisan Enterprises') }}</h4>
+                            <small class="text-white-50">{{ setting('business.tagline', __('app.tagline')) }}</small>
+                        </div>
+                    @endif
                 </div>
                 <h2 class="mb-3">{{ app()->getLocale() === 'hi' ? 'पारदर्शी कृषि व्यापार एवं डिजिटल मंडी प्रबंधन' : 'Transparent Agricultural Trading & Management' }}</h2>
                 <p class="mb-4">{{ app()->getLocale() === 'hi' ? 'किसानों से सीधे फसल खरीद, डिजिटल कंप्यूटर धर्मकांटा तौल, राइस मिलों को थोक आपूर्ति एवं समय पर पारदर्शी भुगतान प्रणाली।' : 'Streamlining procurement directly from farmers, managing grain inventory, tracking dispatch to mills, and maintaining accurate financial ledgers.' }}</p>
@@ -52,11 +69,15 @@
             <div class="auth-content-wrap flex-grow-1 d-flex align-items-center justify-content-center p-3 p-sm-4">
                 <div class="auth-card my-auto">
                     <div class="text-center d-lg-none mb-4">
-                        <div class="brand-mark mx-auto mb-2">
-                            <i class="bi bi-tree"></i>
-                        </div>
-                        <h4 class="fw-bold mb-0">{{ setting('business.name', 'Kisan Enterprises') }}</h4>
-                        <small class="text-muted">{{ setting('business.tagline', __('app.tagline')) }}</small>
+                        @if($authLogoUrl)
+                            <img src="{{ $authLogoUrl }}" alt="{{ setting('business.name') }}" style="height: 44px; width: auto; max-width: 220px; object-fit: contain;" class="mb-2">
+                        @else
+                            <div class="brand-mark mx-auto mb-2 overflow-hidden p-0">
+                                <img src="{{ asset('images/kisanhub-emblem.png') }}" alt="{{ setting('business.name') }}" style="width: 100%; height: 100%; object-fit: contain;">
+                            </div>
+                            <h4 class="fw-bold mb-0">{{ setting('business.name', 'Kisan Enterprises') }}</h4>
+                            <small class="text-muted">{{ setting('business.tagline', __('app.tagline')) }}</small>
+                        @endif
                     </div>
 
                     @if(session('success'))

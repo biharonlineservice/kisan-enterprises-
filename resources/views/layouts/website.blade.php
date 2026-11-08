@@ -340,12 +340,22 @@
         <div class="container d-flex align-items-center justify-content-between flex-nowrap py-2" style="min-height: 60px;">
             {{-- Brand Link --}}
             <a class="navbar-brand site-brand d-flex align-items-center gap-2 m-0 text-decoration-none flex-shrink-0" href="{{ route('home') }}">
-                @php $siteLogo = setting('business.logo'); @endphp
-                @if($siteLogo)
-                    <img src="{{ asset('uploads/' . $siteLogo) }}" alt="{{ setting('website.brand_name', 'KisanHub') }}" class="site-header-logo">
+                @php
+                    $siteLogo = setting('business.logo');
+                    $logoUrl = null;
+                    if ($siteLogo && file_exists(public_path('uploads/' . $siteLogo))) {
+                        $logoUrl = asset('uploads/' . $siteLogo);
+                    } elseif (file_exists(public_path('uploads/branding/kisanhub-logo.png'))) {
+                        $logoUrl = asset('uploads/branding/kisanhub-logo.png');
+                    } elseif (file_exists(public_path('images/kisanhub-logo.png'))) {
+                        $logoUrl = asset('images/kisanhub-logo.png');
+                    }
+                @endphp
+                @if($logoUrl)
+                    <img src="{{ $logoUrl }}" alt="{{ setting('website.brand_name', 'KisanHub') }}" class="site-header-logo">
                 @else
-                    <div class="site-brand-logo">
-                        <i class="bi bi-tree-fill fs-5"></i>
+                    <div class="site-brand-logo overflow-hidden p-0">
+                        <img src="{{ asset('images/kisanhub-emblem.png') }}" alt="{{ setting('website.brand_name', 'KisanHub') }}" style="width: 100%; height: 100%; object-fit: contain;">
                     </div>
                     <div class="min-w-0">
                         <div class="site-brand-title fw-bold text-dark lh-1 text-truncate" style="font-size: 1.14rem; letter-spacing: -0.2px;">{{ setting('website.brand_name', 'KisanHub') }}</div>
@@ -405,11 +415,11 @@
     <div class="offcanvas offcanvas-end public-nav-offcanvas d-lg-none" tabindex="-1" id="publicNavOffcanvas" aria-labelledby="publicNavOffcanvasLabel" style="width: 310px; max-width: 86vw;">
         <div class="offcanvas-header border-bottom bg-light py-3">
             <div class="d-flex align-items-center gap-2" id="publicNavOffcanvasLabel">
-                @if($siteLogo)
-                    <img src="{{ asset('uploads/' . $siteLogo) }}" alt="{{ setting('website.brand_name', 'KisanHub') }}" style="height: 38px; max-width: 190px; width: auto; object-fit: contain;">
+                @if($logoUrl)
+                    <img src="{{ $logoUrl }}" alt="{{ setting('website.brand_name', 'KisanHub') }}" style="height: 38px; max-width: 190px; width: auto; object-fit: contain;">
                 @else
-                    <div class="site-brand-logo" style="width: 34px; height: 34px; border-radius: 9px;">
-                        <i class="bi bi-tree-fill fs-6"></i>
+                    <div class="site-brand-logo overflow-hidden p-0" style="width: 34px; height: 34px; border-radius: 9px;">
+                        <img src="{{ asset('images/kisanhub-emblem.png') }}" alt="{{ setting('website.brand_name', 'KisanHub') }}" style="width: 100%; height: 100%; object-fit: contain;">
                     </div>
                     <div>
                         <div class="fw-bold text-dark lh-1" style="font-size: 1rem;">{{ setting('website.brand_name', 'KisanHub') }}</div>
@@ -538,13 +548,13 @@
             <div class="row g-4">
                 <div class="col-12 col-md-4">
                     <div class="d-flex align-items-center gap-2 mb-3">
-                        @if($siteLogo)
+                        @if($logoUrl)
                             <div class="bg-white rounded-3 px-2 py-1 shadow-sm d-inline-block">
-                                <img src="{{ asset('uploads/' . $siteLogo) }}" alt="{{ setting('website.brand_name', 'KisanHub') }}" style="height: 38px; width: auto; max-width: 190px; object-fit: contain;">
+                                <img src="{{ $logoUrl }}" alt="{{ setting('website.brand_name', 'KisanHub') }}" style="height: 38px; width: auto; max-width: 190px; object-fit: contain;">
                             </div>
                         @else
-                            <div class="bg-white text-success rounded-3 p-1 d-flex align-items-center justify-content-center" style="width: 34px; height: 34px;">
-                                <i class="bi bi-tree-fill fs-5"></i>
+                            <div class="bg-white rounded-3 p-1 d-flex align-items-center justify-content-center overflow-hidden" style="width: 34px; height: 34px;">
+                                <img src="{{ asset('images/kisanhub-emblem.png') }}" alt="{{ setting('website.brand_name', 'KisanHub') }}" style="width: 100%; height: 100%; object-fit: contain;">
                             </div>
                             <h5 class="text-white mb-0 fw-bold">{{ setting('website.brand_name', 'KisanHub') }}</h5>
                         @endif
