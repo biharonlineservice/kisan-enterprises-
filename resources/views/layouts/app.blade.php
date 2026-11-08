@@ -48,16 +48,18 @@
                 }
             @endphp
             @if($sidebarLogoUrl)
-                <img src="{{ $sidebarLogoUrl }}" alt="{{ setting('business.name') }}">
+                <a href="{{ route('dashboard') }}" class="d-flex align-items-center text-decoration-none flex-grow-1 overflow-hidden" title="{{ setting('business.name', 'Kisan Enterprises') }}">
+                    <img src="{{ $sidebarLogoUrl }}" alt="{{ setting('business.name') }}">
+                </a>
             @else
                 <div class="brand-mark overflow-hidden p-0" title="{{ setting('business.name', 'Kisan Enterprises') }}">
                     <img src="{{ asset('images/kisanhub-emblem.png') }}" alt="{{ setting('business.name') }}" style="width: 100%; height: 100%; object-fit: contain;">
                 </div>
+                <div class="overflow-hidden flex-grow-1" style="min-width: 0;">
+                    <div class="brand-name text-truncate">{{ setting('business.name', 'Kisan Enterprises') }}</div>
+                    <div class="brand-sub text-truncate">{{ setting('business.tagline', __('app.tagline')) }}</div>
+                </div>
             @endif
-            <div class="overflow-hidden flex-grow-1" style="min-width: 0;">
-                <div class="brand-name text-truncate">{{ setting('business.name', 'Kisan Enterprises') }}</div>
-                <div class="brand-sub text-truncate">{{ setting('business.tagline', __('app.tagline')) }}</div>
-            </div>
             <button type="button" class="sidebar-hide-btn ms-auto" data-sidebar-toggle aria-label="{{ __('app.hide_sidebar') }}" title="{{ __('app.hide_sidebar') }} (Ctrl+B)">
                 <i class="bi bi-chevron-bar-left d-none d-lg-inline fs-5"></i>
                 <i class="bi bi-x-lg d-lg-none fs-6"></i>
