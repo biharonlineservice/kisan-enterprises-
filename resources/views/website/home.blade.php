@@ -27,7 +27,7 @@
                     <span>{{ __('website.hero.badge') }}</span>
                 </div>
 
-                <h1 class="hero-display-title fw-bold text-dark mb-2.5">
+                <h1 class="hero-display-title fw-bold text-dark mb-3">
                     {{ $customHeadline ?: __('website.hero.title') }}
                 </h1>
 
@@ -35,22 +35,22 @@
                     {{ $customSubtitle ?: __('website.hero.subtitle') }}
                 </p>
 
-                <div class="d-flex flex-column flex-sm-row flex-wrap gap-2 gap-sm-2.5 mb-3">
-                    <a href="{{ route('website.farmer.register') }}" class="btn btn-primary px-3.5 py-2 rounded-pill shadow-sm hero-cta-btn">
+                <div class="d-flex flex-column flex-sm-row flex-wrap gap-2 gap-sm-3 mb-3">
+                    <a href="{{ route('website.farmer.register') }}" class="btn btn-primary px-3 px-sm-4 py-2 rounded-pill shadow-sm hero-cta-btn">
                         <i class="bi bi-person-plus-fill"></i> {{ __('website.hero.register_btn') }}
                     </a>
                     @if($priceTrends->isNotEmpty())
-                        <a href="#price-trend" class="btn btn-outline-primary px-3.5 py-2 rounded-pill hero-cta-btn bg-white">
+                        <a href="#price-trend" class="btn btn-outline-primary px-3 px-sm-4 py-2 rounded-pill hero-cta-btn bg-white">
                             <i class="bi bi-graph-up-arrow"></i> {{ $isHindi ? 'भाव ग्राफ देखें' : 'Price Trend Graph' }}
                         </a>
                     @endif
-                    <a href="{{ route('website.products') }}" class="btn btn-light px-3.5 py-2 rounded-pill hero-cta-btn border">
+                    <a href="{{ route('website.products') }}" class="btn btn-light px-3 px-sm-4 py-2 rounded-pill hero-cta-btn border">
                         <i class="bi bi-building"></i> {{ __('website.hero.products_btn') }}
                     </a>
                 </div>
 
                 {{-- Compact Trust Highlights (3-up on mobile & desktop) --}}
-                <div class="row g-2 g-sm-2.5 hero-trust-grid">
+                <div class="row g-2 g-sm-3 hero-trust-grid">
                     <div class="col-4">
                         <div class="hero-trust-tile">
                             <div class="hero-trust-icon bg-success-subtle text-success">
@@ -90,35 +90,35 @@
             {{-- Right Column: Live Crop Purchase Price Board --}}
             <div class="col-12 col-lg-5">
                 <div class="card hero-price-card border-0 overflow-hidden" id="hero-crop-price-board">
-                    <div class="hero-price-header text-white py-3 px-3 px-sm-3.5">
-                        <div class="d-flex justify-content-between align-items-center gap-2">
-                            <div class="d-flex align-items-center gap-2.5 min-w-0 flex-grow-1">
+                    <div class="hero-price-header text-white">
+                        <div class="d-flex justify-content-between align-items-center gap-2 gap-sm-3">
+                            <div class="d-flex align-items-center min-w-0 flex-grow-1">
                                 <span class="hero-header-icon flex-shrink-0">
                                     <i class="bi bi-graph-up-arrow"></i>
                                 </span>
-                                <div class="min-w-0 flex-grow-1">
-                                    <div class="fw-bold lh-sm text-truncate text-white" style="font-size: 0.98rem; letter-spacing: -0.2px;">
+                                <div class="min-w-0 flex-grow-1 hero-header-text">
+                                    <div class="hero-price-title text-truncate">
                                         {{ $isHindi ? 'आज का फसल खरीद भाव' : "Today's Crop Purchase Prices" }}
                                     </div>
-                                    <small class="d-block text-truncate mt-0.5" style="font-size: 0.74rem; color: rgba(255, 255, 255, 0.85); font-weight: 400;">
+                                    <small class="hero-price-sub d-block text-truncate">
                                         {{ $isHindi ? 'किसान भाइयों के लिए ताज़ा मंडी दरें' : 'Live mandi buying rates for farmers' }}
                                     </small>
                                 </div>
                             </div>
-                            <span class="badge bg-white fw-bold d-inline-flex align-items-center gap-1.5 rounded-pill px-2.5 py-1.5 shadow-sm flex-shrink-0" style="color: #145732; font-size: 0.74rem; letter-spacing: 0.2px;">
-                                <span class="live-pulse-dot" style="width: 7px; height: 7px; background: #198754;"></span>
-                                {{ $isHindi ? 'लाइव भाव' : 'Live Rates' }}
+                            <span class="hero-live-badge">
+                                <span class="live-pulse-dot"></span>
+                                <span>{{ $isHindi ? 'लाइव भाव' : 'Live Rates' }}</span>
                             </span>
                         </div>
                     </div>
 
                     @if($rateCrops->isNotEmpty())
-                        <div class="card-body p-2.5 p-sm-3 bg-white">
+                        <div class="card-body p-3 bg-white">
                             @foreach($rateCrops as $rateCrop)
                                 @php
                                     $heroTrend = $priceTrends->get($rateCrop->id);
                                 @endphp
-                                <div class="hero-crop-row d-flex justify-content-between align-items-center gap-2 {{ ! $loop->last ? 'mb-1.5 pb-1.5 border-bottom' : '' }}"
+                                <div class="hero-crop-row d-flex justify-content-between align-items-center gap-2 {{ ! $loop->last ? 'mb-2 pb-2 border-bottom' : '' }}"
                                      data-hero-crop="{{ $rateCrop->id }}"
                                      role="button"
                                      tabindex="0"
@@ -157,7 +157,7 @@
                                             {{ $isHindi ? 'प्रति ' . $rateCrop->shortUnitLabel('hi') : 'per ' . $rateCrop->shortUnitLabel('en') }}
                                         </small>
                                         @if($heroTrend)
-                                            <div class="mt-0.5">
+                                            <div class="mt-1">
                                                 @include('website.partials.rate-change', ['trend' => $heroTrend, 'isHindi' => $isHindi])
                                             </div>
                                         @endif
@@ -166,7 +166,7 @@
                             @endforeach
 
                             @if($bonusEnabled)
-                                <div class="mt-2.5 px-3 py-1.5 rounded-3 bonus-callout small d-flex align-items-center gap-2" style="font-size: 0.76rem;">
+                                <div class="mt-2 px-3 py-2 rounded-3 bonus-callout small d-flex align-items-center gap-2" style="font-size: 0.76rem;">
                                     <i class="bi bi-gift-fill text-success flex-shrink-0"></i>
                                     <span>
                                         @if($isHindi)
@@ -179,7 +179,7 @@
                             @endif
                         </div>
 
-                        <div class="card-footer bg-light border-top px-3 px-sm-3.5 py-1.5 d-flex flex-wrap justify-content-between align-items-center gap-2">
+                        <div class="card-footer bg-light border-top px-3 py-2 d-flex flex-wrap justify-content-between align-items-center gap-2">
                             <small class="text-muted" style="font-size: 0.72rem;">
                                 <i class="bi bi-patch-check-fill text-success me-1"></i>
                                 {{ $isHindi ? 'एडमिन द्वारा अपडेट:' : 'Updated by Admin:' }}
@@ -435,7 +435,7 @@
                 <p class="text-muted small mb-0">{{ $isHindi ? 'किसानों से सीधी खरीद व उत्तम गुणवत्ता मानकों के साथ थोक आपूर्ति।' : 'Direct farmer procurement & bulk supply with strict mandi quality standards.' }}</p>
             </div>
             <div class="mt-2 mt-md-0 flex-shrink-0">
-                <a href="{{ route('website.products') }}" class="btn btn-outline-primary btn-sm rounded-pill px-3 py-1.5 shadow-none d-inline-flex align-items-center gap-1.5">
+                <a href="{{ route('website.products') }}" class="btn btn-outline-primary btn-sm rounded-pill px-3 py-1 shadow-none d-inline-flex align-items-center gap-2">
                     <span>{{ $isHindi ? 'सभी उत्पाद व गुणवत्ता मानक देखें' : 'View Full Specifications' }}</span>
                     <i class="bi bi-arrow-right"></i>
                 </a>
@@ -572,14 +572,14 @@
 
                 <div class="d-flex flex-column gap-2">
                     @foreach($warehouses as $wh)
-                        <div class="godown-item d-flex justify-content-between align-items-center gap-2 p-2 p-sm-2.5 rounded-3 border bg-light" style="min-width: 0; max-width: 100%; overflow: hidden;">
+                        <div class="godown-item d-flex justify-content-between align-items-center gap-2 p-2 p-sm-3 rounded-3 border bg-light" style="min-width: 0; max-width: 100%; overflow: hidden;">
                             <div class="d-flex align-items-center gap-2 min-w-0 flex-grow-1" style="min-width: 0;">
                                 <div class="rounded-3 bg-white border text-primary d-flex align-items-center justify-content-center flex-shrink-0" style="width: 34px; height: 34px;">
                                     <i class="bi bi-building-check fs-6"></i>
                                 </div>
                                 <div class="min-w-0 flex-grow-1" style="min-width: 0;">
                                     <div class="fw-bold text-dark text-truncate" style="font-size: 0.88rem; line-height: 1.2;">{{ $wh->name }}</div>
-                                    <div class="text-muted d-flex align-items-center gap-1 mt-0.5 min-w-0" style="font-size: 0.70rem; line-height: 1.2; min-width: 0;">
+                                    <div class="text-muted d-flex align-items-center gap-1 mt-1 min-w-0" style="font-size: 0.70rem; line-height: 1.2; min-width: 0;">
                                         <span class="badge bg-white text-secondary border py-0 px-1 font-monospace flex-shrink-0" style="font-size: 0.65rem;">{{ $wh->code }}</span>
                                         <span class="text-truncate" style="min-width: 0;">{{ $wh->address ?: ($isHindi ? 'मुख्य मंडी परिसर' : 'Operational Depot') }}</span>
                                     </div>
@@ -789,6 +789,7 @@
     .hero-price-header {
         background: linear-gradient(135deg, #1b7340 0%, #104b28 100%);
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 0.85rem 1.15rem;
     }
     .hero-header-icon {
         width: 38px;
@@ -803,6 +804,88 @@
         font-size: 1.15rem;
         flex-shrink: 0;
         box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    }
+    .hero-header-text {
+        margin-left: 0.75rem;
+    }
+    .hero-price-title {
+        font-size: 0.98rem;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+        line-height: 1.24;
+        color: #ffffff;
+    }
+    .hero-price-sub {
+        font-size: 0.74rem;
+        color: rgba(255, 255, 255, 0.88);
+        font-weight: 400;
+        line-height: 1.25;
+        margin-top: 3px;
+    }
+    .hero-live-badge {
+        background: #ffffff;
+        color: #145732;
+        font-size: 0.74rem;
+        font-weight: 700;
+        letter-spacing: 0.2px;
+        padding: 0.35rem 0.75rem;
+        border-radius: 999px;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+        flex-shrink: 0;
+        line-height: 1;
+        white-space: nowrap;
+    }
+    .live-pulse-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: #198754;
+        display: inline-block;
+        flex-shrink: 0;
+        position: relative;
+    }
+    .live-pulse-dot::after {
+        content: '';
+        position: absolute;
+        top: -2px;
+        left: -2px;
+        right: -2px;
+        bottom: -2px;
+        border-radius: 50%;
+        background: rgba(25, 135, 84, 0.35);
+        animation: pulseRing 1.8s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+    }
+    @keyframes pulseRing {
+        0% { transform: scale(0.9); opacity: 0.8; }
+        70% { transform: scale(1.9); opacity: 0; }
+        100% { transform: scale(1.9); opacity: 0; }
+    }
+    @media (max-width: 420px) {
+        .hero-price-header {
+            padding: 0.75rem 0.85rem;
+        }
+        .hero-header-icon {
+            width: 34px;
+            height: 34px;
+            font-size: 1rem;
+        }
+        .hero-header-text {
+            margin-left: 0.55rem;
+        }
+        .hero-price-title {
+            font-size: 0.88rem;
+        }
+        .hero-price-sub {
+            font-size: 0.68rem;
+        }
+        .hero-live-badge {
+            font-size: 0.68rem;
+            padding: 0.3rem 0.55rem;
+            gap: 0.35rem;
+        }
     }
     .crop-avatar {
         width: 38px;
