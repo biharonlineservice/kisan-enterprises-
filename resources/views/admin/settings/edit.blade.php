@@ -210,19 +210,36 @@
                         <span>{{ __('settings.section_identity') }} &amp; {{ __('settings.section_contact') }}</span>
                     </h6>
                     <div class="row g-3">
-                        <div class="col-md-8">
+                        <div class="col-md-6">
                             <label for="business_name" class="form-label fw-bold text-dark">
-                                {{ __('settings.label_business_name') }} <span class="text-danger">*</span>
+                                {{ __('settings.label_business_name') }} (ERP / Invoicing Legal Entity) <span class="text-danger">*</span>
                             </label>
                             <input type="text" 
                                    id="business_name" 
                                    name="business_name" 
-                                   value="{{ old('business_name', $s['business.name'] ?? '') }}" 
+                                   value="{{ old('business_name', $s['business.name'] ?? 'Kisan Enterprises') }}" 
                                    class="form-control @error('business_name') is-invalid @enderror" 
                                    required>
                             @error('business_name')
                                 <div class="text-danger small mt-1">{{ $message }}</div>
                             @enderror
+                            <div class="form-text text-muted small">Printed on tax invoices, receipts, and statutory trade records.</div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="website_brand_name" class="form-label fw-bold text-dark">
+                                Public Website Brand Name (Customer-Facing)
+                            </label>
+                            <input type="text" 
+                                   id="website_brand_name" 
+                                   name="website_brand_name" 
+                                   value="{{ old('website_brand_name', $s['website.brand_name'] ?? 'KisanHub') }}" 
+                                   class="form-control @error('website_brand_name') is-invalid @enderror" 
+                                   placeholder="e.g. KisanHub">
+                            @error('website_brand_name')
+                                <div class="text-danger small mt-1">{{ $message }}</div>
+                            @enderror
+                            <div class="form-text text-muted small">Displayed on public website homepage, navbar, footer, and farmer registration.</div>
                         </div>
 
                         <div class="col-md-4">

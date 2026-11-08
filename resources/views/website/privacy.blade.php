@@ -1,7 +1,7 @@
 @extends('layouts.website')
 
 @section('title', 'Privacy Policy — Farmer & Trade Partner Data Protection')
-@section('meta_description', 'Privacy policy and data governance practices of Kisan Enterprises regarding farmer registration, banking details, and commercial trading records.')
+@section('meta_description', 'Privacy policy and data governance practices of KisanHub regarding farmer registration, banking details, and commercial trading records.')
 
 @section('content')
 <div class="bg-white border-bottom py-4 mb-4">
@@ -13,7 +13,7 @@
             </ol>
         </nav>
         <h1 class="h2 fw-bold text-dark mb-1">Privacy Policy & Data Governance</h1>
-        <p class="text-muted mb-0">Last updated: {{ date('F Y') }} &bull; Kisan Enterprises</p>
+        <p class="text-muted mb-0">Last updated: {{ date('F Y') }} &bull; {{ setting('website.brand_name', 'KisanHub') }}</p>
     </div>
 </div>
 
@@ -24,7 +24,7 @@
                 <div class="card-body p-4 p-md-5">
                     <h4 class="fw-bold text-dark mb-3">1. Commitment to Data Confidentiality</h4>
                     <p class="text-muted leading-relaxed">
-                        At <strong>{{ setting('business.name', 'Kisan Enterprises') }}</strong> ("we", "our", or "the Enterprise"), we recognize that the personal and financial information entrusted to us by farmers, agricultural producers, rice millers, and trade partners is sensitive and critical. This policy details how we collect, handle, store, and safeguard your data across our physical weighbridge operations, ERP system, and public web portals.
+                        At <strong>{{ setting('website.brand_name', 'KisanHub') }}</strong> (a digital agri-trading platform powered by <strong>{{ setting('business.name', 'Kisan Enterprises') }}</strong>, "we", "our", or "the Platform"), we recognize that the personal and financial information entrusted to us by farmers, agricultural producers, rice millers, and trade partners is sensitive and critical. This policy details how we collect, handle, store, and safeguard your data across our physical weighbridge operations, ERP system, and public web portals.
                     </p>
 
                     <h4 class="fw-bold text-dark mt-4 mb-3">2. Information We Collect</h4>
@@ -48,7 +48,7 @@
 
                     <h4 class="fw-bold text-dark mt-4 mb-3">4. Strict Non-Disclosure & Zero Data Sale</h4>
                     <p class="text-muted leading-relaxed">
-                        Kisan Enterprises does <strong>never sell, lease, monetize, or disclose</strong> farmer rosters, contact databases, or financial numbers to marketing agencies, data brokers, or third-party lead aggregators. Data is accessed solely by authenticated personnel on a strict need-to-know basis governed by role permissions.
+                        {{ setting('website.brand_name', 'KisanHub') }} does <strong>never sell, lease, monetize, or disclose</strong> farmer rosters, contact databases, or financial numbers to marketing agencies, data brokers, or third-party lead aggregators. Data is accessed solely by authenticated personnel on a strict need-to-know basis governed by role permissions.
                     </p>
 
                     <h4 class="fw-bold text-dark mt-4 mb-3">5. Data Security Measures</h4>

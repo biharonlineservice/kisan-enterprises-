@@ -89,6 +89,7 @@ class SettingsController extends Controller
     {
         $data = $request->validate([
             'business_name' => ['required', 'string', 'max:120'],
+            'website_brand_name' => ['nullable', 'string', 'max:120'],
             'business_tagline' => ['nullable', 'string', 'max:150'],
             'business_address' => ['nullable', 'string', 'max:500'],
             'business_state' => ['nullable', 'string', 'max:60'],
@@ -113,6 +114,7 @@ class SettingsController extends Controller
         ]);
 
         $values = [];
+        $values['website.brand_name'] = !empty($data['website_brand_name']) ? trim($data['website_brand_name']) : 'KisanHub';
         foreach (['name', 'tagline', 'address', 'state', 'phone', 'alt_phone', 'email', 'gstin', 'pan', 'bank_name', 'account_name', 'account_number', 'ifsc_code', 'bank_branch', 'upi_id'] as $f) {
             $values["business.$f"] = $data["business_$f"] ?? null;
         }

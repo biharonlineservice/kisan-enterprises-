@@ -18,7 +18,7 @@ return [
         'products_btn' => 'Bulk Grain Supply',
     ],
     'features' => [
-        'title' => 'Why Farmers & Millers Trust Kisan Enterprises',
+        'title' => 'Why Farmers & Millers Trust KisanHub',
         'subtitle' => 'Built on integrity, digital weighbridge accuracy, and trusted trade relations.',
         'f1_title' => 'Electronic Weighbridge',
         'f1_desc' => 'Certified digital scale weighment with instant computerized weigh slips for full transparency.',
@@ -34,7 +34,7 @@ return [
         'subtitle' => 'Register your details to enjoy priority weighment and direct bank payments during harvest season.',
         'submit_btn' => 'Submit Registration',
         'success_title' => 'Registration Successful!',
-        'success_msg' => 'Welcome to Kisan Enterprises! Your Farmer ID is :id. We look forward to trading with you.',
+        'success_msg' => 'Welcome to KisanHub! Your Farmer ID is :id. We look forward to trading with you.',
     ],
     'contact' => [
         'title' => 'Get in Touch',
@@ -46,7 +46,7 @@ return [
         'success' => 'Thank you! Your message has been sent. Our team will contact you shortly.',
     ],
     'footer' => [
-        'about' => 'Kisan Enterprises is a premier agricultural commodity trading enterprise connecting regional farmers with commercial processors and rice mills.',
+        'about' => 'KisanHub is a premier agricultural commodity trading platform connecting regional farmers with commercial processors and rice mills.',
         'quick_links' => 'Quick Links',
         'contact_info' => 'Mandi Hub & Office',
         'terms' => 'Terms of Trade',

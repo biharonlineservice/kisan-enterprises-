@@ -1,11 +1,11 @@
 @extends('layouts.website')
 
-@section('title', (app()->getLocale() === 'hi' ? 'उत्पाद एवं थोक अनाज आपूर्ति (राइस व फ्लोर मिल्स) — ' : 'Bulk Grain Supply for Rice Mills & Institutional Buyers — ') . setting('business.name', 'Kisan Enterprises'))
+@section('title', (app()->getLocale() === 'hi' ? 'उत्पाद एवं थोक अनाज आपूर्ति (राइस व फ्लोर मिल्स) — ' : 'Bulk Grain Supply for Rice Mills & Institutional Buyers — ') . setting('website.brand_name', 'KisanHub'))
 
 @section('content')
 @php
     $isHindi = app()->getLocale() === 'hi';
-    $bizName = setting('business.name', 'Kisan Enterprises');
+    $bizName = setting('website.brand_name', 'KisanHub');
     $bizPhone = setting('business.phone', '+91 98765 43210');
     $bizAddress = setting('business.address', 'Agricultural Trading Hub, Uttar Pradesh');
 

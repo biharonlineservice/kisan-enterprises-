@@ -121,7 +121,7 @@ return [
     | the owner must enter verified details in Settings.
     */
     'settings' => [
-        // Business profile
+        // Business profile (Legal Entity & ERP Documents)
         'business.name' => 'Kisan Enterprises',
         'business.tagline' => 'Agricultural Crop Trading',
         'business.logo' => null,
@@ -132,6 +132,9 @@ return [
         'business.gstin' => null,
         'business.pan' => null,
         'business.state' => null,
+
+        // Public Website Branding
+        'website.brand_name' => 'KisanHub',
 
         // Bank remittance details
         'business.bank_name' => 'State Bank of India',

@@ -379,7 +379,7 @@
 <section class="py-4 py-md-5 bg-light border-bottom">
     <div class="container py-2 py-md-3">
         <div class="text-center mx-auto mb-4 mb-md-5" style="max-width: 680px;">
-            <span class="section-eyebrow">{{ $isHindi ? 'हमारी विशेषताएं' : 'Why Choose Kisan Enterprises' }}</span>
+            <span class="section-eyebrow">{{ $isHindi ? 'हमारी विशेषताएं' : 'Why Choose KisanHub' }}</span>
             <h2 class="h3 fw-bold mt-1">{{ __('website.features.title') }}</h2>
             <p class="text-muted small mb-0">{{ __('website.features.subtitle') }}</p>
         </div>

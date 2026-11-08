@@ -1,12 +1,12 @@
 @extends('layouts.website')
 
-@section('title', (app()->getLocale() === 'hi' ? 'संपर्क एवं व्यापारिक सहायता केंद्र — ' : 'Contact Us & Trade Desk Inquiries — ') . setting('business.name', 'Kisan Enterprises'))
-@section('meta_description', 'Get in touch with Kisan Enterprises for bulk grain procurement, rice mill supply, farmer weighbridge appointments, and general trading inquiries.')
+@section('title', (app()->getLocale() === 'hi' ? 'संपर्क एवं व्यापारिक सहायता केंद्र — ' : 'Contact Us & Trade Desk Inquiries — ') . setting('website.brand_name', 'KisanHub'))
+@section('meta_description', 'Get in touch with KisanHub for bulk grain procurement, rice mill supply, farmer weighbridge appointments, and general trading inquiries.')
 
 @section('content')
 @php
     $isHindi = app()->getLocale() === 'hi';
-    $bizName = setting('business.name', 'Kisan Enterprises');
+    $bizName = setting('website.brand_name', 'KisanHub');
     $bizAddress = setting('business.address', 'Agricultural Trading Hub, G.T. Road, Chandauli, Uttar Pradesh - 232104');
     $helplinePhone = \App\Models\WebsiteContent::get('helpline_phone', setting('business.phone', '+91 98765 43210')) ?: '+91 98765 43210';
     $helplineHref = preg_replace('/[^0-9+]/', '', $helplinePhone);

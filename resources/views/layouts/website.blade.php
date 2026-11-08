@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Agricultural Crop Trading & Bulk Grain Supply') — {{ setting('business.name', 'Kisan Enterprises') }}</title>
-    <meta name="description" content="@yield('meta_description', 'Kisan Enterprises is a premier agricultural trading business purchasing crops directly from farmers and supplying high-quality grains in bulk to rice mills, wholesalers, and agricultural markets.')">
+    <title>@yield('title', 'Agricultural Crop Trading & Bulk Grain Supply') — {{ setting('website.brand_name', 'KisanHub') }}</title>
+    <meta name="description" content="@yield('meta_description', 'KisanHub is a premier agricultural trading business purchasing crops directly from farmers and supplying high-quality grains in bulk to rice mills, wholesalers, and agricultural markets.')">
 
     <link rel="manifest" href="{{ asset('manifest.json') }}">
     <meta name="theme-color" content="#196F3D">
@@ -330,7 +330,7 @@
                     <i class="bi bi-tree-fill fs-5"></i>
                 </div>
                 <div class="min-w-0">
-                    <div class="site-brand-title fw-bold text-dark lh-1 text-truncate" style="font-size: 1.14rem; letter-spacing: -0.2px;">{{ setting('business.name', 'Kisan Enterprises') }}</div>
+                    <div class="site-brand-title fw-bold text-dark lh-1 text-truncate" style="font-size: 1.14rem; letter-spacing: -0.2px;">{{ setting('website.brand_name', 'KisanHub') }}</div>
                     <small class="text-muted d-block text-truncate mt-1" style="font-size: 0.71rem;" title="{{ setting('business.tagline', $layoutHindi ? 'प्रत्यक्ष फसल खरीद एवं थोक अनाज व्यापार' : 'Agricultural Crop Trading & Warehousing') }}">
                         {{ setting('business.tagline', $layoutHindi ? 'प्रत्यक्ष फसल खरीद एवं थोक अनाज व्यापार' : 'Agricultural Crop Trading & Warehousing') }}
                     </small>
@@ -390,7 +390,7 @@
                     <i class="bi bi-tree-fill fs-6"></i>
                 </div>
                 <div>
-                    <div class="fw-bold text-dark lh-1" style="font-size: 1rem;">{{ setting('business.name', 'Kisan Enterprises') }}</div>
+                    <div class="fw-bold text-dark lh-1" style="font-size: 1rem;">{{ setting('website.brand_name', 'KisanHub') }}</div>
                     <small class="text-muted" style="font-size: 0.72rem;">{{ $layoutHindi ? 'कृषि व्यापार एवं फसल खरीद' : 'Crop Trading & Bulk Supply' }}</small>
                 </div>
             </div>
@@ -518,7 +518,7 @@
                         <div class="bg-white text-success rounded-3 p-1 d-flex align-items-center justify-content-center" style="width: 34px; height: 34px;">
                             <i class="bi bi-tree-fill fs-5"></i>
                         </div>
-                        <h5 class="text-white mb-0 fw-bold">{{ setting('business.name', 'Kisan Enterprises') }}</h5>
+                        <h5 class="text-white mb-0 fw-bold">{{ setting('website.brand_name', 'KisanHub') }}</h5>
                     </div>
                     <p class="small text-white-50 mb-3">
                         {{ __('website.footer.about') }}
@@ -593,7 +593,7 @@
 
             <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-2 small text-white-50">
                 <div>
-                    &copy; {{ date('Y') }} {{ setting('business.name', 'Kisan Enterprises') }}. All rights reserved.
+                    &copy; {{ date('Y') }} {{ setting('website.brand_name', 'KisanHub') }}. All rights reserved.
                 </div>
                 <div class="d-flex flex-wrap justify-content-center gap-3">
                     <a href="{{ route('website.privacy') }}">{{ __('website.footer.privacy') }}</a>

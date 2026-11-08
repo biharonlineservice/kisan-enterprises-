@@ -1,7 +1,7 @@
 @extends('layouts.website')
 
 @section('title', 'Terms of Trade — Agricultural Procurement & Grain Supply')
-@section('meta_description', 'Official commercial terms, weighbridge regulations, quality inspection standards, and settlement guidelines of Kisan Enterprises.')
+@section('meta_description', 'Official commercial terms, weighbridge regulations, quality inspection standards, and settlement guidelines of KisanHub.')
 
 @section('content')
 <div class="bg-white border-bottom py-4 mb-4">
@@ -24,7 +24,7 @@
                 <div class="card-body p-4 p-md-5">
                     <h4 class="fw-bold text-dark mb-3">1. Scope of Operations</h4>
                     <p class="text-muted leading-relaxed">
-                        These Terms of Trade govern all transactions conducted by <strong>{{ setting('business.name', 'Kisan Enterprises') }}</strong> ("the Enterprise"), including direct crop procurement from agricultural producers ("Farmers") and bulk commodity sales to rice mills, flour mills, food processors, and wholesale merchants ("Buyers").
+                        These Terms of Trade govern all transactions conducted through the <strong>{{ setting('website.brand_name', 'KisanHub') }}</strong> platform and physical trading operations of <strong>{{ setting('business.name', 'Kisan Enterprises') }}</strong> ("the Enterprise"), including direct crop procurement from agricultural producers ("Farmers") and bulk commodity sales to rice mills, flour mills, food processors, and wholesale merchants ("Buyers").
                     </p>
 
                     <h4 class="fw-bold text-dark mt-4 mb-3">2. Procurement & Weighbridge Protocol</h4>

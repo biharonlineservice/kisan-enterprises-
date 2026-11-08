@@ -1,7 +1,7 @@
 @extends('layouts.website')
 
 @section('title', 'Farmer Registration — Direct Crop Procurement')
-@section('meta_description', 'Register online with Kisan Enterprises for transparent electronic weighment, fair market pricing, and direct bank settlement for your harvest.')
+@section('meta_description', 'Register online with KisanHub for transparent electronic weighment, fair market pricing, and direct bank settlement for your harvest.')
 
 @section('content')
 <div class="bg-white border-bottom py-4 mb-4">
@@ -16,7 +16,7 @@
                 </nav>
                 <h1 class="h2 fw-bold text-dark mb-1">Farmer Online Registration</h1>
                 <p class="text-muted mb-0">
-                    Enroll once with Kisan Enterprises to receive a permanent Farmer ID, priority weighbridge unloading, and direct bank account settlement.
+                    Enroll once with KisanHub to receive a permanent Farmer ID, priority weighbridge unloading, and direct bank account settlement.
                 </p>
             </div>
             <div class="col-md-4 text-md-end mt-3 mt-md-0">
@@ -208,7 +208,7 @@
                         <div class="form-check mb-4 bg-light p-3 rounded border">
                             <input class="form-check-input ms-0 me-2" type="checkbox" id="termsCheck" required>
                             <label class="form-check-label small text-muted" for="termsCheck">
-                                I confirm that the details provided are correct and belong to me. I agree to Kisan Enterprises' weighment standards and procurement procedures.
+                                I confirm that the details provided are correct and belong to me. I agree to KisanHub's weighment standards and procurement procedures.
                             </label>
                         </div>
 

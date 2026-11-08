@@ -1,11 +1,11 @@
 @extends('layouts.website')
 
-@section('title', (app()->getLocale() === 'hi' ? 'हमारे बारे में — ' : 'About Us — ') . setting('business.name', 'Kisan Enterprises'))
+@section('title', (app()->getLocale() === 'hi' ? 'हमारे बारे में — ' : 'About Us — ') . setting('website.brand_name', 'KisanHub'))
 
 @section('content')
 @php
     $isHindi = app()->getLocale() === 'hi';
-    $bizName = setting('business.name', 'Kisan Enterprises');
+    $bizName = setting('website.brand_name', 'KisanHub');
     $customAboutSnippet = \App\Models\WebsiteContent::get('about_snippet');
     $bonusEnabled = (string) setting('procurement.delayed_bonus_enabled', '1') === '1' && (float) setting('procurement.delayed_bonus_rate', '1.00') > 0;
     $bonusRateFormatted = number_format((float) setting('procurement.delayed_bonus_rate', '1.00'), 2);
@@ -151,7 +151,7 @@
                     <div class="col-12 col-sm-6">
                         <div class="p-3 rounded-3 border border-success-subtle bg-success-subtle bg-opacity-50 h-100">
                             <div class="fw-bold small text-success mb-1">
-                                <i class="bi bi-check-circle-fill me-1"></i>{{ $isHindi ? 'किसान एंटरप्राइजेज मानक' : 'The Kisan Standard' }}
+                                <i class="bi bi-check-circle-fill me-1"></i>{{ $isHindi ? 'किसानहब मानक' : 'The KisanHub Standard' }}
                             </div>
                             <div class="small text-dark">
                                 {{ $isHindi ? 'कंप्यूटर तौल पर्ची, लाइव वेबसाइट भाव, शून्य छिपा शुल्क और तुरंत भुगतान।' : 'Printed digital weigh slips, live public crop rates, zero hidden charges & fast settlement.' }}

@@ -1,11 +1,11 @@
 @extends('layouts.website')
 
-@section('title', (app()->getLocale() === 'hi' ? 'फसल कैसे बेचें (किसान मार्गदर्शिका) — ' : 'Crop Procurement Guide for Farmers — ') . setting('business.name', 'Kisan Enterprises'))
+@section('title', (app()->getLocale() === 'hi' ? 'फसल कैसे बेचें (किसान मार्गदर्शिका) — ' : 'Crop Procurement Guide for Farmers — ') . setting('website.brand_name', 'KisanHub'))
 
 @section('content')
 @php
     $isHindi = app()->getLocale() === 'hi';
-    $bizName = setting('business.name', 'Kisan Enterprises');
+    $bizName = setting('website.brand_name', 'KisanHub');
     $bonusEnabled = (string) setting('procurement.delayed_bonus_enabled', '1') === '1' && (float) setting('procurement.delayed_bonus_rate', '1.00') > 0;
     $bonusRate = (float) setting('procurement.delayed_bonus_rate', '1.00');
     $bonusRateFormatted = number_format($bonusRate, 2);
