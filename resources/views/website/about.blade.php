@@ -14,7 +14,7 @@
 {{-- Hero Banner + Live Key Stats --}}
 <section class="hero-section">
     <div class="container">
-        <div class="row align-items-center g-4 g-lg-5">
+        <div class="row align-items-start g-4 g-lg-5">
             <div class="col-12 col-lg-7">
                 <div class="d-inline-flex align-items-center gap-2 px-3 py-1 rounded-pill about-eyebrow mb-3">
                     <i class="bi bi-award-fill text-success"></i>

@@ -209,12 +209,12 @@
                 radial-gradient(circle at 8% 18%, rgba(33, 134, 75, 0.11) 0%, transparent 42%),
                 radial-gradient(circle at 92% 12%, rgba(244, 183, 64, 0.10) 0%, transparent 36%),
                 linear-gradient(180deg, #eff7f2 0%, #f9fbf9 65%, #ffffff 100%);
-            padding: 2.25rem 0 2.25rem 0;
+            padding: 1.15rem 0 2.25rem 0;
             border-bottom: 1px solid var(--ke-border);
         }
         @media (max-width: 767.98px) {
             .hero-section {
-                padding: 1.35rem 0 2rem 0;
+                padding: 0.85rem 0 1.75rem 0;
             }
         }
         .feature-card {

@@ -19,7 +19,7 @@
 {{-- Hero Banner --}}
 <section class="hero-section">
     <div class="container">
-        <div class="row align-items-center g-4 g-lg-5">
+        <div class="row align-items-start g-4 g-lg-5">
             {{-- Left Column: Headline, CTAs & Trust Strip --}}
             <div class="col-12 col-lg-7">
                 <div class="d-inline-flex align-items-center gap-2 px-3 py-1 rounded-pill hero-eyebrow mb-2">
@@ -642,6 +642,16 @@
 
 @push('styles')
 <style>
+    .hero-section {
+        padding-top: 1rem !important;
+        padding-bottom: 2rem !important;
+    }
+    @media (max-width: 767.98px) {
+        .hero-section {
+            padding-top: 0.75rem !important;
+            padding-bottom: 1.5rem !important;
+        }
+    }
     .tabular-nums {
         font-variant-numeric: tabular-nums;
     }
