@@ -658,14 +658,20 @@
         font-size: 0.82rem;
     }
     .hero-display-title {
-        font-size: clamp(1.35rem, 5vw, 2.55rem);
+        font-size: clamp(1.9rem, 4.5vw, 2.75rem);
         line-height: 1.22;
         letter-spacing: -0.02em;
         word-break: normal;
         overflow-wrap: break-word;
     }
+    @media (max-width: 575.98px) {
+        .hero-display-title {
+            font-size: 1.9rem !important;
+            line-height: 1.24;
+        }
+    }
     .hero-subtitle {
-        font-size: clamp(0.88rem, 1.3vw, 1.05rem);
+        font-size: clamp(0.92rem, 1.3vw, 1.08rem);
         line-height: 1.6;
         max-width: 620px;
         word-break: normal;
@@ -673,7 +679,7 @@
     }
     @media (min-width: 992px) {
         .hero-display-title {
-            font-size: clamp(2.05rem, 2.5vw, 2.55rem);
+            font-size: clamp(2.15rem, 2.8vw, 2.85rem);
             line-height: 1.18;
             letter-spacing: -0.03em;
             font-weight: 800;
