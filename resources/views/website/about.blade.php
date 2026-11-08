@@ -39,18 +39,18 @@
                     @endif
                 </p>
 
-                <div class="d-flex flex-column flex-sm-row flex-wrap gap-2 gap-sm-3">
-                    <a href="{{ route('home') }}#price-trend" class="btn btn-primary px-4 py-2 shadow-sm about-cta-btn">
+                <div class="about-cta-group mb-3">
+                    <a href="{{ route('home') }}#price-trend" class="btn btn-primary about-cta-btn shadow-sm">
                         <i class="bi bi-graph-up-arrow"></i>
-                        {{ $isHindi ? 'आज का फसल खरीद भाव देखें' : "Check Today's Crop Rates" }}
+                        <span>{{ $isHindi ? 'आज का फसल खरीद भाव देखें' : "Check Today's Crop Rates" }}</span>
                     </a>
-                    <a href="{{ route('website.farmer.register') }}" class="btn btn-outline-primary bg-white px-4 py-2 about-cta-btn">
+                    <a href="{{ route('website.farmer.register') }}" class="btn btn-outline-primary bg-white about-cta-btn">
                         <i class="bi bi-person-plus-fill"></i>
-                        {{ __('website.nav.farmer_register') }}
+                        <span>{{ __('website.nav.farmer_register') }}</span>
                     </a>
-                    <a href="{{ route('website.contact') }}" class="btn btn-light border px-4 py-2 about-cta-btn">
+                    <a href="{{ route('website.contact') }}" class="btn btn-light border about-cta-btn">
                         <i class="bi bi-telephone-fill text-success"></i>
-                        {{ __('website.nav.contact') }}
+                        <span>{{ __('website.nav.contact') }}</span>
                     </a>
                 </div>
             </div>
@@ -376,9 +376,55 @@
         font-size: clamp(0.95rem, 1.25vw, 1.06rem);
         line-height: 1.68;
     }
+    .about-cta-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    @media (min-width: 576px) {
+        .about-cta-group {
+            flex-direction: row;
+            flex-wrap: nowrap;
+            align-items: center;
+            gap: 0.55rem;
+        }
+    }
+    .about-cta-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.42rem;
+        font-size: 0.88rem;
+        font-weight: 600;
+        padding: 0.52rem 0.95rem;
+        border-radius: 999px !important;
+        white-space: nowrap;
+        text-decoration: none;
+        transition: transform 0.15s ease, box-shadow 0.15s ease;
+        line-height: 1.25;
+        flex-shrink: 0;
+    }
+    .about-cta-btn:hover {
+        transform: translateY(-1px);
+    }
+    .about-cta-btn i {
+        font-size: 0.95rem;
+    }
+    @media (min-width: 1200px) {
+        .about-cta-group {
+            gap: 0.65rem;
+        }
+        .about-cta-btn {
+            font-size: 0.92rem;
+            padding: 0.55rem 1.15rem;
+            gap: 0.5rem;
+        }
+    }
     @media (max-width: 575.98px) {
         .about-cta-btn {
             width: 100%;
+            font-size: 0.92rem;
+            padding: 0.65rem 1rem;
         }
     }
     .about-stat-card {
