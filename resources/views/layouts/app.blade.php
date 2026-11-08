@@ -60,9 +60,8 @@
                     <div class="brand-sub text-truncate">{{ setting('business.tagline', __('app.tagline')) }}</div>
                 </div>
             @endif
-            <button type="button" class="sidebar-hide-btn ms-auto" data-sidebar-toggle aria-label="{{ __('app.hide_sidebar') }}" title="{{ __('app.hide_sidebar') }} (Ctrl+B)">
-                <i class="bi bi-chevron-bar-left d-none d-lg-inline fs-5"></i>
-                <i class="bi bi-x-lg d-lg-none fs-6"></i>
+            <button type="button" class="sidebar-hide-btn ms-auto d-lg-none" data-sidebar-toggle aria-label="{{ __('app.hide_sidebar') }}" title="{{ __('app.hide_sidebar') }}">
+                <i class="bi bi-x-lg fs-6"></i>
             </button>
         </div>
 
