@@ -1,6 +1,50 @@
 @extends('layouts.website')
 
-@section('title', app()->getLocale() === 'hi' ? 'किसानों से सीधी फसल खरीद एवं थोक अनाज आपूर्ति' : 'Direct Farmer Crop Procurement & Bulk Grain Trading')
+@php
+    $isHindi = app()->getLocale() === 'hi';
+    $seoBrand = setting('website.brand_name', 'KisanHub');
+    $customSeoTitle = \App\Models\WebsiteContent::get('seo_meta_title');
+    $customSeoDesc = \App\Models\WebsiteContent::get('seo_meta_description');
+@endphp
+
+@section('title', $customSeoTitle ?: ($isHindi ? 'किसानों से सीधी फसल खरीद, आज के लाइव मंडी भाव एवं थोक अनाज आपूर्ति — ' . $seoBrand : 'Direct Farmer Crop Procurement, Live Mandi Rates & Bulk Grain Supply — ' . $seoBrand))
+@section('meta_description', $customSeoDesc ?: ($isHindi
+    ? $seoBrand . ' पर आज के ताजा धान, गेहूं, मक्का और सरसों के मंडी खरीद भाव देखें। प्रमाणित इलेक्ट्रॉनिक धर्मकांटा तौल, पारदर्शी नमी जांच और उसी दिन बैंक/नकद भुगतान।'
+    : 'Check today\'s live mandi purchase prices for Paddy, Wheat, Maize, and Mustard at ' . $seoBrand . '. Certified digital weighbridge, transparent moisture testing, same-day farmer payment, and bulk grain supply for rice & flour mills.'))
+@section('meta_keywords', \App\Models\WebsiteContent::get('seo_meta_keywords', 'today mandi rate, paddy rate today, wheat price per quintal, maize mandi bhav, mustard भाव, direct farmer crop procurement, bulk grain supplier for rice mills, ' . $seoBrand))
+
+@push('structured_data')
+@if($rateCrops->isNotEmpty())
+@php
+    $cropOffersSchema = [
+        '@context' => 'https://schema.org',
+        '@type' => 'OfferCatalog',
+        'name' => $seoBrand . ' — Today\'s Live Crop Purchase Prices (Mandi Rates)',
+        'url' => route('home'),
+        'itemListElement' => $rateCrops->values()->map(function ($crop, $idx) {
+            return [
+                '@type' => 'ListItem',
+                'position' => $idx + 1,
+                'item' => [
+                    '@type' => 'Product',
+                    'name' => $crop->name . ' (' . $crop->code . ')',
+                    'description' => $crop->rate_note ?: 'Standard Fair Average Quality (FAQ) agricultural grain procurement',
+                    'sku' => $crop->code,
+                    'offers' => [
+                        '@type' => 'Offer',
+                        'priceCurrency' => 'INR',
+                        'price' => number_format((float) $crop->current_purchase_rate, 2, '.', ''),
+                        'availability' => 'https://schema.org/InStock',
+                        'priceValidUntil' => now()->addDays(7)->toDateString(),
+                    ],
+                ],
+            ];
+        })->all(),
+    ];
+@endphp
+<script type="application/ld+json">{!! json_encode($cropOffersSchema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}</script>
+@endif
+@endpush
 
 @section('content')
 @php

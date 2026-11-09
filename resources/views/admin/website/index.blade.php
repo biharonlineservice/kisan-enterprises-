@@ -152,6 +152,13 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a class="nav-link text-nowrap d-inline-flex align-items-center gap-1 {{ $tab === 'seo' ? 'active' : '' }}" 
+                   href="{{ route('website.admin.index', ['tab' => 'seo']) }}">
+                    <i class="bi bi-google"></i>
+                    <span>{{ __('website_content.tab_seo') }}</span>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link text-nowrap d-inline-flex align-items-center gap-1 {{ $tab === 'inquiries' ? 'active' : '' }}" 
                    href="{{ route('website.admin.index', ['tab' => 'inquiries']) }}">
                     <i class="bi bi-chat-left-dots-fill"></i>
@@ -337,8 +344,8 @@
     </div>
 @endif
 
-{{-- 5. CMS Content & Inquiries Modules --}}
-@if($tab === 'cms' || $tab === 'inquiries' || $tab === 'all')
+{{-- 5. CMS Content, SEO & Inquiries Modules --}}
+@if($tab === 'cms' || $tab === 'seo' || $tab === 'inquiries' || $tab === 'all')
     <div class="row g-4">
         {{-- CMS Content Editor --}}
         @if($tab === 'cms' || $tab === 'all')
@@ -358,6 +365,7 @@
                         <form action="{{ route('website.admin.update') }}" method="POST">
                             @csrf
                             @method('PUT')
+                            <input type="hidden" name="return_tab" value="cms">
 
                             <div class="mb-4">
                                 <label class="form-label fw-bold text-dark d-flex align-items-center gap-1">
@@ -423,6 +431,178 @@
                             <div class="d-flex justify-content-end pt-3 border-top">
                                 <button type="submit" class="btn btn-success px-4 fw-semibold shadow-sm">
                                     <i class="bi bi-check2-circle me-1"></i> {{ __('website_content.btn_save_content') }}
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        @endif
+
+        {{-- SEO & Search Console Settings --}}
+        @if($tab === 'seo' || $tab === 'all')
+            @php
+                $seoDefaultTitle = \App\Models\WebsiteContent::get('seo_meta_title', setting('business.name', 'KisanHub') . ' — Live Mandi Crop Rates, Direct Procurement & Bulk Grain Supply');
+                $seoDefaultDesc  = \App\Models\WebsiteContent::get('seo_meta_description', 'Direct agricultural crop procurement from verified farmers with digital weighbridge, transparent moisture testing, same-day bank/cash payment, and B2B bulk supply of Wheat, Paddy, Maize, and Mustard across Uttar Pradesh & Bihar.');
+                $seoDefaultKeys  = \App\Models\WebsiteContent::get('seo_meta_keywords', 'KisanHub, Kisan Enterprises, Mandi Bhav Today, Crop Purchase Rate, Wheat Price per Quintal, Paddy Rate Today, Maize Mandi Rate, Mustard Price, Farmer Registration, Bulk Grain Supplier UP Bihar');
+                $seoRobotsVal    = \App\Models\WebsiteContent::get('seo_robots', 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1');
+            @endphp
+            <div class="col-12">
+                <div class="card shadow-sm border-0 rounded-3 mb-4 bg-white overflow-hidden">
+                    <div class="card-header bg-white border-bottom py-3 d-flex flex-wrap justify-content-between align-items-center gap-2">
+                        <div>
+                            <h6 class="card-title mb-0 fw-bold text-dark d-flex align-items-center gap-2">
+                                <span class="badge bg-success-subtle text-success p-2 rounded-2">
+                                    <i class="bi bi-google fs-6"></i>
+                                </span>
+                                <span>SEO, Meta Tags &amp; Search Console Configuration</span>
+                            </h6>
+                            <small class="text-muted d-block mt-1">Manage Google search appearance, Open Graph (WhatsApp/Facebook) cards, Sitemap, and Search Console verification.</small>
+                        </div>
+                        <div class="d-flex flex-wrap gap-2">
+                            <a href="{{ route('website.sitemap') }}" target="_blank" class="btn btn-sm btn-outline-success fw-semibold">
+                                <i class="bi bi-diagram-3 me-1"></i> View Sitemap.xml
+                            </a>
+                            <a href="{{ route('website.robots') }}" target="_blank" class="btn btn-sm btn-outline-secondary fw-semibold">
+                                <i class="bi bi-robot me-1"></i> View Robots.txt
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="card-body p-4">
+                        {{-- Live Google SERP Preview --}}
+                        <div class="p-3 rounded-3 border bg-light mb-4">
+                            <div class="d-flex align-items-center justify-content-between mb-2">
+                                <span class="badge bg-white text-dark border fw-semibold">
+                                    <i class="bi bi-google text-success me-1"></i> Google Search Result Preview (SERP)
+                                </span>
+                                <span class="small text-muted">Schema.org JSON-LD + Open Graph Active</span>
+                            </div>
+                            <div class="bg-white p-3 rounded-2 border shadow-xs">
+                                <div class="d-flex align-items-center gap-2 mb-1">
+                                    <span class="badge bg-success-subtle text-success rounded-circle p-1"><i class="bi bi-globe2"></i></span>
+                                    <div class="small text-truncate">
+                                        <div class="fw-semibold text-dark" style="font-size: 0.8rem;">{{ setting('business.name', 'KisanHub') }}</div>
+                                        <div class="text-muted" style="font-size: 0.72rem;">{{ url('/') }}</div>
+                                    </div>
+                                </div>
+                                <div id="serpPreviewTitle" class="fw-semibold mb-1" style="color: #1a0dab; font-size: 1.08rem; line-height: 1.3;">
+                                    {{ $seoDefaultTitle }}
+                                </div>
+                                <div id="serpPreviewDesc" class="text-secondary" style="font-size: 0.85rem; line-height: 1.45;">
+                                    {{ \Illuminate\Support\Str::limit($seoDefaultDesc, 160) }}
+                                </div>
+                            </div>
+                        </div>
+
+                        <form action="{{ route('website.admin.update') }}" method="POST">
+                            @csrf
+                            @method('PUT')
+                            <input type="hidden" name="return_tab" value="seo">
+
+                            <div class="row g-4">
+                                <div class="col-md-8">
+                                    <label class="form-label fw-bold text-dark d-flex align-items-center gap-1">
+                                        <i class="bi bi-type-h1 text-success"></i>
+                                        Default / Homepage SEO Meta Title
+                                    </label>
+                                    <input type="text"
+                                           name="seo_meta_title"
+                                           id="seoMetaTitleInput"
+                                           maxlength="255"
+                                           class="form-control"
+                                           value="{{ $seoDefaultTitle }}"
+                                           oninput="document.getElementById('serpPreviewTitle').textContent = this.value || 'KisanHub'">
+                                    <div class="form-text text-muted">Recommended: 50–65 characters. Include brand name, primary service (Mandi Rates / Grain Trading), and region.</div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label class="form-label fw-bold text-dark d-flex align-items-center gap-1">
+                                        <i class="bi bi-robot text-primary"></i>
+                                        Search Crawler Indexing (`robots`)
+                                    </label>
+                                    <select name="seo_robots" class="form-select">
+                                        <option value="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" {{ str_starts_with($seoRobotsVal, 'index') ? 'selected' : '' }}>
+                                            Allow Indexing (index, follow) — Recommended
+                                        </option>
+                                        <option value="noindex, nofollow" {{ str_starts_with($seoRobotsVal, 'noindex') ? 'selected' : '' }}>
+                                            Discourage Search Engines (noindex, nofollow)
+                                        </option>
+                                    </select>
+                                    <div class="form-text text-muted">Controls whether Google &amp; Bing index public pages.</div>
+                                </div>
+
+                                <div class="col-12">
+                                    <label class="form-label fw-bold text-dark d-flex align-items-center gap-1">
+                                        <i class="bi bi-card-text text-success"></i>
+                                        Default / Homepage Meta Description
+                                    </label>
+                                    <textarea name="seo_meta_description"
+                                              id="seoMetaDescInput"
+                                              rows="3"
+                                              maxlength="500"
+                                              class="form-control"
+                                              oninput="document.getElementById('serpPreviewDesc').textContent = this.value">{{ $seoDefaultDesc }}</textarea>
+                                    <div class="form-text text-muted">Recommended: 140–165 characters. Displayed in Google Search snippets and WhatsApp link previews.</div>
+                                </div>
+
+                                <div class="col-12">
+                                    <label class="form-label fw-bold text-dark d-flex align-items-center gap-1">
+                                        <i class="bi bi-tags-fill text-warning"></i>
+                                        Target SEO Keywords (Comma Separated)
+                                    </label>
+                                    <textarea name="seo_meta_keywords" rows="2" maxlength="500" class="form-control">{{ $seoDefaultKeys }}</textarea>
+                                    <div class="form-text text-muted">Include local agricultural keywords in English &amp; Hindi/Hinglish (e.g., Mandi Bhav Today, Gehu Dhan Makka Sarson Rate, Kisan Registration).</div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label class="form-label fw-bold text-dark d-flex align-items-center gap-1">
+                                        <i class="bi bi-patch-check-fill text-success"></i>
+                                        Google Search Console Verification
+                                    </label>
+                                    <input type="text"
+                                           name="seo_google_verification"
+                                           class="form-control font-monospace"
+                                           placeholder="e.g. google-site-verification token"
+                                           value="{{ \App\Models\WebsiteContent::get('seo_google_verification', '') }}">
+                                    <div class="form-text text-muted">Paste only the `content` code from `<meta name="google-site-verification" content="...">`.</div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label class="form-label fw-bold text-dark d-flex align-items-center gap-1">
+                                        <i class="bi bi-microsoft text-primary"></i>
+                                        Bing Webmaster Verification (`msvalidate.01`)
+                                    </label>
+                                    <input type="text"
+                                           name="seo_bing_verification"
+                                           class="form-control font-monospace"
+                                           placeholder="e.g. 32-char Bing token"
+                                           value="{{ \App\Models\WebsiteContent::get('seo_bing_verification', '') }}">
+                                    <div class="form-text text-muted">Optional verification token for Microsoft Bing Webmaster Tools.</div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label class="form-label fw-bold text-dark d-flex align-items-center gap-1">
+                                        <i class="bi bi-graph-up-arrow text-danger"></i>
+                                        Google Analytics 4 (GA4) Measurement ID
+                                    </label>
+                                    <input type="text"
+                                           name="seo_ga_measurement_id"
+                                           class="form-control font-monospace"
+                                           placeholder="e.g. G-XXXXXXXXXX"
+                                           value="{{ \App\Models\WebsiteContent::get('seo_ga_measurement_id', '') }}">
+                                    <div class="form-text text-muted">Automatically injects Google Tag (`gtag.js`) across all public pages when filled.</div>
+                                </div>
+                            </div>
+
+                            <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 pt-3 mt-4 border-top">
+                                <div class="small text-muted d-flex flex-wrap align-items-center gap-3">
+                                    <span><i class="bi bi-check-circle-fill text-success me-1"></i>Canonical URLs Active</span>
+                                    <span><i class="bi bi-check-circle-fill text-success me-1"></i>Bilingual `hreflang` (EN/HI)</span>
+                                    <span><i class="bi bi-check-circle-fill text-success me-1"></i>JSON-LD `LocalBusiness` &amp; `OfferCatalog`</span>
+                                </div>
+                                <button type="submit" class="btn btn-success px-4 fw-semibold shadow-sm">
+                                    <i class="bi bi-check2-circle me-1"></i> Save SEO Settings
                                 </button>
                             </div>
                         </form>

@@ -7,8 +7,11 @@
     $helplineHref = preg_replace('/[^0-9+]/', '', (string) $helplinePhone) ?: '+919876543210';
 @endphp
 
-@section('title', ($isHindi ? 'किसान ऑनलाइन पंजीकरण — ' : 'Farmer Registration — Direct Crop Procurement | ') . $bizName)
-@section('meta_description', 'Register online with ' . $bizName . ' for transparent electronic weighment, fair market pricing, and direct bank settlement for your harvest.')
+@section('title', ($isHindi ? 'किसान ऑनलाइन पंजीकरण (Farmer ID) — ' : 'Farmer Online Registration — Direct Crop Procurement | ') . $bizName)
+@section('meta_description', $isHindi
+    ? $bizName . ' पर निःशुल्क ऑनलाइन किसान पंजीकरण करें और स्थायी किसान आईडी (Farmer ID), धर्मकांटा पर त्वरित तौल तथा सीधे बैंक खाते में भुगतान की सुविधा प्राप्त करें।'
+    : 'Register online with ' . $bizName . ' to get your permanent Farmer ID for priority electronic weighment, fair mandi pricing, and direct RTGS/NEFT bank settlement.')
+@section('meta_keywords', 'farmer registration online, kisan id registration, sell crop directly, mandi farmer portal, ' . $bizName)
 
 @section('content')
 <section class="hero-section">

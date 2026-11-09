@@ -27,6 +27,7 @@ return [
     // Tabs
     'tab_rates' => 'Hero Live Crop Rates',
     'tab_cms' => 'Homepage & Notices CMS',
+    'tab_seo' => 'SEO & Search Console',
     'tab_inquiries' => 'Recent Trade Leads',
     'tab_all' => 'All Modules (Overview)',
 

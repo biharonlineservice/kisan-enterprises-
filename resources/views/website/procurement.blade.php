@@ -1,6 +1,15 @@
 @extends('layouts.website')
 
-@section('title', (app()->getLocale() === 'hi' ? 'फसल कैसे बेचें (किसान मार्गदर्शिका) — ' : 'Crop Procurement Guide for Farmers — ') . setting('website.brand_name', 'KisanHub'))
+@php
+    $isHindi = app()->getLocale() === 'hi';
+    $bizName = setting('website.brand_name', 'KisanHub');
+@endphp
+
+@section('title', ($isHindi ? 'फसल कैसे बेचें (किसान खरीद प्रक्रिया एवं आज के मंडी भाव) — ' : 'Selling Your Crop — Farmer Procurement Process & Live Mandi Rates | ') . $bizName)
+@section('meta_description', $isHindi
+    ? $bizName . ' पर अपनी फसल (धान, गेहूं, मक्का, सरसों) बेचने की 4-चरणीय पारदर्शी प्रक्रिया, लाइव फसल मूल्य कैलकुलेटर, विलंबित भुगतान बोनस और आवश्यक दस्तावेजों की पूरी जानकारी।'
+    : 'Step-by-step guide for farmers selling Paddy, Wheat, Maize, and Mustard at ' . $bizName . '. Includes live crop value calculator, digital weighment standards, same-day RTGS/NEFT payout, and delayed payment bonus scheme.')
+@section('meta_keywords', 'sell crop to mandi, farmer crop calculator, paddy moisture limit, digital dharamkanta weighment, same day farmer payment, delayed payment bonus, ' . $bizName)
 
 @section('content')
 @php

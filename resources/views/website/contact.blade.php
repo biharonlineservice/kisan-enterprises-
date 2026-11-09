@@ -1,7 +1,10 @@
 @extends('layouts.website')
 
 @section('title', (app()->getLocale() === 'hi' ? 'संपर्क एवं व्यापारिक सहायता केंद्र — ' : 'Contact Us & Trade Desk Inquiries — ') . setting('website.brand_name', 'KisanHub'))
-@section('meta_description', 'Get in touch with KisanHub for bulk grain procurement, rice mill supply, farmer weighbridge appointments, and general trading inquiries.')
+@section('meta_description', app()->getLocale() === 'hi'
+    ? setting('website.brand_name', 'KisanHub') . ' के मुख्य मंडी कार्यालय, धर्मकांटा और गोदाम परिसरों से संपर्क करें। थोक अनाज खरीद, राइस मिल कोटेशन और किसान तौल अपॉइंटमेंट हेतु संदेश भेजें।'
+    : 'Get in touch with ' . setting('website.brand_name', 'KisanHub') . ' for bulk grain procurement, rice mill supply quotes, farmer weighbridge appointments, and godown dispatch inquiries.')
+@section('meta_keywords', 'contact ' . setting('website.brand_name', 'KisanHub') . ', mandi trade desk phone, grain wholesale inquiry, weighbridge location, warehouse address')
 
 @section('content')
 @php

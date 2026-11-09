@@ -1,6 +1,15 @@
 @extends('layouts.website')
 
-@section('title', (app()->getLocale() === 'hi' ? 'हमारे बारे में — ' : 'About Us — ') . setting('website.brand_name', 'KisanHub'))
+@php
+    $isHindi = app()->getLocale() === 'hi';
+    $bizName = setting('website.brand_name', 'KisanHub');
+@endphp
+
+@section('title', ($isHindi ? 'हमारे बारे में (कंपनी प्रोफाइल एवं गोदाम क्षमता) — ' : 'About Us — Certified Grain Trading & Warehousing | ') . $bizName)
+@section('meta_description', $isHindi
+    ? $bizName . ' एक विश्वसनीय कृषि व्यापार एवं गोदाम भंडारण संस्था है जो किसानों से सीधे अनाज खरीदकर राइस मिलों और फ्लोर मिलों को उच्च गुणवत्ता की थोक आपूर्ति करती है।'
+    : 'Learn about ' . $bizName . ', a trusted agricultural crop trading and warehousing enterprise offering 100% computerized weighbridge procurement for farmers and graded bulk grain supply for commercial mills.')
+@section('meta_keywords', 'about ' . $bizName . ', agricultural trading company, grain warehousing, computerized weighbridge mandi, rice mill supplier, farmer crop buyer')
 
 @section('content')
 @php

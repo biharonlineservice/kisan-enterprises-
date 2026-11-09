@@ -3,13 +3,179 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Agricultural Crop Trading & Bulk Grain Supply') — {{ setting('website.brand_name', 'KisanHub') }}</title>
-    <meta name="description" content="@yield('meta_description', 'KisanHub is a premier agricultural trading business purchasing crops directly from farmers and supplying high-quality grains in bulk to rice mills, wholesalers, and agricultural markets.')">
+    @php
+        $seoBrandName = setting('website.brand_name', 'KisanHub');
+        $seoLegalName = setting('business.name', 'Kisan Enterprises');
+        $seoState = setting('business.state', 'Uttar Pradesh');
+        $seoAddress = setting('business.address', 'Agricultural Trading Hub, Uttar Pradesh, India');
+        $seoPhone = \App\Models\WebsiteContent::get('helpline_phone', setting('business.phone', '+91 98765 43210'));
+        $seoEmail = \App\Models\WebsiteContent::get('contact_email', setting('business.email', 'info@kisanenterprises.com'));
+        $seoGstin = setting('business.gstin');
+
+        $rawPageTitle = trim($__env->yieldContent('title', \App\Models\WebsiteContent::get('seo_meta_title', 'Agricultural Crop Trading & Bulk Grain Supply')));
+        $fullPageTitle = str_contains(strtolower($rawPageTitle), strtolower($seoBrandName))
+            ? $rawPageTitle
+            : $rawPageTitle . ' — ' . $seoBrandName;
+
+        $defaultMetaDesc = \App\Models\WebsiteContent::get(
+            'seo_meta_description',
+            $seoBrandName . ' (' . $seoLegalName . ') is a premier agricultural trading enterprise purchasing paddy, wheat, maize, and mustard directly from farmers with certified digital weighbridges and supplying graded bulk grain to rice mills, flour mills, and institutional buyers across ' . $seoState . ' and Bihar.'
+        );
+        $pageMetaDesc = trim($__env->yieldContent('meta_description', $defaultMetaDesc));
+
+        $defaultMetaKeywords = \App\Models\WebsiteContent::get(
+            'seo_meta_keywords',
+            'mandi rates today, crop purchase price, paddy procurement, wheat wholesale supplier, maize bulk buyer, mustard mandi rate, agricultural crop trading, digital weighbridge mandi, rice mill grain supplier, ' . $seoBrandName . ', ' . $seoLegalName . ', ' . $seoState . ', Bihar'
+        );
+        $pageMetaKeywords = trim($__env->yieldContent('meta_keywords', $defaultMetaKeywords));
+
+        $seoRobots = trim($__env->yieldContent('meta_robots', \App\Models\WebsiteContent::get('seo_robots', 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1')));
+        $canonicalUrl = trim($__env->yieldContent('canonical_url', url()->current()));
+
+        $customLogoPath = setting('business.logo');
+        $seoOgImage = trim($__env->yieldContent(
+            'og_image',
+            $customLogoPath && file_exists(public_path('uploads/' . $customLogoPath))
+                ? asset('uploads/' . $customLogoPath)
+                : (file_exists(public_path('images/logo.png')) ? asset('images/logo.png') : asset('icons/icon-192.png'))
+        ));
+
+        $googleVerification = trim((string) \App\Models\WebsiteContent::get('seo_google_verification', ''));
+        $bingVerification = trim((string) \App\Models\WebsiteContent::get('seo_bing_verification', ''));
+        $gaMeasurementId = trim((string) \App\Models\WebsiteContent::get('seo_ga_measurement_id', ''));
+
+        $breadcrumbItems = [
+            [
+                '@type' => 'ListItem',
+                'position' => 1,
+                'name' => app()->getLocale() === 'hi' ? 'मुखपृष्ठ' : 'Home',
+                'item' => route('home'),
+            ],
+        ];
+        if (!request()->routeIs('home')) {
+            $breadcrumbItems[] = [
+                '@type' => 'ListItem',
+                'position' => 2,
+                'name' => $rawPageTitle,
+                'item' => $canonicalUrl,
+            ];
+        }
+
+        $globalSchemaGraph = [
+            '@context' => 'https://schema.org',
+            '@graph' => [
+                [
+                    '@type' => ['Organization', 'LocalBusiness'],
+                    '@id' => route('home') . '#organization',
+                    'name' => $seoBrandName,
+                    'legalName' => $seoLegalName,
+                    'url' => route('home'),
+                    'logo' => [
+                        '@type' => 'ImageObject',
+                        'url' => $seoOgImage,
+                    ],
+                    'image' => $seoOgImage,
+                    'description' => $pageMetaDesc,
+                    'telephone' => $seoPhone,
+                    'email' => $seoEmail,
+                    'priceRange' => '₹₹',
+                    'address' => [
+                        '@type' => 'PostalAddress',
+                        'streetAddress' => $seoAddress,
+                        'addressRegion' => $seoState,
+                        'addressCountry' => 'IN',
+                    ],
+                    'areaServed' => [
+                        ['@type' => 'AdministrativeArea', 'name' => 'Uttar Pradesh'],
+                        ['@type' => 'AdministrativeArea', 'name' => 'Bihar'],
+                        ['@type' => 'Country', 'name' => 'India'],
+                    ],
+                    'openingHoursSpecification' => [
+                        [
+                            '@type' => 'OpeningHoursSpecification',
+                            'dayOfWeek' => ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+                            'opens' => '08:00',
+                            'closes' => '20:00',
+                        ],
+                    ],
+                ] + ($seoGstin ? ['taxID' => $seoGstin] : []),
+                [
+                    '@type' => 'WebSite',
+                    '@id' => route('home') . '#website',
+                    'url' => route('home'),
+                    'name' => $seoBrandName,
+                    'alternateName' => $seoLegalName,
+                    'publisher' => ['@id' => route('home') . '#organization'],
+                    'inLanguage' => ['en-IN', 'hi-IN'],
+                ],
+                [
+                    '@type' => 'BreadcrumbList',
+                    '@id' => $canonicalUrl . '#breadcrumb',
+                    'itemListElement' => $breadcrumbItems,
+                ],
+            ],
+        ];
+    @endphp
+
+    <title>{{ $fullPageTitle }}</title>
+    <meta name="description" content="{{ $pageMetaDesc }}">
+    <meta name="keywords" content="{{ $pageMetaKeywords }}">
+    <meta name="author" content="{{ $seoBrandName }} ({{ $seoLegalName }})">
+    <meta name="robots" content="{{ $seoRobots }}">
+    <meta name="geo.region" content="IN-UP">
+    <meta name="geo.placename" content="{{ $seoState }}, India">
+
+    {{-- Canonical & Multilingual Hreflang Alternates --}}
+    <link rel="canonical" href="{{ $canonicalUrl }}">
+    <link rel="alternate" hreflang="en-IN" href="{{ $canonicalUrl }}">
+    <link rel="alternate" hreflang="hi-IN" href="{{ $canonicalUrl }}">
+    <link rel="alternate" hreflang="x-default" href="{{ $canonicalUrl }}">
+
+    {{-- Open Graph / WhatsApp / Facebook / LinkedIn Rich Preview --}}
+    <meta property="og:type" content="@yield('og_type', 'website')">
+    <meta property="og:site_name" content="{{ $seoBrandName }}">
+    <meta property="og:title" content="{{ $fullPageTitle }}">
+    <meta property="og:description" content="{{ $pageMetaDesc }}">
+    <meta property="og:url" content="{{ $canonicalUrl }}">
+    <meta property="og:image" content="{{ $seoOgImage }}">
+    <meta property="og:image:alt" content="{{ $seoBrandName }} — {{ $seoLegalName }}">
+    <meta property="og:locale" content="{{ app()->getLocale() === 'hi' ? 'hi_IN' : 'en_IN' }}">
+    <meta property="og:locale:alternate" content="{{ app()->getLocale() === 'hi' ? 'en_IN' : 'hi_IN' }}">
+
+    {{-- Twitter / X Card Meta --}}
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ $fullPageTitle }}">
+    <meta name="twitter:description" content="{{ $pageMetaDesc }}">
+    <meta name="twitter:image" content="{{ $seoOgImage }}">
+
+    {{-- Search Console Verification Tags (if configured in CMS) --}}
+    @if($googleVerification !== '')
+        <meta name="google-site-verification" content="{{ $googleVerification }}">
+    @endif
+    @if($bingVerification !== '')
+        <meta name="msvalidate.01" content="{{ $bingVerification }}">
+    @endif
 
     <link rel="manifest" href="{{ asset('manifest.json') }}">
     <meta name="theme-color" content="#196F3D">
     <link rel="apple-touch-icon" href="{{ asset('icons/icon-192.png') }}">
     <link rel="icon" type="image/png" sizes="192x192" href="{{ asset('icons/icon-192.png') }}">
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="{{ route('website.sitemap') }}">
+
+    {{-- Schema.org Structured Data (JSON-LD) --}}
+    <script type="application/ld+json">{!! json_encode($globalSchemaGraph, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}</script>
+    @stack('structured_data')
+
+    {{-- Optional Google Analytics 4 (GA4) --}}
+    @if($gaMeasurementId !== '' && preg_match('/^G-[A-Z0-9]+$/i', $gaMeasurementId))
+        <script async src="https://www.googletagmanager.com/gtag/js?id={{ $gaMeasurementId }}"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '{{ $gaMeasurementId }}');
+        </script>
+    @endif
 
     <link rel="stylesheet" href="{{ asset('vendor/bootstrap/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/bootstrap-icons/bootstrap-icons.min.css') }}">

@@ -6,7 +6,9 @@
 @endphp
 
 @section('title', ($isHindi ? 'व्यापार की शर्तें — ' : 'Terms of Trade — Agricultural Procurement & Grain Supply | ') . $bizName)
-@section('meta_description', 'Official commercial terms, weighbridge regulations, quality inspection standards, and settlement guidelines of ' . $bizName . '.')
+@section('meta_description', $isHindi
+    ? $bizName . ' के आधिकारिक व्यापारिक नियम, इलेक्ट्रॉनिक धर्मकांटा तौल मानक, नमी एवं गुणवत्ता जांच और किसान भुगतान की शर्तें।'
+    : 'Official commercial terms, weighbridge regulations, quality inspection standards, and settlement guidelines of ' . $bizName . '.')
 
 @section('content')
 <section class="hero-section">

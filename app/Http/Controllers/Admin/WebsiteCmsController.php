@@ -17,7 +17,7 @@ class WebsiteCmsController extends Controller
     public function index(Request $request, CropPriceTrendService $trendService): View
     {
         $tab = $request->input('tab', 'rates');
-        if (!in_array($tab, ['rates', 'cms', 'inquiries', 'all'], true)) {
+        if (!in_array($tab, ['rates', 'cms', 'seo', 'inquiries', 'all'], true)) {
             $tab = 'rates';
         }
 
@@ -38,7 +38,10 @@ class WebsiteCmsController extends Controller
 
     public function update(Request $request): RedirectResponse
     {
-        $fields = $request->except(['_token', '_form_token', '_method', 'rates', 'tab']);
+        $returnTab = in_array($request->input('return_tab'), ['cms', 'seo', 'all'], true)
+            ? $request->input('return_tab')
+            : 'cms';
+        $fields = $request->except(['_token', '_form_token', '_method', 'rates', 'tab', 'return_tab']);
 
         foreach ($fields as $key => $value) {
             if (is_array($value)) {
@@ -47,7 +50,7 @@ class WebsiteCmsController extends Controller
             WebsiteContent::set($key, 'general', null, (string) $value);
         }
 
-        return redirect()->route('website.admin.index', ['tab' => 'cms'])->with('success', 'Website content updated successfully.');
+        return redirect()->route('website.admin.index', ['tab' => $returnTab])->with('success', 'Website & SEO settings updated successfully.');
     }
 
     public function updateCropRates(Request $request): RedirectResponse

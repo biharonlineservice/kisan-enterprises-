@@ -1,6 +1,41 @@
 @extends('layouts.website')
 
-@section('title', (app()->getLocale() === 'hi' ? 'उत्पाद एवं थोक अनाज आपूर्ति (राइस व फ्लोर मिल्स) — ' : 'Bulk Grain Supply for Rice Mills & Institutional Buyers — ') . setting('website.brand_name', 'KisanHub'))
+@php
+    $isHindi = app()->getLocale() === 'hi';
+    $bizName = setting('website.brand_name', 'KisanHub');
+@endphp
+
+@section('title', ($isHindi ? 'उत्पाद एवं थोक अनाज आपूर्ति (राइस मिल्स व फ्लोर मिल्स हेतु) — ' : 'Products & Bulk Grain Supply for Rice Mills, Flour Mills & Wholesalers | ') . $bizName)
+@section('meta_description', $isHindi
+    ? $bizName . ' से राइस मिलों, आटा मिलों, पशु आहार संयंत्रों और थोक व्यापारियों के लिए ग्रेड-ए धान, गेहूं, मक्का और सरसों की ट्रक-लोड आपूर्ति, एचएसएन कोड और गुणवत्ता मानक।'
+    : 'Source moisture-tested, grade-sorted Paddy, Wheat, Maize, and Mustard in bulk truckloads from ' . $bizName . ' for rice mills, roller flour mills, cattle feed plants, and institutional commodity buyers.')
+@section('meta_keywords', 'bulk grain supplier India, paddy supplier for rice mills, milling wheat wholesale, yellow maize cattle feed supplier, mustard oil mill supply, HSN code grain trading, ' . $bizName)
+
+@push('structured_data')
+@if($crops->isNotEmpty())
+@php
+    $productsSchema = [
+        '@context' => 'https://schema.org',
+        '@type' => 'ItemList',
+        'name' => $bizName . ' — B2B Bulk Agricultural Commodities Catalogue',
+        'url' => route('website.products'),
+        'itemListElement' => $crops->values()->map(function ($crop, $idx) {
+            return [
+                '@type' => 'ListItem',
+                'position' => $idx + 1,
+                'item' => [
+                    '@type' => 'Product',
+                    'name' => $crop->name,
+                    'sku' => $crop->code,
+                    'description' => $crop->description ?: ('Bulk wholesale supply of graded ' . $crop->name . ' for industrial mills and processors.'),
+                ],
+            ];
+        })->all(),
+    ];
+@endphp
+<script type="application/ld+json">{!! json_encode($productsSchema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}</script>
+@endif
+@endpush
 
 @section('content')
 @php

@@ -25,6 +25,8 @@ Route::get('/contact', [\App\Http\Controllers\Website\PublicWebsiteController::c
 Route::post('/contact', [\App\Http\Controllers\Website\PublicWebsiteController::class, 'inquiryStore'])->middleware('throttle:public-forms')->name('website.contact.store');
 Route::get('/privacy-policy', [\App\Http\Controllers\Website\PublicWebsiteController::class, 'privacy'])->name('website.privacy');
 Route::get('/terms-of-trade', [\App\Http\Controllers\Website\PublicWebsiteController::class, 'terms'])->name('website.terms');
+Route::get('/sitemap.xml', [\App\Http\Controllers\Website\PublicWebsiteController::class, 'sitemap'])->name('website.sitemap');
+Route::get('/robots.txt', [\App\Http\Controllers\Website\PublicWebsiteController::class, 'robots'])->name('website.robots');
 Route::get('/locale/{locale}', [\App\Http\Controllers\LocaleController::class, 'switch'])->name('locale.switch');
 Route::post('/locale/{locale}', [\App\Http\Controllers\LocaleController::class, 'switch'])->name('locale.switch.post');
 Route::view('/offline', 'offline')->name('offline');

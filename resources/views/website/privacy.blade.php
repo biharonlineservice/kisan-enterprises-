@@ -6,7 +6,9 @@
 @endphp
 
 @section('title', ($isHindi ? 'गोपनीयता नीति — ' : 'Privacy Policy — Farmer & Trade Partner Data Protection | ') . $bizName)
-@section('meta_description', 'Privacy policy and data governance practices of ' . $bizName . ' regarding farmer registration, banking details, and commercial trading records.')
+@section('meta_description', $isHindi
+    ? $bizName . ' की गोपनीयता नीति: किसान केवाईसी, बैंक खाता विवरण और धर्मकांटा व्यापारिक अभिलेखों की सुरक्षा एवं डेटा गोपनीयता मानक।'
+    : 'Privacy policy and data governance practices of ' . $bizName . ' regarding farmer registration, banking details, and commercial trading records.')
 
 @section('content')
 <section class="hero-section">

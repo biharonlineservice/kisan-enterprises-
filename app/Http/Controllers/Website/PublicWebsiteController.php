@@ -180,4 +180,61 @@ class PublicWebsiteController extends Controller
     {
         return view('website.terms');
     }
+
+    public function sitemap(): \Illuminate\Http\Response
+    {
+        $latestCropUpdate = Crop::where('is_active', true)->max('updated_at');
+        $lastmod = $latestCropUpdate ? \Illuminate\Support\Carbon::parse($latestCropUpdate)->toAtomString() : now()->toAtomString();
+
+        $pages = [
+            ['loc' => route('home'), 'priority' => '1.0', 'changefreq' => 'daily', 'lastmod' => $lastmod],
+            ['loc' => route('website.procurement'), 'priority' => '0.9', 'changefreq' => 'daily', 'lastmod' => $lastmod],
+            ['loc' => route('website.products'), 'priority' => '0.9', 'changefreq' => 'weekly', 'lastmod' => $lastmod],
+            ['loc' => route('website.farmer.register'), 'priority' => '0.8', 'changefreq' => 'monthly', 'lastmod' => now()->startOfMonth()->toAtomString()],
+            ['loc' => route('website.about'), 'priority' => '0.8', 'changefreq' => 'monthly', 'lastmod' => now()->startOfMonth()->toAtomString()],
+            ['loc' => route('website.contact'), 'priority' => '0.8', 'changefreq' => 'monthly', 'lastmod' => now()->startOfMonth()->toAtomString()],
+            ['loc' => route('website.privacy'), 'priority' => '0.4', 'changefreq' => 'yearly', 'lastmod' => now()->startOfYear()->toAtomString()],
+            ['loc' => route('website.terms'), 'priority' => '0.4', 'changefreq' => 'yearly', 'lastmod' => now()->startOfYear()->toAtomString()],
+        ];
+
+        $xml = '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
+        $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">' . "\n";
+
+        foreach ($pages as $p) {
+            $loc = htmlspecialchars($p['loc'], ENT_XML1, 'UTF-8');
+            $xml .= "  <url>\n";
+            $xml .= "    <loc>{$loc}</loc>\n";
+            $xml .= "    <lastmod>{$p['lastmod']}</lastmod>\n";
+            $xml .= "    <changefreq>{$p['changefreq']}</changefreq>\n";
+            $xml .= "    <priority>{$p['priority']}</priority>\n";
+            $xml .= "    <xhtml:link rel=\"alternate\" hreflang=\"en-IN\" href=\"{$loc}\" />\n";
+            $xml .= "    <xhtml:link rel=\"alternate\" hreflang=\"hi-IN\" href=\"{$loc}\" />\n";
+            $xml .= "    <xhtml:link rel=\"alternate\" hreflang=\"x-default\" href=\"{$loc}\" />\n";
+            $xml .= "  </url>\n";
+        }
+
+        $xml .= "</urlset>\n";
+
+        return response($xml, 200, [
+            'Content-Type' => 'application/xml; charset=UTF-8',
+            'Cache-Control' => 'public, max-age=3600',
+        ]);
+    }
+
+    public function robots(): \Illuminate\Http\Response
+    {
+        $sitemapUrl = route('website.sitemap');
+        $content = "User-agent: *\n"
+            . "Allow: /\n"
+            . "Disallow: /erp/\n"
+            . "Disallow: /login\n"
+            . "Disallow: /forgot-password\n"
+            . "Disallow: /reset-password\n"
+            . "Disallow: /csrf-token\n\n"
+            . "Sitemap: {$sitemapUrl}\n";
+
+        return response($content, 200, [
+            'Content-Type' => 'text/plain; charset=UTF-8',
+        ]);
+    }
 }
