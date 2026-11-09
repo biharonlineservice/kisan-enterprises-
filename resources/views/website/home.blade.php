@@ -23,7 +23,7 @@
             {{-- Left Column: Headline, CTAs & Trust Strip --}}
             <div class="col-12 col-lg-7">
                 <div class="d-inline-flex align-items-center gap-2 px-3 py-1 rounded-pill hero-eyebrow mb-2">
-                    <i class="bi bi-shield-check-fill text-success"></i>
+                    <i class="bi bi-shield-fill-check text-success"></i>
                     <span>{{ __('website.hero.badge') }}</span>
                 </div>
 
@@ -86,6 +86,29 @@
                                 <div class="hero-trust-lbl">{{ $bonusEnabled ? ($isHindi ? 'देरी भुगतान बोनस' : 'Delayed Bonus') : ($isHindi ? 'ग्रेड बोनस' : 'Grade Value') }}</div>
                             </div>
                         </div>
+                    </div>
+                </div>
+
+                {{-- Live Weighbridge & Trading Desk Operations Bar --}}
+                <div class="mt-3 p-3 rounded-4 bg-white border shadow-2xs d-flex flex-wrap justify-content-between align-items-center gap-2">
+                    <div class="d-flex align-items-center gap-2">
+                        <span class="live-pulse-dot"></span>
+                        <span class="small fw-semibold text-dark">
+                            {{ $isHindi ? 'धर्मकांटा व खरीद समय:' : 'Weighbridge Open:' }}
+                            <span class="text-success fw-bold">8:00 AM – 7:30 PM</span>
+                        </span>
+                    </div>
+                    <div class="d-flex align-items-center flex-wrap gap-2">
+                        @if($totalCapacityQtl > 0)
+                            <span class="badge bg-light text-dark border fw-medium px-2 py-1" style="font-size: 0.74rem;">
+                                <i class="bi bi-layers-fill text-success me-1"></i>{{ indian_number($totalCapacityQtl, 0) }}+ {{ $isHindi ? 'क्विंटल क्षमता' : 'Qtl Storage' }}
+                            </span>
+                        @endif
+                        @if(setting('business.phone'))
+                            <a href="tel:{{ preg_replace('/[^0-9+]/', '', setting('business.phone')) }}" class="badge bg-success-subtle text-success border border-success-subtle text-decoration-none fw-bold px-2 py-1" style="font-size: 0.74rem;">
+                                <i class="bi bi-telephone-fill me-1"></i>{{ setting('business.phone') }}
+                            </a>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -1223,8 +1246,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const pts = filterPoints(trend.points, activeRangeDays);
         const labels = pts.map(p => p.label);
-        const baseRates = pts.map(p => p.rate);
-        const maxRates = pts.map(p => p.max);
+        const baseRates = pts.map(p => Number(p.rate) || 0);
+        const maxRates = pts.map(p => (p.max !== null && p.max !== undefined && Number(p.max) >= Number(p.rate)) ? Number(p.max) : null);
         const hasMax = maxRates.some(v => v !== null && v > 0);
 
         const isDown = trend.direction === 'down';

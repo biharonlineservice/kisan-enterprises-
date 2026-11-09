@@ -90,7 +90,7 @@
 {{-- Hero Banner + Commercial Dispatch Snapshot --}}
 <section class="hero-section">
     <div class="container">
-        <div class="row align-items-center g-4 g-lg-5">
+        <div class="row align-items-start g-4 g-lg-5">
             {{-- Left Column --}}
             <div class="col-12 col-lg-7">
                 <div class="d-inline-flex align-items-center gap-2 px-3 py-1 rounded-pill prod-eyebrow mb-3">
@@ -114,14 +114,14 @@
                     @endif
                 </p>
 
-                <div class="d-flex flex-column flex-sm-row flex-wrap gap-2 gap-sm-3 mb-4">
-                    <a href="#bulk-quote-form" class="btn btn-primary btn-lg px-4 shadow-sm prod-cta-btn">
+                <div class="ke-cta-group mb-4">
+                    <a href="#bulk-quote-form" class="btn btn-primary rounded-pill shadow-sm ke-cta-btn">
                         <i class="bi bi-send-check-fill"></i>
-                        {{ $isHindi ? 'थोक कोटेशन मंगवाएं' : 'Request Bulk Quotation' }}
+                        <span>{{ $isHindi ? 'थोक कोटेशन मंगवाएं' : 'Request Bulk Quotation' }}</span>
                     </a>
-                    <a href="#commodity-catalogue" class="btn btn-outline-primary bg-white btn-lg px-4 prod-cta-btn">
+                    <a href="#commodity-catalogue" class="btn btn-outline-primary bg-white rounded-pill ke-cta-btn">
                         <i class="bi bi-grid-1x2-fill"></i>
-                        {{ $isHindi ? 'उपलब्ध अनाज व ग्रेड देखें' : 'View Commodity Catalogue' }}
+                        <span>{{ $isHindi ? 'उपलब्ध अनाज व ग्रेड देखें' : 'View Commodity Catalogue' }}</span>
                     </a>
                 </div>
 
@@ -151,20 +151,21 @@
             {{-- Right Column: B2B Supply Readiness & Logistics Card --}}
             <div class="col-12 col-lg-5">
                 <div class="card prod-snapshot-card border-0 overflow-hidden">
-                    <div class="prod-snapshot-header text-white py-3 px-3 px-sm-4 d-flex justify-content-between align-items-center gap-2">
-                        <div class="d-flex align-items-center gap-2">
-                            <span class="prod-header-icon">
+                    <div class="prod-snapshot-header text-white py-3 px-3 px-sm-4 d-flex justify-content-between align-items-center gap-3">
+                        <div class="d-flex align-items-center gap-3 min-w-0">
+                            <span class="ke-header-icon">
                                 <i class="bi bi-truck-front-fill"></i>
                             </span>
-                            <div>
-                                <div class="fw-bold lh-sm">{{ $isHindi ? 'थोक डिस्पैच एवं लॉट क्षमता' : 'Commercial Supply Snapshot' }}</div>
-                                <small class="text-white-50 d-block" style="font-size: 0.72rem;">
+                            <div class="ke-header-text min-w-0">
+                                <div class="fw-bold text-white lh-sm">{{ $isHindi ? 'थोक डिस्पैच एवं लॉट क्षमता' : 'Commercial Supply Snapshot' }}</div>
+                                <small class="text-white-50 d-block" style="font-size: 0.75rem;">
                                     {{ $isHindi ? 'गोदाम स्टॉक व डायरेक्ट मंडी ट्रांजिट' : 'Ex-Godown & Direct Mandi Transit Dispatch' }}
                                 </small>
                             </div>
                         </div>
-                        <span class="badge bg-white text-success rounded-pill px-2 py-1 small fw-bold">
-                            {{ $isHindi ? 'GST व ई-वे बिल' : 'GST Ready' }}
+                        <span class="ke-live-badge flex-shrink-0">
+                            <span class="live-pulse-dot"></span>
+                            <span>{{ $isHindi ? 'GST व ई-वे बिल' : 'GST Ready' }}</span>
                         </span>
                     </div>
 
@@ -642,9 +643,9 @@
                                             <i class="bi bi-shield-lock text-success me-1"></i>
                                             {{ $isHindi ? 'हमारी टीम कार्य दिवसों में शीघ्र कोटेशन साझा करती है।' : 'Prompt response during mandi trading hours.' }}
                                         </small>
-                                        <button type="submit" class="btn btn-primary btn-lg px-4 fw-semibold shadow-sm">
-                                            <i class="bi bi-send-fill me-1"></i>
-                                            {{ $isHindi ? 'थोक कोटेशन भेजें' : 'Submit Bulk Request' }}
+                                        <button type="submit" class="btn btn-primary rounded-pill px-4 py-2 fw-semibold shadow-sm d-inline-flex align-items-center justify-content-center gap-2 text-nowrap">
+                                            <i class="bi bi-send-fill"></i>
+                                            <span>{{ $isHindi ? 'थोक कोटेशन भेजें' : 'Submit Bulk Request' }}</span>
                                         </button>
                                     </div>
                                 </div>

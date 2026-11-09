@@ -16,10 +16,17 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
     <style>
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 84px;
+        }
         html, body.public-site {
             overflow-x: hidden !important;
             max-width: 100vw;
             width: 100%;
+        }
+        [id] {
+            scroll-margin-top: 84px;
         }
         *, *::before, *::after {
             box-sizing: border-box;
@@ -273,6 +280,111 @@
         .site-footer hr {
             border-color: rgba(255, 255, 255, 0.14);
         }
+        /* Shared Public UI Design System */
+        .ke-cta-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.55rem;
+        }
+        @media (min-width: 576px) {
+            .ke-cta-group {
+                flex-direction: row;
+                flex-wrap: nowrap;
+                align-items: center;
+                gap: 0.65rem;
+            }
+        }
+        .ke-cta-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.45rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            padding: 0.56rem 1.1rem;
+            border-radius: 999px !important;
+            white-space: nowrap;
+            text-decoration: none;
+            transition: transform 0.16s ease, box-shadow 0.16s ease, background-color 0.16s ease;
+            line-height: 1.25;
+            flex-shrink: 0;
+        }
+        .ke-cta-btn:hover {
+            transform: translateY(-1px);
+        }
+        .ke-cta-btn i {
+            font-size: 0.96rem;
+        }
+        @media (min-width: 1200px) {
+            .ke-cta-btn {
+                font-size: 0.94rem;
+                padding: 0.6rem 1.25rem;
+                gap: 0.5rem;
+            }
+        }
+        @media (max-width: 575.98px) {
+            .ke-cta-btn {
+                width: 100%;
+                font-size: 0.92rem;
+                padding: 0.65rem 1rem;
+            }
+        }
+        .ke-card-header-dark {
+            background: linear-gradient(135deg, #1b7340 0%, #104b28 100%);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 0.9rem 1.15rem;
+            color: #ffffff;
+        }
+        .ke-header-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.18);
+            border: 1px solid rgba(255, 255, 255, 0.28);
+            color: #ffffff;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.15rem;
+            flex-shrink: 0;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+        }
+        .ke-header-text {
+            margin-left: 0.75rem;
+            min-width: 0;
+            flex: 1 1 auto;
+        }
+        .ke-live-badge {
+            background: #ffffff;
+            color: #145732;
+            font-size: 0.74rem;
+            font-weight: 700;
+            letter-spacing: 0.2px;
+            padding: 0.35rem 0.75rem;
+            border-radius: 999px;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.42rem;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+            flex-shrink: 0;
+            line-height: 1;
+            white-space: nowrap;
+        }
+        .top-erp-pill {
+            background: rgba(255, 255, 255, 0.14);
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            border-radius: 999px;
+            padding: 0.15rem 0.65rem;
+            color: #fde047 !important;
+            font-weight: 600;
+            font-size: 0.76rem;
+            text-decoration: none;
+            transition: background 0.15s ease;
+        }
+        .top-erp-pill:hover {
+            background: rgba(255, 255, 255, 0.24);
+            color: #ffffff !important;
+        }
     </style>
     @stack('styles')
 </head>
@@ -289,30 +401,29 @@
 
     {{-- Top Utility & Mandi Ticker Bar (Desktop) --}}
     <div class="top-utility-bar py-1 d-none d-lg-block">
-        <div class="container d-flex justify-content-between align-items-center py-1">
-            <div class="d-flex align-items-center gap-3 overflow-hidden text-nowrap" style="max-width: 48%;">
+        <div class="container d-flex justify-content-between align-items-center gap-3 py-1">
+            <div class="d-flex align-items-center gap-3 overflow-hidden text-nowrap min-w-0">
                 <span class="text-truncate d-inline-block" title="{{ setting('business.address', 'Agricultural Trading Hub, Uttar Pradesh') }}">
                     <i class="bi bi-geo-alt-fill text-warning me-1 flex-shrink-0"></i>
                     {{ setting('business.address', 'Agricultural Trading Hub, Uttar Pradesh') }}
                 </span>
                 @if(setting('business.phone'))
-                    <a href="tel:{{ preg_replace('/[^0-9+]/', '', setting('business.phone')) }}" class="text-white text-decoration-none text-nowrap flex-shrink-0">
-                        <i class="bi bi-telephone-fill text-success me-1"></i> {{ setting('business.phone') }}
+                    <a href="tel:{{ preg_replace('/[^0-9+]/', '', setting('business.phone')) }}" class="text-white text-decoration-none text-nowrap flex-shrink-0 fw-medium">
+                        <i class="bi bi-telephone-fill text-success me-1"></i>{{ setting('business.phone') }}
                     </a>
                 @endif
             </div>
-            <div class="d-flex align-items-center justify-content-end gap-3 overflow-hidden text-nowrap" style="max-width: 50%;">
+            <div class="d-flex align-items-center justify-content-end gap-2 overflow-hidden text-nowrap flex-shrink-0">
                 <span class="d-inline-flex align-items-center gap-2 text-white-50 overflow-hidden text-truncate" title="{{ $bannerNotice }}">
                     <span class="live-pulse-dot flex-shrink-0"></span>
                     <span class="text-white text-truncate">{{ $bannerNotice }}</span>
                 </span>
-                <span class="text-white-50 flex-shrink-0">|</span>
                 @auth
-                    <a href="{{ route('dashboard') }}" class="text-warning fw-semibold text-decoration-none text-nowrap flex-shrink-0">
+                    <a href="{{ route('dashboard') }}" class="top-erp-pill text-nowrap flex-shrink-0 ms-1">
                         <i class="bi bi-speedometer2 me-1"></i>{{ __('website.nav.portal') }}
                     </a>
                 @else
-                    <a href="{{ route('login') }}" class="text-warning fw-semibold text-decoration-none text-nowrap flex-shrink-0">
+                    <a href="{{ route('login') }}" class="top-erp-pill text-nowrap flex-shrink-0 ms-1">
                         <i class="bi bi-person-lock me-1"></i>{{ __('website.nav.login') }}
                     </a>
                 @endauth
@@ -396,7 +507,7 @@
             </nav>
 
             {{-- Mobile Actions Bar (< 992px) --}}
-            <div class="d-flex align-items-center gap-1.5 d-lg-none flex-shrink-0 ms-auto">
+            <div class="d-flex align-items-center gap-2 d-lg-none flex-shrink-0 ms-auto">
                 @include('components.language-switcher')
                 <button class="btn btn-light border btn-sm d-flex align-items-center justify-content-center p-0 rounded-3 shadow-none"
                         type="button"

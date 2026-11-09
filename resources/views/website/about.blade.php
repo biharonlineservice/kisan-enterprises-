@@ -327,7 +327,7 @@
         {{-- Bottom Conversion CTA Banner --}}
         <div class="about-cta-banner rounded-4 p-4 p-md-5 text-white mt-3">
             <div class="row align-items-center g-3">
-                <div class="col-12 col-lg-8">
+                <div class="col-12 col-lg-7">
                     <h3 class="h4 fw-bold mb-1">
                         {{ $isHindi ? 'अपनी फसल बेचने या थोक अनाज खरीदने के लिए तैयार हैं?' : 'Ready to Sell Your Harvest or Source Bulk Grain?' }}
                     </h3>
@@ -335,12 +335,14 @@
                         {{ $isHindi ? 'ऑनलाइन किसान पंजीकरण करके धर्मकांटा पर प्राथमिकता पाएं, या थोक आपूर्ति कोटेशन के लिए हमारे व्यापार कक्ष से जुड़ें।' : 'Register online for priority weighbridge service as a farmer, or contact our trading desk for bulk mill supply quotes.' }}
                     </p>
                 </div>
-                <div class="col-12 col-lg-4 d-flex flex-column flex-sm-row flex-lg-column flex-xl-row justify-content-lg-end gap-2">
-                    <a href="{{ route('website.farmer.register') }}" class="btn btn-light text-success fw-bold px-4">
-                        <i class="bi bi-person-plus-fill"></i> {{ $isHindi ? 'किसान पंजीकरण' : 'Farmer Signup' }}
+                <div class="col-12 col-lg-5 d-flex flex-column flex-sm-row justify-content-lg-end gap-2">
+                    <a href="{{ route('website.farmer.register') }}" class="btn btn-light text-success fw-bold rounded-pill text-nowrap px-4 py-2 d-inline-flex align-items-center justify-content-center gap-2 shadow-sm">
+                        <i class="bi bi-person-plus-fill"></i>
+                        <span>{{ $isHindi ? 'किसान पंजीकरण' : 'Farmer Signup' }}</span>
                     </a>
-                    <a href="{{ route('website.contact') }}" class="btn btn-outline-light px-4">
-                        <i class="bi bi-chat-dots-fill"></i> {{ $isHindi ? 'संपर्क करें' : 'Contact Desk' }}
+                    <a href="{{ route('website.contact') }}" class="btn btn-outline-light fw-semibold rounded-pill text-nowrap px-4 py-2 d-inline-flex align-items-center justify-content-center gap-2">
+                        <i class="bi bi-chat-dots-fill"></i>
+                        <span>{{ $isHindi ? 'संपर्क करें' : 'Contact Desk' }}</span>
                     </a>
                 </div>
             </div>

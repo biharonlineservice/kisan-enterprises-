@@ -37,7 +37,7 @@ class CropPriceTrendService
             $rows = $histories->get($crop->id, collect())->values();
 
             $current = (float) $crop->current_purchase_rate;
-            $currentMax = $crop->max_purchase_rate !== null && (float) $crop->max_purchase_rate > 0
+            $currentMax = $crop->max_purchase_rate !== null && (float) $crop->max_purchase_rate >= $current
                 ? (float) $crop->max_purchase_rate
                 : null;
 
@@ -90,7 +90,7 @@ class CropPriceTrendService
                 $recent->push([
                     'date' => $row->effective_at,
                     'rate' => (float) $row->purchase_rate,
-                    'max' => $row->max_purchase_rate !== null && (float) $row->max_purchase_rate > 0 ? (float) $row->max_purchase_rate : null,
+                    'max' => $row->max_purchase_rate !== null && (float) $row->max_purchase_rate >= (float) $row->purchase_rate ? (float) $row->max_purchase_rate : null,
                     'change' => $diff,
                     'direction' => $diff === null ? 'new' : ($diff > 0 ? 'up' : ($diff < 0 ? 'down' : 'same')),
                 ]);
@@ -129,7 +129,7 @@ class CropPriceTrendService
             'days_ago' => $daysAgo,
             'label' => $local->format($includeTime ? 'd M, h:i A' : 'd M'),
             'rate' => (float) $row->purchase_rate,
-            'max' => $row->max_purchase_rate !== null && (float) $row->max_purchase_rate > 0
+            'max' => $row->max_purchase_rate !== null && (float) $row->max_purchase_rate >= (float) $row->purchase_rate
                 ? (float) $row->max_purchase_rate
                 : null,
         ];

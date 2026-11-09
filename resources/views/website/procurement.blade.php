@@ -19,7 +19,7 @@
 {{-- Hero Banner + Interactive Farmer Crop Value Estimator --}}
 <section class="hero-section">
     <div class="container">
-        <div class="row align-items-center g-4 g-lg-5">
+        <div class="row align-items-start g-4 g-lg-5">
             {{-- Left Column --}}
             <div class="col-12 col-lg-7">
                 <div class="d-inline-flex align-items-center gap-2 px-3 py-1 rounded-pill proc-eyebrow mb-3">
@@ -43,14 +43,14 @@
                     @endif
                 </p>
 
-                <div class="d-flex flex-column flex-sm-row flex-wrap gap-2 gap-sm-3 mb-4">
-                    <a href="{{ route('website.farmer.register') }}" class="btn btn-primary btn-lg px-4 shadow-sm proc-cta-btn">
+                <div class="ke-cta-group mb-4">
+                    <a href="{{ route('website.farmer.register') }}" class="btn btn-primary rounded-pill shadow-sm ke-cta-btn">
                         <i class="bi bi-person-plus-fill"></i>
-                        {{ $isHindi ? 'किसान ऑनलाइन पंजीकरण करें' : 'Register as Farmer Online' }}
+                        <span>{{ $isHindi ? 'किसान ऑनलाइन पंजीकरण करें' : 'Register as Farmer Online' }}</span>
                     </a>
-                    <a href="#accepted-crops" class="btn btn-outline-primary bg-white btn-lg px-4 proc-cta-btn">
+                    <a href="#accepted-crops" class="btn btn-outline-primary bg-white rounded-pill ke-cta-btn">
                         <i class="bi bi-list-check"></i>
-                        {{ $isHindi ? 'स्वीकृत फसलें व आज का भाव' : 'Accepted Crops & Rates' }}
+                        <span>{{ $isHindi ? 'स्वीकृत फसलें व आज का भाव' : 'Accepted Crops & Rates' }}</span>
                     </a>
                 </div>
 
@@ -77,20 +77,21 @@
             {{-- Right Column: Interactive Harvest Value & Bonus Estimator --}}
             <div class="col-12 col-lg-5">
                 <div class="card estimator-card border-0 overflow-hidden">
-                    <div class="estimator-header text-white py-3 px-3 px-sm-4 d-flex justify-content-between align-items-center gap-2">
-                        <div class="d-flex align-items-center gap-2">
-                            <span class="estimator-icon">
+                    <div class="estimator-header text-white py-3 px-3 px-sm-4 d-flex justify-content-between align-items-center gap-3">
+                        <div class="d-flex align-items-center gap-3 min-w-0">
+                            <span class="ke-header-icon">
                                 <i class="bi bi-calculator-fill"></i>
                             </span>
-                            <div>
-                                <div class="fw-bold lh-sm">{{ $isHindi ? 'फसल मूल्य एवं बोनस कैलकुलेटर' : 'Harvest Value & Bonus Estimator' }}</div>
-                                <small class="text-white-50 d-block" style="font-size: 0.72rem;">
+                            <div class="ke-header-text min-w-0">
+                                <div class="fw-bold text-white lh-sm">{{ $isHindi ? 'फसल मूल्य एवं बोनस कैलकुलेटर' : 'Harvest Value & Bonus Estimator' }}</div>
+                                <small class="text-white-50 d-block" style="font-size: 0.75rem;">
                                     {{ $isHindi ? 'आज के लाइव मंडी भाव के अनुसार अनुमानित राशि' : "Estimate payout using today's live buying rates" }}
                                 </small>
                             </div>
                         </div>
-                        <span class="badge bg-white text-success rounded-pill px-2 py-1 small fw-bold">
-                            {{ $isHindi ? 'लाइव कैलकुलेटर' : 'Instant' }}
+                        <span class="ke-live-badge flex-shrink-0">
+                            <span class="live-pulse-dot"></span>
+                            <span>{{ $isHindi ? 'लाइव कैलकुलेटर' : 'Instant' }}</span>
                         </span>
                     </div>
 
@@ -102,7 +103,7 @@
                             <select id="calcCropSelect" class="form-select">
                                 @forelse($rateCrops as $rc)
                                     <option value="{{ $rc->current_purchase_rate }}"
-                                            data-max="{{ $rc->max_purchase_rate ?: $rc->current_purchase_rate }}"
+                                            data-max="{{ ((float) $rc->max_purchase_rate > (float) $rc->current_purchase_rate) ? $rc->max_purchase_rate : $rc->current_purchase_rate }}"
                                             data-unit="{{ $isHindi ? $rc->shortUnitLabel('hi') : $rc->shortUnitLabel('en') }}">
                                         {{ $rc->name }} — {{ $rc->formattedPurchaseRate() }}
                                     </option>
@@ -488,8 +489,9 @@
                         <h5 class="h6 fw-bold mb-1">{{ $isHindi ? 'ऑनलाइन किसान आईडी मात्र 1 मिनट में बनाएं' : 'Get Your Official Farmer ID in 1 Minute' }}</h5>
                         <small class="text-white-50">{{ $isHindi ? 'निःशुल्क पंजीकरण — त्वरित तौल और सीधे बैंक भुगतान के लिए।' : 'Free enrollment for faster weighbridge entry & direct bank payouts.' }}</small>
                     </div>
-                    <a href="{{ route('website.farmer.register') }}" class="btn btn-light text-success fw-bold px-4 flex-shrink-0">
-                        <i class="bi bi-pencil-square"></i> {{ $isHindi ? 'अभी पंजीकरण करें' : 'Register Now' }}
+                    <a href="{{ route('website.farmer.register') }}" class="btn btn-light text-success fw-bold rounded-pill text-nowrap px-4 py-2 d-inline-flex align-items-center justify-content-center gap-2 flex-shrink-0 shadow-sm">
+                        <i class="bi bi-pencil-square"></i>
+                        <span>{{ $isHindi ? 'अभी पंजीकरण करें' : 'Register Now' }}</span>
                     </a>
                 </div>
             </div>

@@ -19,7 +19,7 @@
 {{-- Botanical Hero + Main Trading Hub Snapshot --}}
 <section class="hero-section">
     <div class="container">
-        <div class="row align-items-center g-4 g-lg-5">
+        <div class="row align-items-start g-4 g-lg-5">
             {{-- Left Column --}}
             <div class="col-12 col-lg-7">
                 <div class="d-inline-flex align-items-center gap-2 px-3 py-1 rounded-pill cnt-eyebrow mb-3">
@@ -43,14 +43,14 @@
                     @endif
                 </p>
 
-                <div class="d-flex flex-column flex-sm-row flex-wrap gap-2 gap-sm-3 mb-4">
-                    <a href="#inquiry-form" class="btn btn-primary btn-lg px-4 shadow-sm cnt-cta-btn">
+                <div class="ke-cta-group mb-4">
+                    <a href="#inquiry-form" class="btn btn-primary rounded-pill shadow-sm ke-cta-btn">
                         <i class="bi bi-envelope-paper-fill"></i>
-                        {{ $isHindi ? 'ऑनलाइन संदेश / पूछताछ भेजें' : 'Send Trade Inquiry Online' }}
+                        <span>{{ $isHindi ? 'ऑनलाइन संदेश / पूछताछ भेजें' : 'Send Trade Inquiry Online' }}</span>
                     </a>
-                    <a href="tel:{{ $helplineHref }}" class="btn btn-outline-primary bg-white btn-lg px-4 cnt-cta-btn">
+                    <a href="tel:{{ $helplineHref }}" class="btn btn-outline-primary bg-white rounded-pill ke-cta-btn">
                         <i class="bi bi-telephone-outbound-fill"></i>
-                        {{ $isHindi ? 'सीधी कॉल: ' : 'Call Desk: ' }}{{ $helplinePhone }}
+                        <span>{{ $isHindi ? 'सीधी कॉल: ' : 'Call Desk: ' }}{{ $helplinePhone }}</span>
                     </a>
                 </div>
 
@@ -77,20 +77,21 @@
             {{-- Right Column: Head Office & Weighbridge Timings Card --}}
             <div class="col-12 col-lg-5">
                 <div class="card cnt-office-card border-0 overflow-hidden">
-                    <div class="cnt-office-header text-white py-3 px-3 px-sm-4 d-flex justify-content-between align-items-center gap-2">
-                        <div class="d-flex align-items-center gap-2">
-                            <span class="cnt-header-icon">
+                    <div class="cnt-office-header text-white py-3 px-3 px-sm-4 d-flex justify-content-between align-items-center gap-3">
+                        <div class="d-flex align-items-center gap-3 min-w-0">
+                            <span class="ke-header-icon">
                                 <i class="bi bi-geo-alt-fill"></i>
                             </span>
-                            <div>
-                                <div class="fw-bold lh-sm">{{ $isHindi ? 'मुख्य मंडी कार्यालय व धर्मकांटा' : 'Trading Hub & Head Office' }}</div>
-                                <small class="text-white-50 d-block" style="font-size: 0.72rem;">
+                            <div class="ke-header-text min-w-0">
+                                <div class="fw-bold text-white lh-sm">{{ $isHindi ? 'मुख्य मंडी कार्यालय व धर्मकांटा' : 'Trading Hub & Head Office' }}</div>
+                                <small class="text-white-50 d-block" style="font-size: 0.75rem;">
                                     {{ $bizName }}
                                 </small>
                             </div>
                         </div>
-                        <span class="badge bg-white text-success rounded-pill px-2 py-1 small fw-bold">
-                            {{ $isHindi ? 'सक्रिय केंद्र' : 'Active Hub' }}
+                        <span class="ke-live-badge flex-shrink-0">
+                            <span class="live-pulse-dot"></span>
+                            <span>{{ $isHindi ? 'सक्रिय केंद्र' : 'Active Hub' }}</span>
                         </span>
                     </div>
 
@@ -490,9 +491,9 @@
                                     <i class="bi bi-clock text-success me-1"></i>
                                     {{ $isHindi ? 'सोम–शनि कार्य समय में त्वरित उत्तर।' : 'Prompt callback during Mon–Sat mandi hours.' }}
                                 </small>
-                                <button type="submit" class="btn btn-primary btn-lg px-4 fw-semibold shadow-sm cnt-submit-btn">
-                                    <i class="bi bi-send-fill me-1"></i>
-                                    {{ $isHindi ? 'संदेश भेजें' : 'Send Trade Message' }}
+                                <button type="submit" class="btn btn-primary rounded-pill px-4 py-2 fw-semibold shadow-sm cnt-submit-btn d-inline-flex align-items-center justify-content-center gap-2 text-nowrap">
+                                    <i class="bi bi-send-fill"></i>
+                                    <span>{{ $isHindi ? 'संदेश भेजें' : 'Send Trade Message' }}</span>
                                 </button>
                             </div>
                         </form>
