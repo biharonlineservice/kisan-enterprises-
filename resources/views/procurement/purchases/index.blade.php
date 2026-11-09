@@ -241,15 +241,12 @@
     </div>
 
     {{-- Search & Filter Form --}}
-    @php
-        $hasAdvFilters = request()->anyFilled(['status', 'payment', 'from', 'to']);
-    @endphp
-    <form method="GET" action="{{ route('purchases.index') }}" class="p-3 bg-light bg-opacity-50 border-bottom" data-autosubmit>
-        {{-- Row 1: Search (6 cols), Crop (3 cols), Destination Warehouse (3 cols) --}}
-        <div class="row g-2 align-items-end">
-            <div class="col-12 col-md-6 col-lg-6">
-                <label class="form-label small fw-semibold text-muted mb-1">{{ __('app.search') }}</label>
-                <div class="d-flex gap-2">
+    <div class="p-3 bg-light bg-opacity-50 border-bottom erp-filter-collapsible">
+        <form method="GET" action="{{ route('purchases.index') }}" data-autosubmit>
+            {{-- Row 1: Search (6 cols), Crop (3 cols), Destination Warehouse (3 cols) --}}
+            <div class="row g-2 align-items-end">
+                <div class="col-12 col-md-6 col-lg-6">
+                    <label class="form-label small fw-semibold text-muted mb-1">{{ __('app.search') }}</label>
                     <div class="input-group input-group-sm">
                         <span class="input-group-text bg-white border-end-0"><i class="bi bi-search text-muted"></i></span>
                         <input type="text"
@@ -258,41 +255,31 @@
                                class="form-control form-control-sm border-start-0"
                                placeholder="{{ __('procurement.purchases.search_placeholder') }}">
                     </div>
-                    <button type="button"
-                            class="btn btn-sm {{ $hasAdvFilters ? 'btn-primary text-white' : 'btn-light border' }} d-md-none flex-shrink-0 px-3"
-                            data-bs-toggle="collapse"
-                            data-bs-target="#purchaseAdvFilters"
-                            aria-expanded="{{ $hasAdvFilters ? 'true' : 'false' }}"
-                            title="Filters">
-                        <i class="bi bi-sliders"></i>
-                    </button>
+                </div>
+
+                <div class="col-6 col-md-3 col-lg-3">
+                    <label class="form-label small fw-semibold text-muted mb-1">{{ __('procurement.purchases.crop') }}</label>
+                    <select name="crop_id" class="form-select form-select-sm">
+                        <option value="">{{ __('app.all') }}</option>
+                        @foreach($crops as $crop)
+                            <option value="{{ $crop->id }}" @selected(request('crop_id') == $crop->id)>{{ $crop->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="col-6 col-md-3 col-lg-3">
+                    <label class="form-label small fw-semibold text-muted mb-1">{{ __('procurement.purchases.warehouse') }}</label>
+                    <select name="warehouse_id" class="form-select form-select-sm">
+                        <option value="">{{ __('app.all') }}</option>
+                        @foreach($warehouses as $wh)
+                            <option value="{{ $wh->id }}" @selected(request('warehouse_id') == $wh->id)>{{ $wh->name }}</option>
+                        @endforeach
+                    </select>
                 </div>
             </div>
 
-            <div class="col-6 col-md-3 col-lg-3">
-                <label class="form-label small fw-semibold text-muted mb-1">{{ __('procurement.purchases.crop') }}</label>
-                <select name="crop_id" class="form-select form-select-sm">
-                    <option value="">{{ __('app.all') }}</option>
-                    @foreach($crops as $crop)
-                        <option value="{{ $crop->id }}" @selected(request('crop_id') == $crop->id)>{{ $crop->name }}</option>
-                    @endforeach
-                </select>
-            </div>
-
-            <div class="col-6 col-md-3 col-lg-3">
-                <label class="form-label small fw-semibold text-muted mb-1">{{ __('procurement.purchases.warehouse') }}</label>
-                <select name="warehouse_id" class="form-select form-select-sm">
-                    <option value="">{{ __('app.all') }}</option>
-                    @foreach($warehouses as $wh)
-                        <option value="{{ $wh->id }}" @selected(request('warehouse_id') == $wh->id)>{{ $wh->name }}</option>
-                    @endforeach
-                </select>
-            </div>
-        </div>
-
-        {{-- Row 2: Payment (3 cols), Status (3 cols), From Date (2 cols), To Date (2 cols), Actions (2 cols) --}}
-        <div id="purchaseAdvFilters" class="collapse {{ $hasAdvFilters ? 'show' : '' }} d-md-block mt-2">
-            <div class="row g-2 align-items-end">
+            {{-- Row 2: Payment (3 cols), Status (3 cols), From Date (2 cols), To Date (2 cols), Actions (2 cols) --}}
+            <div class="row g-2 align-items-end mt-1">
                 <div class="col-6 col-md-3 col-lg-3">
                     <label class="form-label small fw-semibold text-muted mb-1">{{ __('procurement.purchases.payment_filter') }}</label>
                     <select name="payment" class="form-select form-select-sm">
@@ -336,8 +323,8 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </form>
+        </form>
+    </div>
 
     {{-- Desktop Purchase Records Table (>= 768px) --}}
     <div class="table-responsive d-none d-md-block">

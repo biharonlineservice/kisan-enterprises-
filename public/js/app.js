@@ -114,6 +114,96 @@
         sel.addEventListener('change', function () { sel.form.submit(); });
     });
 
+    // ---- Mobile-Only Collapsible Filter Bars (< 768px) -------------------
+    (function initMobileCollapsibleFilters() {
+        var isHindi = (document.documentElement.lang || '').toLowerCase().indexOf('hi') === 0;
+        var labelSearchFilter = isHindi ? 'फ़िल्टर और खोज (Search & Filter)' : 'Search & Filter';
+        var labelActive = isHindi ? 'सक्रिय' : 'Active';
+        var labelReset = isHindi ? 'रीसेट' : 'Reset';
+
+        // Also ensure any custom filter containers without explicit class are wrapped
+        document.querySelectorAll('.app-content form[data-autosubmit], .app-content form.filter-bar').forEach(function (form) {
+            if (form.closest('#inventoryFilterDrawer') || form.closest('#paymentFilterDrawer')) return;
+            if (!form.closest('.erp-filter-collapsible')) {
+                var card = form.closest('.card');
+                if (card && card.querySelectorAll('table, .mobile-card-list, .list-group').length === 0) {
+                    card.classList.add('erp-filter-collapsible');
+                } else if (form.parentElement && form.parentElement.children.length === 1 && !form.parentElement.classList.contains('card')) {
+                    form.parentElement.classList.add('erp-filter-collapsible');
+                } else {
+                    form.classList.add('erp-filter-collapsible');
+                }
+            }
+        });
+
+        document.querySelectorAll('.erp-filter-collapsible').forEach(function (panel, idx) {
+            if (panel.dataset.mobileFilterInit === '1') return;
+            panel.dataset.mobileFilterInit = '1';
+
+            var form = panel.tagName === 'FORM' ? panel : panel.querySelector('form');
+            var activeCount = 0;
+            var resetHref = null;
+
+            if (form) {
+                form.querySelectorAll('input:not([type="hidden"]):not([type="submit"]):not([type="button"]), select').forEach(function (el) {
+                    var val = (el.value || '').trim();
+                    var name = el.getAttribute('name') || '';
+                    if (!val) return;
+                    if (name === 'sort' && val === 'name_asc') return;
+                    if (name === 'preset' && val === 'this_month') return;
+                    activeCount++;
+                });
+
+                var resetLink = form.querySelector('a.btn[href]');
+                if (resetLink) {
+                    resetHref = resetLink.getAttribute('href');
+                }
+            }
+
+            var isInsideCard = panel.parentElement && panel.parentElement.classList.contains('card') && !panel.classList.contains('card');
+            var bar = document.createElement('div');
+            bar.className = 'erp-mobile-filter-bar d-md-none ' + (isInsideCard ? 'is-in-card' : 'is-standalone');
+
+            var panelId = panel.id || ('erpMobileFilterPanel_' + idx);
+            panel.id = panelId;
+
+            var btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'erp-mobile-filter-toggle';
+            btn.setAttribute('aria-expanded', 'false');
+            btn.setAttribute('aria-controls', panelId);
+
+            var badgeHtml = activeCount > 0
+                ? '<span class="badge bg-success text-white rounded-pill ms-1" style="font-size: 0.7rem;">' + activeCount + ' ' + labelActive + '</span>'
+                : '';
+
+            btn.innerHTML =
+                '<span class="d-inline-flex align-items-center gap-2">' +
+                    '<i class="bi bi-sliders2 text-success"></i>' +
+                    '<span>' + labelSearchFilter + '</span>' +
+                    badgeHtml +
+                '</span>' +
+                '<i class="bi bi-chevron-down erp-filter-chevron"></i>';
+
+            btn.addEventListener('click', function () {
+                var isOpen = panel.classList.toggle('is-open');
+                btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+            });
+
+            bar.appendChild(btn);
+
+            if (activeCount > 0 && resetHref) {
+                var resetBtn = document.createElement('a');
+                resetBtn.href = resetHref;
+                resetBtn.className = 'btn btn-sm btn-outline-danger erp-mobile-filter-reset d-inline-flex align-items-center gap-1';
+                resetBtn.innerHTML = '<i class="bi bi-x-circle"></i><span>' + labelReset + '</span>';
+                bar.appendChild(resetBtn);
+            }
+
+            panel.parentNode.insertBefore(bar, panel);
+        });
+    })();
+
     // ---- Image preview for file inputs -----------------------------------
     document.querySelectorAll('input[type=file][data-preview]').forEach(function (input) {
         input.addEventListener('change', function () {

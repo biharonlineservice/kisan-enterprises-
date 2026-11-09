@@ -50,11 +50,11 @@
 
 @if($tab === 'balance')
     {{-- Current Stock Balance --}}
-    <div class="card mb-3">
+    <div class="card mb-3 erp-filter-collapsible">
         <form method="GET" action="{{ route('reports.inventory') }}" class="p-3 bg-light rounded" data-autosubmit>
             <input type="hidden" name="tab" value="balance">
             <div class="row g-2 align-items-end">
-                <div class="col-md-3">
+                <div class="col-6 col-md-3">
                     <label class="form-label small fw-semibold">Warehouse</label>
                     <select name="warehouse_id" class="form-select form-select-sm" onchange="this.form.submit()">
                         <option value="">All Warehouses</option>
@@ -63,7 +63,7 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="col-md-3">
+                <div class="col-6 col-md-3">
                     <label class="form-label small fw-semibold">Crop</label>
                     <select name="crop_id" class="form-select form-select-sm" onchange="this.form.submit()">
                         <option value="">All Crops</option>
@@ -72,8 +72,8 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="col-auto">
-                    <button type="submit" class="btn btn-sm btn-dark"><i class="bi bi-funnel"></i> Filter</button>
+                <div class="col-12 col-md-auto d-flex gap-2">
+                    <button type="submit" class="btn btn-sm btn-dark flex-grow-1"><i class="bi bi-funnel"></i> Filter</button>
                     <a href="{{ route('reports.inventory', ['tab' => 'balance']) }}" class="btn btn-sm btn-outline-secondary" title="Reset Filters"><i class="bi bi-arrow-clockwise"></i></a>
                 </div>
             </div>
@@ -136,11 +136,11 @@
 
 @elseif($tab === 'movements')
     {{-- Movements Register --}}
-    <div class="card mb-3">
+    <div class="card mb-3 erp-filter-collapsible">
         <form method="GET" action="{{ route('reports.inventory') }}" class="p-3 bg-light rounded" data-autosubmit>
             <input type="hidden" name="tab" value="movements">
             <div class="row g-2 align-items-end">
-                <div class="col-md-2">
+                <div class="col-6 col-md-2">
                     <label class="form-label small fw-semibold">Date Preset</label>
                     <select name="preset" class="form-select form-select-sm" onchange="this.form.submit()">
                         <option value="today" {{ ($filters['preset'] ?? '') === 'today' ? 'selected' : '' }}>Today</option>
@@ -151,7 +151,7 @@
                         <option value="all_time" {{ ($filters['preset'] ?? '') === 'all_time' ? 'selected' : '' }}>All Time</option>
                     </select>
                 </div>
-                <div class="col-md-2">
+                <div class="col-6 col-md-2">
                     <label class="form-label small fw-semibold">Warehouse</label>
                     <select name="warehouse_id" class="form-select form-select-sm" onchange="this.form.submit()">
                         <option value="">All Warehouses</option>
@@ -160,7 +160,7 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="col-md-2">
+                <div class="col-6 col-md-2">
                     <label class="form-label small fw-semibold">Crop</label>
                     <select name="crop_id" class="form-select form-select-sm" onchange="this.form.submit()">
                         <option value="">All Crops</option>
@@ -169,7 +169,7 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="col-md-2">
+                <div class="col-6 col-md-2">
                     <label class="form-label small fw-semibold">Movement Type</label>
                     <select name="type" class="form-select form-select-sm" onchange="this.form.submit()">
                         <option value="">All Types</option>
@@ -180,8 +180,8 @@
                         <option value="adjustment" {{ ($filters['type'] ?? '') === 'adjustment' ? 'selected' : '' }}>Adjustment</option>
                     </select>
                 </div>
-                <div class="col-auto">
-                    <button type="submit" class="btn btn-sm btn-dark"><i class="bi bi-funnel"></i> Filter</button>
+                <div class="col-12 col-md-auto d-flex gap-2">
+                    <button type="submit" class="btn btn-sm btn-dark flex-grow-1"><i class="bi bi-funnel"></i> Filter</button>
                     <a href="{{ route('reports.inventory', ['tab' => 'movements']) }}" class="btn btn-sm btn-outline-secondary" title="Reset Filters"><i class="bi bi-arrow-clockwise"></i></a>
                 </div>
             </div>

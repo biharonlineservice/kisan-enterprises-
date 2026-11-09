@@ -196,7 +196,7 @@
 {{-- 4. Audit Log Records Data Card --}}
 <div class="card shadow-sm border-0 rounded-3 mb-4 bg-white overflow-hidden">
     {{-- Filter Toolbar --}}
-    <div class="card-body border-bottom bg-light p-3">
+    <div class="card-body border-bottom bg-light p-3 erp-filter-collapsible">
         <form method="GET" action="{{ route('audit-logs.index') }}" class="row g-2 align-items-end" data-autosubmit>
             <input type="hidden" name="tab" value="{{ $tab }}">
 

@@ -184,12 +184,12 @@
 </div>
 
 {{-- 4. Custom Date Range Toolbar --}}
-<div class="card border-0 shadow-sm mb-4 bg-white" style="border-radius: 12px;">
+<div class="card border-0 shadow-sm mb-4 bg-white erp-filter-collapsible" style="border-radius: 12px;">
     <div class="card-body p-3 bg-light-subtle rounded-3">
         <form method="GET" action="{{ route('accounts.profit_and_loss') }}" class="row g-2 align-items-end" data-autosubmit>
             <input type="hidden" name="period" value="custom">
 
-            <div class="col-12 col-sm-5 col-md-4">
+            <div class="col-6 col-sm-5 col-md-4">
                 <label class="form-label small fw-semibold text-muted mb-1">{{ __('accounts.from_date') }}</label>
                 <div class="input-group input-group-sm">
                     <span class="input-group-text bg-white border-end-0"><i class="bi bi-calendar-event text-muted"></i></span>
@@ -197,7 +197,7 @@
                 </div>
             </div>
 
-            <div class="col-12 col-sm-5 col-md-4">
+            <div class="col-6 col-sm-5 col-md-4">
                 <label class="form-label small fw-semibold text-muted mb-1">{{ __('accounts.to_date') }}</label>
                 <div class="input-group input-group-sm">
                     <span class="input-group-text bg-white border-end-0"><i class="bi bi-calendar-check text-muted"></i></span>

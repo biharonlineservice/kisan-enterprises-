@@ -172,8 +172,8 @@
             </li>
         </ul>
 
-        <div class="d-flex align-items-center gap-2 flex-shrink-0 pe-2">
-            <form method="GET" action="{{ route('accounts.index') }}" class="d-flex align-items-center gap-1" style="max-width: 280px;">
+        <div class="d-flex align-items-center gap-2 flex-shrink-0 pe-2 w-100 w-md-auto erp-filter-collapsible">
+            <form method="GET" action="{{ route('accounts.index') }}" class="d-flex align-items-center gap-1 flex-grow-1 flex-md-grow-0" style="max-width: 100%;" data-autosubmit>
                 @if(request('tab'))
                     <input type="hidden" name="tab" value="{{ request('tab') }}">
                 @endif

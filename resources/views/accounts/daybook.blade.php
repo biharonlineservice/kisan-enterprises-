@@ -207,7 +207,7 @@
 </div>
 
 {{-- 4. Date Picker & Search Toolbar --}}
-<div class="card border-0 shadow-sm mb-4 bg-white" style="border-radius: 12px;">
+<div class="card border-0 shadow-sm mb-4 bg-white erp-filter-collapsible" style="border-radius: 12px;">
     <div class="card-body p-3 bg-light-subtle rounded-3">
         <form method="GET" action="{{ route('accounts.daybook') }}" class="row g-2 align-items-end" data-autosubmit>
             @if($tab !== 'all')

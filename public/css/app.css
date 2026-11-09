@@ -107,9 +107,123 @@ a { text-decoration: none; }
 .th-sort { color: inherit; display: inline-flex; align-items: center; gap: .25rem; }
 .th-sort:hover { color: var(--ke-primary); }
 
-.filter-bar { display: flex; flex-wrap: wrap; gap: .5rem; align-items: end; padding: 1rem 1.25rem; border-bottom: 1px solid var(--ke-border); }
-.filter-bar .form-control, .filter-bar .form-select { min-width: 150px; }
-.filter-bar .grow { flex: 1 1 220px; }
+.filter-bar { display: flex; flex-wrap: wrap; gap: .6rem; align-items: flex-end; padding: .9rem 1.15rem; border-bottom: 1px solid var(--ke-border); }
+.filter-bar > div { flex: 1 1 150px; min-width: 0; }
+.filter-bar .form-control, .filter-bar .form-select { min-width: 0; width: 100%; }
+.filter-bar .grow { flex: 2 1 240px; }
+
+/* ---------- Responsive Mobile-Only Collapsible Filter System ---------- */
+.erp-mobile-filter-bar {
+    display: none;
+}
+
+@media (max-width: 767.98px) {
+    .filter-bar {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: .6rem;
+        padding: .85rem;
+    }
+    .filter-bar .grow,
+    .filter-bar > div:last-child {
+        grid-column: 1 / -1;
+    }
+    .filter-bar > div:last-child .d-flex,
+    .filter-bar > div:last-child .btn[type="submit"] {
+        width: 100%;
+    }
+
+    /* Hide all ERP filter sections by default on mobile (< 768px) unless toggled open */
+    .erp-filter-collapsible:not(.is-open) {
+        display: none !important;
+    }
+
+    .erp-filter-collapsible.is-open {
+        animation: keFilterSlideDown .18s ease-out;
+    }
+
+    .erp-mobile-filter-bar {
+        display: flex !important;
+        align-items: center;
+        justify-content: space-between;
+        gap: .5rem;
+        width: 100%;
+    }
+
+    .erp-mobile-filter-bar.is-in-card {
+        padding: .6rem .85rem;
+        background: #F8FBF9;
+        border-bottom: 1px solid var(--ke-border);
+    }
+
+    .erp-mobile-filter-bar.is-standalone {
+        margin-bottom: .75rem;
+    }
+
+    .erp-mobile-filter-toggle {
+        flex: 1;
+        display: inline-flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: .5rem;
+        min-height: 38px !important;
+        padding: .42rem .85rem;
+        background: #ffffff;
+        border: 1px solid var(--ke-border);
+        border-radius: 10px;
+        color: var(--ke-text);
+        font-size: .84rem;
+        font-weight: 600;
+        box-shadow: 0 1px 2px rgba(36, 51, 42, .04);
+        transition: all .15s ease;
+    }
+
+    .erp-mobile-filter-toggle:hover,
+    .erp-mobile-filter-toggle[aria-expanded="true"] {
+        border-color: var(--ke-primary);
+        background: var(--ke-primary-soft);
+        color: var(--ke-primary-dark);
+    }
+
+    .erp-mobile-filter-toggle .erp-filter-chevron {
+        transition: transform .2s ease;
+        font-size: .8rem;
+        color: var(--ke-muted);
+    }
+
+    .erp-mobile-filter-toggle[aria-expanded="true"] .erp-filter-chevron {
+        transform: rotate(180deg);
+        color: var(--ke-primary-dark);
+    }
+
+    .erp-mobile-filter-reset {
+        min-height: 38px !important;
+        padding: .42rem .7rem;
+        border-radius: 10px;
+        font-size: .8rem;
+        font-weight: 600;
+        flex-shrink: 0;
+    }
+
+    /* Keep filter controls compact and proportional when expanded on mobile */
+    .erp-filter-collapsible .form-control,
+    .erp-filter-collapsible .form-select,
+    .erp-filter-collapsible .btn,
+    #inventoryFilterDrawer .form-control,
+    #inventoryFilterDrawer .form-select,
+    #inventoryFilterDrawer .btn,
+    #paymentFilterDrawer .form-control,
+    #paymentFilterDrawer .form-select,
+    #paymentFilterDrawer .btn {
+        min-height: 38px !important;
+        font-size: .875rem !important;
+    }
+}
+
+@keyframes keFilterSlideDown {
+    from { opacity: 0; transform: translateY(-4px); }
+    to { opacity: 1; transform: translateY(0); }
+}
 
 /* Pagination */
 .pagination { --bs-pagination-color: var(--ke-text); --bs-pagination-active-bg: var(--ke-primary); --bs-pagination-active-border-color: var(--ke-primary); --bs-pagination-border-color: var(--ke-border); --bs-pagination-hover-color: var(--ke-primary); margin-bottom: 0; }

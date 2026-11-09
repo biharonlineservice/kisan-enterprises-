@@ -176,7 +176,7 @@
 </div>
 
 {{-- 4. Collapsible Mobile & Inline Desktop Filters Card --}}
-<div class="collapse d-md-block {{ $hasFilters ? 'show' : '' }}" id="inventoryFilterDrawer">
+<div class="collapse d-md-block" id="inventoryFilterDrawer">
     <div class="card shadow-sm border-0 mb-4" style="border-radius: 0.75rem; background: #ffffff;">
         <div class="card-body p-3">
             <form method="GET" action="{{ route('inventory.index') }}" class="row g-2 align-items-end">

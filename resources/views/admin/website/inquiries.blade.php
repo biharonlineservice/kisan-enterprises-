@@ -17,36 +17,38 @@
 
 <div class="card">
     {{-- Filter Bar --}}
-    <form method="GET" action="{{ route('website.admin.inquiries') }}" class="filter-bar" data-autosubmit>
-        <div class="grow">
-            <label class="form-label small">Filter by Inquiry Type</label>
-            <select name="type" class="form-select">
-                <option value="">All Inquiry Types</option>
-                <option value="bulk_buyer" {{ request('type') === 'bulk_buyer' ? 'selected' : '' }}>Bulk Buyer / Rice Mill</option>
-                <option value="farmer" {{ request('type') === 'farmer' ? 'selected' : '' }}>Farmer Procurement</option>
-                <option value="general" {{ request('type') === 'general' ? 'selected' : '' }}>General Inquiry</option>
-            </select>
-        </div>
-
-        <div>
-            <label class="form-label small">Status</label>
-            <select name="status" class="form-select">
-                <option value="">All Statuses</option>
-                <option value="new" {{ request('status') === 'new' ? 'selected' : '' }}>New Unread Only</option>
-                <option value="responded" {{ request('status') === 'responded' ? 'selected' : '' }}>Responded Only</option>
-            </select>
-        </div>
-
-        <div>
-            <label class="form-label small d-none d-md-block">&nbsp;</label>
-            <div class="d-flex gap-1">
-                <button type="submit" class="btn btn-light"><i class="bi bi-funnel"></i> Filter</button>
-                @if(request()->anyFilled(['type', 'status']))
-                    <a href="{{ route('website.admin.inquiries') }}" class="btn btn-light" title="Clear Filters"><i class="bi bi-x-circle"></i></a>
-                @endif
+    <div class="p-3 bg-light bg-opacity-50 border-bottom erp-filter-collapsible">
+        <form method="GET" action="{{ route('website.admin.inquiries') }}" class="row g-2 align-items-end" data-autosubmit>
+            <div class="col-6 col-md-5">
+                <label class="form-label small fw-semibold text-muted mb-1">Filter by Inquiry Type</label>
+                <select name="type" class="form-select form-select-sm">
+                    <option value="">All Inquiry Types</option>
+                    <option value="bulk_buyer" {{ request('type') === 'bulk_buyer' ? 'selected' : '' }}>Bulk Buyer / Rice Mill</option>
+                    <option value="farmer" {{ request('type') === 'farmer' ? 'selected' : '' }}>Farmer Procurement</option>
+                    <option value="general" {{ request('type') === 'general' ? 'selected' : '' }}>General Inquiry</option>
+                </select>
             </div>
-        </div>
-    </form>
+
+            <div class="col-6 col-md-4">
+                <label class="form-label small fw-semibold text-muted mb-1">Status</label>
+                <select name="status" class="form-select form-select-sm">
+                    <option value="">All Statuses</option>
+                    <option value="new" {{ request('status') === 'new' ? 'selected' : '' }}>New Unread Only</option>
+                    <option value="responded" {{ request('status') === 'responded' ? 'selected' : '' }}>Responded Only</option>
+                </select>
+            </div>
+
+            <div class="col-12 col-md-3">
+                <label class="form-label small fw-semibold text-muted mb-1 d-none d-md-block">&nbsp;</label>
+                <div class="d-flex gap-2">
+                    <button type="submit" class="btn btn-sm btn-primary fw-semibold shadow-sm flex-grow-1"><i class="bi bi-funnel me-1"></i> Filter</button>
+                    @if(request()->anyFilled(['type', 'status']))
+                        <a href="{{ route('website.admin.inquiries') }}" class="btn btn-sm btn-outline-secondary" title="Clear Filters"><i class="bi bi-x-circle"></i></a>
+                    @endif
+                </div>
+            </div>
+        </form>
+    </div>
 
     {{-- Inquiries Table --}}
     <div class="table-responsive">

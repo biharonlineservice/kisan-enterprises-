@@ -167,7 +167,7 @@
 </div>
 
 {{-- 4. Collapsible Mobile & Inline Desktop Filters Card --}}
-<div class="collapse d-md-block {{ $hasFilters ? 'show' : '' }}" id="paymentFilterDrawer">
+<div class="collapse d-md-block" id="paymentFilterDrawer">
     <div class="card shadow-sm border-0 mb-4 bg-white" style="border-radius: 12px;">
         <div class="p-3 bg-light bg-opacity-50 border-bottom">
             <form method="GET" action="{{ route('farmer-payments.index') }}" data-autosubmit>

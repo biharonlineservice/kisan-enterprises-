@@ -182,7 +182,7 @@
 
 {{-- 4. Advanced Filter Bar & Listing Card --}}
 <div class="card mb-4 shadow-sm border-0" style="border-radius: 12px; overflow: hidden;">
-    <div class="p-3 bg-light-subtle border-bottom">
+    <div class="p-3 bg-light-subtle border-bottom erp-filter-collapsible">
         <form method="GET" action="{{ route('customers.index') }}" class="row g-2 align-items-end" data-autosubmit>
             @if(request('tab'))
                 <input type="hidden" name="tab" value="{{ request('tab') }}">
@@ -209,17 +209,15 @@
             </div>
 
             {{-- Mandi / City --}}
-            @if(count($cities) > 0)
-                <div class="col-6 col-md-2">
-                    <label class="form-label small fw-semibold text-muted mb-1">{{ __('sales.customers.city') }}</label>
-                    <select name="city" class="form-select form-select-sm">
-                        <option value="">{{ __('app.all') }}</option>
-                        @foreach($cities as $cCity)
-                            <option value="{{ $cCity }}" {{ request('city') === $cCity ? 'selected' : '' }}>{{ $cCity }}</option>
-                        @endforeach
-                    </select>
-                </div>
-            @endif
+            <div class="col-6 col-md-2">
+                <label class="form-label small fw-semibold text-muted mb-1">{{ __('sales.customers.city') }}</label>
+                <select name="city" class="form-select form-select-sm">
+                    <option value="">{{ __('app.all') }}</option>
+                    @foreach($cities as $cCity)
+                        <option value="{{ $cCity }}" {{ request('city') === $cCity ? 'selected' : '' }}>{{ $cCity }}</option>
+                    @endforeach
+                </select>
+            </div>
 
             {{-- Status --}}
             <div class="col-6 col-md-2">

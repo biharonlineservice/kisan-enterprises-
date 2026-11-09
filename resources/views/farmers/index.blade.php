@@ -167,75 +167,77 @@
     </div>
 
     {{-- Search & Filter Form --}}
-    <form method="GET" action="{{ route('farmers.index') }}" class="filter-bar bg-light bg-opacity-50" data-autosubmit>
-        @if(request()->filled('bonus'))
-            <input type="hidden" name="bonus" value="{{ request('bonus') }}">
-        @endif
+    <div class="p-3 bg-light bg-opacity-50 border-bottom erp-filter-collapsible">
+        <form method="GET" action="{{ route('farmers.index') }}" class="row g-2 align-items-end" data-autosubmit>
+            @if(request()->filled('bonus'))
+                <input type="hidden" name="bonus" value="{{ request('bonus') }}">
+            @endif
 
-        <div class="grow">
-            <label class="form-label small">{{ __('app.search') }}</label>
-            <div class="input-group">
-                <span class="input-group-text bg-white"><i class="bi bi-search"></i></span>
-                <input type="text"
-                       name="q"
-                       value="{{ request('q') }}"
-                       class="form-control"
-                       placeholder="{{ __('procurement.farmers.search_placeholder') }}">
+            <div class="col-12 col-md-3">
+                <label class="form-label small fw-semibold text-muted mb-1">{{ __('app.search') }}</label>
+                <div class="input-group input-group-sm">
+                    <span class="input-group-text bg-white border-end-0"><i class="bi bi-search text-muted"></i></span>
+                    <input type="text"
+                           name="q"
+                           value="{{ request('q') }}"
+                           class="form-control form-control-sm border-start-0"
+                           placeholder="{{ __('procurement.farmers.search_placeholder') }}">
+                </div>
             </div>
-        </div>
 
-        <div>
-            <label class="form-label small">{{ __('procurement.farmers.village') }}</label>
-            <select name="village" class="form-select">
-                <option value="">{{ __('app.all') }}</option>
-                @foreach($villages as $v)
-                    <option value="{{ $v }}" {{ request('village') === $v ? 'selected' : '' }}>{{ $v }}</option>
-                @endforeach
-            </select>
-        </div>
-
-        <div>
-            <label class="form-label small">{{ __('procurement.farmers.block_tehsil') }}</label>
-            <select name="block" class="form-select">
-                <option value="">{{ __('app.all') }}</option>
-                @foreach($blocks as $b)
-                    <option value="{{ $b }}" {{ request('block') === $b ? 'selected' : '' }}>{{ $b }}</option>
-                @endforeach
-            </select>
-        </div>
-
-        <div>
-            <label class="form-label small">{{ __('procurement.farmers.filter_balance') }}</label>
-            <select name="due" class="form-select">
-                <option value="">{{ __('app.all') }}</option>
-                <option value="pending" {{ request('due') === 'pending' ? 'selected' : '' }}>{{ __('procurement.farmers.balance_has_due') }}</option>
-                <option value="settled" {{ request('due') === 'settled' ? 'selected' : '' }}>{{ __('procurement.farmers.balance_settled') }}</option>
-            </select>
-        </div>
-
-        <div>
-            <label class="form-label small">{{ __('app.status') }}</label>
-            <select name="status" class="form-select">
-                <option value="">{{ __('app.all') }}</option>
-                <option value="active" {{ request('status') === 'active' ? 'selected' : '' }}>{{ __('app.active') }}</option>
-                <option value="inactive" {{ request('status') === 'inactive' ? 'selected' : '' }}>{{ __('app.inactive') }}</option>
-            </select>
-        </div>
-
-        <div>
-            <label class="form-label small d-none d-md-block">&nbsp;</label>
-            <div class="d-flex gap-1">
-                <button type="submit" class="btn btn-primary">
-                    <i class="bi bi-funnel"></i> {{ __('app.filter') }}
-                </button>
-                @if($hasFilters)
-                    <a href="{{ route('farmers.index') }}" class="btn btn-light border" title="{{ __('app.reset') }}">
-                        <i class="bi bi-x-lg"></i>
-                    </a>
-                @endif
+            <div class="col-6 col-md-2">
+                <label class="form-label small fw-semibold text-muted mb-1">{{ __('procurement.farmers.village') }}</label>
+                <select name="village" class="form-select form-select-sm">
+                    <option value="">{{ __('app.all') }}</option>
+                    @foreach($villages as $v)
+                        <option value="{{ $v }}" {{ request('village') === $v ? 'selected' : '' }}>{{ $v }}</option>
+                    @endforeach
+                </select>
             </div>
-        </div>
-    </form>
+
+            <div class="col-6 col-md-2">
+                <label class="form-label small fw-semibold text-muted mb-1">{{ __('procurement.farmers.block_tehsil') }}</label>
+                <select name="block" class="form-select form-select-sm">
+                    <option value="">{{ __('app.all') }}</option>
+                    @foreach($blocks as $b)
+                        <option value="{{ $b }}" {{ request('block') === $b ? 'selected' : '' }}>{{ $b }}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="col-6 col-md-2">
+                <label class="form-label small fw-semibold text-muted mb-1">{{ __('procurement.farmers.filter_balance') }}</label>
+                <select name="due" class="form-select form-select-sm">
+                    <option value="">{{ __('app.all') }}</option>
+                    <option value="pending" {{ request('due') === 'pending' ? 'selected' : '' }}>{{ __('procurement.farmers.balance_has_due') }}</option>
+                    <option value="settled" {{ request('due') === 'settled' ? 'selected' : '' }}>{{ __('procurement.farmers.balance_settled') }}</option>
+                </select>
+            </div>
+
+            <div class="col-6 col-md-1">
+                <label class="form-label small fw-semibold text-muted mb-1">{{ __('app.status') }}</label>
+                <select name="status" class="form-select form-select-sm">
+                    <option value="">{{ __('app.all') }}</option>
+                    <option value="active" {{ request('status') === 'active' ? 'selected' : '' }}>{{ __('app.active') }}</option>
+                    <option value="inactive" {{ request('status') === 'inactive' ? 'selected' : '' }}>{{ __('app.inactive') }}</option>
+                </select>
+            </div>
+
+            <div class="col-12 col-md-2">
+                <label class="form-label small fw-semibold text-muted mb-1 d-none d-md-block">&nbsp;</label>
+                <div class="d-flex gap-2">
+                    <button type="submit" class="btn btn-sm btn-primary fw-semibold shadow-sm flex-grow-1">
+                        <i class="bi bi-funnel me-1"></i> {{ __('app.filter') }}
+                    </button>
+                    @if($hasFilters)
+                        <a href="{{ route('farmers.index') }}" class="btn btn-sm btn-outline-secondary" title="{{ __('app.reset') }}">
+                            <i class="bi bi-x-circle"></i>
+                        </a>
+                    @endif
+                </div>
+            </div>
+        </form>
+    </div>
 
     {{-- Desktop Table View (>= 768px) --}}
     <div class="table-responsive d-none d-md-block">

@@ -25,10 +25,10 @@
 </div>
 
 {{-- Filters --}}
-<div class="card mb-4">
+<div class="card mb-4 erp-filter-collapsible">
     <form method="GET" action="{{ route('reports.purchases') }}" class="p-3 bg-light rounded" data-autosubmit>
         <div class="row g-2 align-items-end">
-            <div class="col-md-2">
+            <div class="col-12 col-md-2">
                 <label class="form-label small fw-semibold">Date Preset</label>
                 <select name="preset" class="form-select form-select-sm" onchange="this.form.submit()">
                     <option value="today" {{ ($filters['preset'] ?? '') === 'today' ? 'selected' : '' }}>Today</option>
@@ -44,17 +44,17 @@
             </div>
 
             @if(($filters['preset'] ?? '') === 'custom')
-                <div class="col-md-2">
+                <div class="col-6 col-md-2">
                     <label class="form-label small fw-semibold">From Date</label>
                     <input type="date" name="date_from" value="{{ $filters['date_from'] ?? '' }}" class="form-control form-control-sm">
                 </div>
-                <div class="col-md-2">
+                <div class="col-6 col-md-2">
                     <label class="form-label small fw-semibold">To Date</label>
                     <input type="date" name="date_to" value="{{ $filters['date_to'] ?? '' }}" class="form-control form-control-sm">
                 </div>
             @endif
 
-            <div class="col-md-2">
+            <div class="col-6 col-md-2">
                 <label class="form-label small fw-semibold">Crop</label>
                 <select name="crop_id" class="form-select form-select-sm" onchange="this.form.submit()">
                     <option value="">All Crops</option>
@@ -64,7 +64,7 @@
                 </select>
             </div>
 
-            <div class="col-md-2">
+            <div class="col-6 col-md-2">
                 <label class="form-label small fw-semibold">Warehouse</label>
                 <select name="warehouse_id" class="form-select form-select-sm" onchange="this.form.submit()">
                     <option value="">All Warehouses</option>
@@ -74,7 +74,7 @@
                 </select>
             </div>
 
-            <div class="col-md-2">
+            <div class="col-6 col-md-2">
                 <label class="form-label small fw-semibold">Farmer</label>
                 <select name="farmer_id" class="form-select form-select-sm" onchange="this.form.submit()">
                     <option value="">All Farmers</option>
@@ -84,7 +84,7 @@
                 </select>
             </div>
 
-            <div class="col-md-2">
+            <div class="col-6 col-md-2">
                 <label class="form-label small fw-semibold">Status</label>
                 <select name="status" class="form-select form-select-sm" onchange="this.form.submit()">
                     <option value="">All Statuses</option>
@@ -94,8 +94,8 @@
                 </select>
             </div>
 
-            <div class="col-auto">
-                <button type="submit" class="btn btn-sm btn-primary"><i class="bi bi-funnel"></i> Filter</button>
+            <div class="col-12 col-md-auto d-flex gap-2">
+                <button type="submit" class="btn btn-sm btn-primary flex-grow-1"><i class="bi bi-funnel"></i> Filter</button>
                 <a href="{{ route('reports.purchases') }}" class="btn btn-sm btn-outline-secondary" title="Reset Filters"><i class="bi bi-arrow-clockwise"></i></a>
             </div>
         </div>

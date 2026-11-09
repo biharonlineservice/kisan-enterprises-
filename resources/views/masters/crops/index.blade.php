@@ -181,7 +181,7 @@
     </div>
 
     {{-- Filter Form --}}
-    <div class="card-body p-3 bg-light-subtle border-bottom">
+    <div class="card-body p-3 bg-light-subtle border-bottom erp-filter-collapsible">
         <form method="GET" action="{{ route('crops.index') }}" class="row g-2 align-items-end" data-autosubmit>
             <input type="hidden" name="tab" value="{{ $tab }}">
 
@@ -193,7 +193,7 @@
                 </div>
             </div>
 
-            <div class="col-6 col-md-3">
+            <div class="col-12 col-md-4">
                 <label class="form-label small fw-semibold text-muted mb-1">{{ __('crops.filter_status') }}</label>
                 <select name="status" class="form-select form-select-sm">
                     <option value="">{{ __('crops.status_all') }}</option>
@@ -202,7 +202,7 @@
                 </select>
             </div>
 
-            <div class="col-6 col-md-4 d-flex gap-2">
+            <div class="col-12 col-md-3 d-flex gap-2">
                 <button type="submit" class="btn btn-sm btn-success fw-semibold shadow-sm flex-grow-1">
                     <i class="bi bi-funnel me-1"></i> {{ __('reports.apply_filter') ?? 'Filter' }}
                 </button>

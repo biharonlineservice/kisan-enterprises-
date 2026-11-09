@@ -201,11 +201,11 @@
 
 @elseif($tab === 'expenses')
     {{-- Expense Breakdown by Category --}}
-    <div class="card mb-3">
+    <div class="card mb-3 erp-filter-collapsible">
         <form method="GET" action="{{ route('reports.finance') }}" class="p-3 bg-light rounded" data-autosubmit>
             <input type="hidden" name="tab" value="expenses">
             <div class="row g-2 align-items-end">
-                <div class="col-md-3">
+                <div class="col-12 col-md-3">
                     <label class="form-label small fw-semibold">Period Preset</label>
                     <select name="preset" class="form-select form-select-sm" onchange="this.form.submit()">
                         <option value="this_month" {{ ($filters['preset'] ?? 'this_month') === 'this_month' ? 'selected' : '' }}>This Month</option>
@@ -215,8 +215,8 @@
                         <option value="all_time" {{ ($filters['preset'] ?? '') === 'all_time' ? 'selected' : '' }}>All Time</option>
                     </select>
                 </div>
-                <div class="col-auto">
-                    <button type="submit" class="btn btn-sm btn-dark"><i class="bi bi-funnel"></i> Filter</button>
+                <div class="col-12 col-md-auto d-flex gap-2">
+                    <button type="submit" class="btn btn-sm btn-dark flex-grow-1"><i class="bi bi-funnel"></i> Filter</button>
                 </div>
             </div>
         </form>
@@ -265,11 +265,11 @@
 
 @elseif($tab === 'statement')
     {{-- Cashbook / Bankbook Statement --}}
-    <div class="card mb-3">
+    <div class="card mb-3 erp-filter-collapsible">
         <form method="GET" action="{{ route('reports.finance') }}" class="p-3 bg-light rounded" data-autosubmit>
             <input type="hidden" name="tab" value="statement">
             <div class="row g-2 align-items-end">
-                <div class="col-md-3">
+                <div class="col-6 col-md-3">
                     <label class="form-label small fw-semibold">Select Account</label>
                     <select name="account_id" class="form-select form-select-sm" onchange="this.form.submit()">
                         @foreach($accounts as $acc)
@@ -279,7 +279,7 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="col-md-2">
+                <div class="col-6 col-md-2">
                     <label class="form-label small fw-semibold">Date Preset</label>
                     <select name="preset" class="form-select form-select-sm" onchange="this.form.submit()">
                         <option value="today" {{ ($filters['preset'] ?? '') === 'today' ? 'selected' : '' }}>Today</option>
@@ -289,8 +289,8 @@
                         <option value="this_fy" {{ ($filters['preset'] ?? '') === 'this_fy' ? 'selected' : '' }}>This Financial Year</option>
                     </select>
                 </div>
-                <div class="col-auto">
-                    <button type="submit" class="btn btn-sm btn-dark"><i class="bi bi-funnel"></i> View Statement</button>
+                <div class="col-12 col-md-auto d-flex gap-2">
+                    <button type="submit" class="btn btn-sm btn-dark flex-grow-1"><i class="bi bi-funnel"></i> View Statement</button>
                 </div>
             </div>
         </form>

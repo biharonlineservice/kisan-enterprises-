@@ -204,7 +204,7 @@
     </div>
 
     {{-- Filter Form --}}
-    <div class="card-body p-3 bg-light-subtle border-bottom">
+    <div class="card-body p-3 bg-light-subtle border-bottom erp-filter-collapsible">
         <form method="GET" action="{{ route('users.index') }}" class="row g-2 align-items-end" data-autosubmit>
             <input type="hidden" name="tab" value="{{ $tab }}">
 
