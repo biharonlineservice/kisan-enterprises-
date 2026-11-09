@@ -326,6 +326,30 @@ class CustomerController extends Controller
 
     private function validated(Request $request, ?Customer $customer = null): array
     {
+        $cleanUpper = static function (?string $val): ?string {
+            if ($val === null) {
+                return null;
+            }
+            $cleaned = strtoupper(preg_replace('/\s+/', '', $val));
+
+            return $cleaned !== '' ? $cleaned : null;
+        };
+
+        $gstinInput = $cleanUpper($request->input('gstin'));
+        $panInput = $cleanUpper($request->input('pan'));
+
+        if ($gstinInput && strlen($gstinInput) === 15 && !$panInput) {
+            $extractedPan = substr($gstinInput, 2, 10);
+            if (preg_match('/^[A-Z]{5}[0-9]{4}[A-Z]$/', $extractedPan)) {
+                $panInput = $extractedPan;
+            }
+        }
+
+        $request->merge([
+            'gstin' => $gstinInput,
+            'pan' => $panInput,
+        ]);
+
         return $request->validate([
             'name' => ['required', 'string', 'max:150'],
             'customer_type' => ['required', Rule::in(array_keys(Customer::TYPES))],
@@ -336,16 +360,16 @@ class CustomerController extends Controller
             'address' => ['nullable', 'string', 'max:255'],
             'city' => ['nullable', 'string', 'max:100'],
             'state' => ['nullable', 'string', 'max:100'],
-            'gstin' => ['nullable', 'regex:/^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z][1-9A-Z]Z[0-9A-Z]$/'],
-            'pan' => ['nullable', 'regex:/^[A-Z]{5}[0-9]{4}[A-Z]$/'],
+            'gstin' => ['nullable', 'regex:/^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z][0-9A-Z]{3}$/i'],
+            'pan' => ['nullable', 'regex:/^[A-Z]{5}[0-9]{4}[A-Z]$/i'],
             'credit_limit' => ['nullable', 'numeric', 'min:0'],
             'payment_terms_days' => ['required', 'integer', 'min:0', 'max:365'],
             'opening_balance' => ['nullable', 'numeric'],
             'notes' => ['nullable', 'string', 'max:1000'],
         ], [
             'mobile.regex' => 'Enter a valid 10-digit Indian mobile number.',
-            'gstin.regex' => 'Enter a valid 15-character GSTIN (capital letters).',
-            'pan.regex' => 'Enter a valid 10-character PAN (capital letters).',
+            'gstin.regex' => 'Enter a valid 15-character GSTIN (e.g. 10IYLPK1340A1Z3).',
+            'pan.regex' => 'Enter a valid 10-character PAN (e.g. IYLPK1340A).',
         ]);
     }
 }

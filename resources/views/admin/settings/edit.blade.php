@@ -361,7 +361,10 @@
                                            name="business_gstin" 
                                            value="{{ old('business_gstin', $s['business.gstin'] ?? '') }}" 
                                            class="form-control text-uppercase font-monospace @error('business_gstin') is-invalid @enderror" 
-                                           placeholder="15-character GSTIN" 
+                                           placeholder="e.g. 10IYLPK1340A1Z3" 
+                                           autocapitalize="characters"
+                                           spellcheck="false"
+                                           oninput="this.value = this.value.toUpperCase().replace(/\s+/g, ''); if (this.value.length === 15) { var panEl = document.getElementById('business_pan'); if (panEl && !panEl.value) panEl.value = this.value.substring(2, 12); }"
                                            maxlength="15">
                                     @error('business_gstin')
                                         <div class="text-danger small mt-1">{{ $message }}</div>
@@ -378,7 +381,10 @@
                                            name="business_pan" 
                                            value="{{ old('business_pan', $s['business.pan'] ?? '') }}" 
                                            class="form-control text-uppercase font-monospace @error('business_pan') is-invalid @enderror" 
-                                           placeholder="10-character PAN" 
+                                           placeholder="e.g. IYLPK1340A" 
+                                           autocapitalize="characters"
+                                           spellcheck="false"
+                                           oninput="this.value = this.value.toUpperCase().replace(/\s+/g, '')"
                                            maxlength="10">
                                     @error('business_pan')
                                         <div class="text-danger small mt-1">{{ $message }}</div>

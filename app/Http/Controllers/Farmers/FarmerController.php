@@ -287,6 +287,12 @@ class FarmerController extends Controller
 
     private function validated(Request $request, ?Farmer $farmer = null): array
     {
+        if ($request->filled('bank_ifsc')) {
+            $request->merge([
+                'bank_ifsc' => strtoupper(preg_replace('/\s+/', '', (string) $request->input('bank_ifsc'))),
+            ]);
+        }
+
         return $request->validate([
             'name' => ['required', 'string', 'max:120'],
             'mobile' => ['nullable', 'regex:/^[6-9]\d{9}$/'],
@@ -299,7 +305,7 @@ class FarmerController extends Controller
             'bank_name' => ['nullable', 'string', 'max:100'],
             'bank_branch' => ['nullable', 'string', 'max:100'],
             'bank_account_number' => ['nullable', 'string', 'max:50'],
-            'bank_ifsc' => ['nullable', 'string', 'max:20', 'regex:/^[A-Z]{4}0[A-Z0-9]{6}$/'],
+            'bank_ifsc' => ['nullable', 'string', 'max:20', 'regex:/^[A-Z]{4}0[A-Z0-9]{6}$/i'],
             'id_type' => ['nullable', 'string', 'max:30'],
             'id_number' => ['nullable', 'string', 'max:50'],
             'registration_date' => ['nullable', 'date'],

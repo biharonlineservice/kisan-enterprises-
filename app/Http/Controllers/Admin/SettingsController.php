@@ -87,6 +87,32 @@ class SettingsController extends Controller
 
     private function business(Request $request): array
     {
+        $cleanUpper = static function (?string $val): ?string {
+            if ($val === null) {
+                return null;
+            }
+            $cleaned = strtoupper(preg_replace('/\s+/', '', $val));
+
+            return $cleaned !== '' ? $cleaned : null;
+        };
+
+        $gstinInput = $cleanUpper($request->input('business_gstin'));
+        $panInput = $cleanUpper($request->input('business_pan'));
+
+        // Auto-extract 10-character PAN from characters 3–12 of valid 15-character GSTIN if PAN was left blank
+        if ($gstinInput && strlen($gstinInput) === 15 && !$panInput) {
+            $extractedPan = substr($gstinInput, 2, 10);
+            if (preg_match('/^[A-Z]{5}[0-9]{4}[A-Z]$/', $extractedPan)) {
+                $panInput = $extractedPan;
+            }
+        }
+
+        $request->merge([
+            'business_gstin' => $gstinInput,
+            'business_pan' => $panInput,
+            'business_ifsc_code' => $cleanUpper($request->input('business_ifsc_code')),
+        ]);
+
         $data = $request->validate([
             'business_name' => ['required', 'string', 'max:120'],
             'website_brand_name' => ['nullable', 'string', 'max:120'],
@@ -96,8 +122,8 @@ class SettingsController extends Controller
             'business_phone' => ['nullable', 'regex:/^[0-9+\-\s]{8,20}$/'],
             'business_alt_phone' => ['nullable', 'regex:/^[0-9+\-\s]{8,20}$/'],
             'business_email' => ['nullable', 'email', 'max:150'],
-            'business_gstin' => ['nullable', 'regex:/^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z][1-9A-Z]Z[0-9A-Z]$/'],
-            'business_pan' => ['nullable', 'regex:/^[A-Z]{5}[0-9]{4}[A-Z]$/'],
+            'business_gstin' => ['nullable', 'regex:/^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z][0-9A-Z]{3}$/i'],
+            'business_pan' => ['nullable', 'regex:/^[A-Z]{5}[0-9]{4}[A-Z]$/i'],
             'business_bank_name' => ['nullable', 'string', 'max:120'],
             'business_account_name' => ['nullable', 'string', 'max:150'],
             'business_account_number' => ['nullable', 'string', 'max:50'],
@@ -107,8 +133,8 @@ class SettingsController extends Controller
             'logo' => ['nullable', 'file', 'mimes:png,jpg,jpeg,webp', 'max:1024', 'dimensions:max_width=2000,max_height=2000'],
             'remove_logo' => ['nullable', 'boolean'],
         ], [
-            'business_gstin.regex' => 'Enter a valid 15-character GSTIN (capital letters), or leave blank if not registered.',
-            'business_pan.regex' => 'Enter a valid 10-character PAN (capital letters).',
+            'business_gstin.regex' => 'Enter a valid 15-character GSTIN (e.g. 10IYLPK1340A1Z3), or leave blank if not registered.',
+            'business_pan.regex' => 'Enter a valid 10-character PAN (e.g. IYLPK1340A).',
             'business_phone.regex' => 'Enter a valid phone number.',
             'business_alt_phone.regex' => 'Enter a valid phone number.',
         ]);
@@ -159,7 +185,13 @@ class SettingsController extends Controller
 
     private function numbering(Request $request): array
     {
-        $rule = ['required', 'string', 'max:10', 'regex:/^[A-Z0-9\-]+$/'];
+        foreach (['purchase', 'sales_order', 'sales_invoice', 'farmer_payment', 'customer_receipt', 'expense', 'farmer', 'customer'] as $key) {
+            if ($request->has($key)) {
+                $request->merge([$key => strtoupper(trim((string) $request->input($key)))]);
+            }
+        }
+
+        $rule = ['required', 'string', 'max:10', 'regex:/^[A-Z0-9\-]+$/i'];
         $data = $request->validate([
             'purchase' => $rule, 'sales_order' => $rule, 'sales_invoice' => $rule,
             'farmer_payment' => $rule, 'customer_receipt' => $rule, 'expense' => $rule,

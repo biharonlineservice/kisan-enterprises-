@@ -147,8 +147,11 @@
                                    id="gstin" 
                                    name="gstin" 
                                    value="{{ old('gstin', $customer->gstin) }}" 
-                                   class="form-control text-uppercase @error('gstin') is-invalid @enderror" 
-                                   placeholder="15-character GSTIN" 
+                                   class="form-control text-uppercase font-monospace @error('gstin') is-invalid @enderror" 
+                                   placeholder="e.g. 10IYLPK1340A1Z3" 
+                                   autocapitalize="characters"
+                                   spellcheck="false"
+                                   oninput="this.value = this.value.toUpperCase().replace(/\s+/g, ''); if (this.value.length === 15) { var panEl = document.getElementById('pan'); if (panEl && !panEl.value) panEl.value = this.value.substring(2, 12); }"
                                    maxlength="15">
                             @error('gstin')
                                 <div class="text-danger small mt-1">{{ $message }}</div>
@@ -162,8 +165,11 @@
                                    id="pan" 
                                    name="pan" 
                                    value="{{ old('pan', $customer->pan) }}" 
-                                   class="form-control text-uppercase @error('pan') is-invalid @enderror" 
-                                   placeholder="10-character PAN" 
+                                   class="form-control text-uppercase font-monospace @error('pan') is-invalid @enderror" 
+                                   placeholder="e.g. IYLPK1340A" 
+                                   autocapitalize="characters"
+                                   spellcheck="false"
+                                   oninput="this.value = this.value.toUpperCase().replace(/\s+/g, '')"
                                    maxlength="10">
                             @error('pan')
                                 <div class="text-danger small mt-1">{{ $message }}</div>

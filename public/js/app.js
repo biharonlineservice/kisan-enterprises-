@@ -114,6 +114,23 @@
         sel.addEventListener('change', function () { sel.form.submit(); });
     });
 
+    // ---- Sync real DOM value to uppercase for .text-uppercase inputs -----
+    document.addEventListener('input', function (e) {
+        var el = e.target;
+        if (!el || el.tagName !== 'INPUT' || !el.classList.contains('text-uppercase')) return;
+        var upper = el.value.toUpperCase();
+        if (el.value !== upper) {
+            var start = el.selectionStart;
+            var end = el.selectionEnd;
+            el.value = upper;
+            try {
+                if (typeof start === 'number' && typeof end === 'number') {
+                    el.setSelectionRange(start, end);
+                }
+            } catch (err) {}
+        }
+    });
+
     // ---- Mobile-Only Collapsible Filter Bars (< 768px) -------------------
     (function initMobileCollapsibleFilters() {
         var isHindi = (document.documentElement.lang || '').toLowerCase().indexOf('hi') === 0;
