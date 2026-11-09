@@ -508,20 +508,24 @@
             {{-- Right Column: Request a Bulk Supply Quotation Form --}}
             <div class="col-12 col-lg-7">
                 <div class="card prod-quote-card border-0 rounded-4 overflow-hidden">
-                    <div class="prod-quote-header text-white p-3 p-sm-4">
-                        <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
-                            <div>
-                                <span class="badge bg-white text-success rounded-pill px-3 py-1 small fw-bold mb-2">
-                                    <i class="bi bi-lightning-charge-fill me-1"></i>{{ $isHindi ? 'सीधे ट्रेडिंग डेस्क से जुड़ें' : 'Direct Commercial Desk' }}
-                                </span>
-                                <h3 class="h4 fw-bold mb-1">
+                    <div class="prod-quote-header text-white py-3 px-3 px-sm-4 d-flex justify-content-between align-items-center gap-3">
+                        <div class="d-flex align-items-center gap-3 min-w-0">
+                            <span class="ke-header-icon">
+                                <i class="bi bi-send-check-fill"></i>
+                            </span>
+                            <div class="ke-header-text min-w-0">
+                                <h3 class="h5 fw-bold text-white mb-0">
                                     {{ $isHindi ? 'थोक अनाज आपूर्ति कोटेशन का अनुरोध करें' : 'Request a Bulk Supply Quotation' }}
                                 </h3>
-                                <p class="small text-white-50 mb-0">
-                                    {{ $isHindi ? 'वर्तमान लॉट उपलब्धता, एक्स-गोदाम भाव और डिस्पैच शेड्यूल के लिए नीचे विवरण भरें।' : 'Connect with our commercial trading desk for current lot availability, ex-godown rates, and dispatch timelines.' }}
-                                </p>
+                                <small class="text-white-50 d-block" style="font-size: 0.76rem;">
+                                    {{ $isHindi ? 'वर्तमान लॉट उपलब्धता, एक्स-गोदाम भाव और डिस्पैच शेड्यूल के लिए नीचे विवरण भरें।' : 'Connect with our trading desk for lot availability, ex-godown rates & dispatch schedules' }}
+                                </small>
                             </div>
                         </div>
+                        <span class="ke-live-badge flex-shrink-0">
+                            <span class="live-pulse-dot"></span>
+                            <span>{{ $isHindi ? 'ट्रेडिंग डेस्क' : 'Direct Desk' }}</span>
+                        </span>
                     </div>
 
                     <div class="card-body p-3 p-sm-4 p-md-5 bg-white">
@@ -677,8 +681,8 @@
         color: #1e8449;
     }
     .prod-hero-title {
-        font-size: clamp(1.7rem, 3.3vw, 2.55rem);
-        line-height: 1.2;
+        font-size: 1.9rem;
+        line-height: 1.24;
         letter-spacing: -0.02em;
     }
     .prod-lead {

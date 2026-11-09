@@ -519,8 +519,8 @@
         letter-spacing: 0.5px;
     }
     .proc-hero-title {
-        font-size: clamp(1.7rem, 3.3vw, 2.5rem);
-        line-height: 1.22;
+        font-size: 1.9rem;
+        line-height: 1.24;
         letter-spacing: -0.02em;
     }
     .proc-lead {

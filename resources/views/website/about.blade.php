@@ -39,7 +39,7 @@
                     @endif
                 </p>
 
-                <div class="about-cta-group mb-3">
+                <div class="about-cta-group mb-4">
                     <a href="{{ route('home') }}#price-trend" class="btn btn-primary about-cta-btn shadow-sm">
                         <i class="bi bi-graph-up-arrow"></i>
                         <span>{{ $isHindi ? 'आज का फसल खरीद भाव देखें' : "Check Today's Crop Rates" }}</span>
@@ -53,56 +53,125 @@
                         <span>{{ __('website.nav.contact') }}</span>
                     </a>
                 </div>
+
+                {{-- Verified Mandi Credentials & Operations Strip --}}
+                <div class="p-3 rounded-4 bg-white border shadow-sm">
+                    <div class="small fw-bold text-dark mb-2">
+                        <i class="bi bi-patch-check-fill text-success me-1"></i>
+                        {{ $isHindi ? 'हमारी प्रमाणित व्यापारिक पहचान:' : 'Verified Mandi Operations & Credentials:' }}
+                    </div>
+                    <div class="d-flex flex-wrap gap-2">
+                        <span class="badge bg-light text-dark border px-3 py-2 fw-normal">
+                            <i class="bi bi-speedometer2 text-success me-1"></i>{{ $isHindi ? 'विधिक माप विज्ञान प्रमाणित धर्मकांटा' : 'Certified Digital Weighbridge' }}
+                        </span>
+                        <span class="badge bg-light text-dark border px-3 py-2 fw-normal">
+                            <i class="bi bi-bank2 text-primary me-1"></i>{{ $isHindi ? 'उसी दिन RTGS / NEFT / नकद भुगतान' : 'Same-Day RTGS / NEFT Payout' }}
+                        </span>
+                        <span class="badge bg-light text-dark border px-3 py-2 fw-normal">
+                            <i class="bi bi-file-earmark-check text-warning-emphasis me-1"></i>{{ $isHindi ? 'GST एवं ई-वे बिल थोक डिस्पैच' : 'GST & E-Way Bill Compliant' }}
+                        </span>
+                    </div>
+                </div>
             </div>
 
-            {{-- 2x2 Impact Metrics Grid --}}
+            {{-- Right Column: Enterprise Snapshot Card with 2x2 Impact Metrics --}}
             <div class="col-12 col-lg-5">
-                <div class="row g-3">
-                    <div class="col-6">
-                        <div class="about-stat-card">
-                            <div class="about-stat-icon bg-success-subtle text-success">
-                                <i class="bi bi-speedometer2"></i>
+                <div class="card promise-card border-0 overflow-hidden">
+                    <div class="promise-header text-white py-3 px-3 px-sm-4 d-flex justify-content-between align-items-center gap-3">
+                        <div class="d-flex align-items-center gap-3 min-w-0">
+                            <span class="ke-header-icon">
+                                <i class="bi bi-buildings-fill"></i>
+                            </span>
+                            <div class="ke-header-text min-w-0">
+                                <div class="fw-bold text-white lh-sm">{{ $isHindi ? 'संस्था एक नज़र में (Key Highlights)' : $bizName . ' At a Glance' }}</div>
+                                <small class="text-white-50 d-block" style="font-size: 0.75rem;">
+                                    {{ $isHindi ? 'प्रमाणित धर्मकांटा, गोदाम क्षमता एवं खरीद नेटवर्क' : 'Verified infrastructure & farmer procurement metrics' }}
+                                </small>
                             </div>
-                            <div class="about-stat-val">100%</div>
-                            <div class="about-stat-lbl">{{ $isHindi ? 'डिजिटल धर्मकांटा तौल' : 'Computerized Weighbridge' }}</div>
+                        </div>
+                        <span class="ke-live-badge flex-shrink-0">
+                            <span class="live-pulse-dot"></span>
+                            <span>{{ $isHindi ? 'सक्रिय मंडी' : 'Verified Hub' }}</span>
+                        </span>
+                    </div>
+
+                    <div class="card-body p-3 p-sm-4 bg-white">
+                        <div class="row g-2 mb-3">
+                            <div class="col-6">
+                                <div class="about-stat-card">
+                                    <div class="d-flex align-items-center justify-content-between mb-2">
+                                        <div class="about-stat-icon bg-success-subtle text-success mb-0">
+                                            <i class="bi bi-speedometer2"></i>
+                                        </div>
+                                        <span class="badge bg-success-subtle text-success rounded-pill" style="font-size: 0.68rem;">{{ $isHindi ? 'सत्यापित' : 'Certified' }}</span>
+                                    </div>
+                                    <div class="about-stat-val">100%</div>
+                                    <div class="about-stat-lbl">{{ $isHindi ? 'डिजिटल धर्मकांटा तौल' : 'Computerized Weighbridge' }}</div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="about-stat-card">
+                                    <div class="d-flex align-items-center justify-content-between mb-2">
+                                        <div class="about-stat-icon bg-primary-subtle text-primary mb-0">
+                                            <i class="bi bi-layers-fill"></i>
+                                        </div>
+                                        <span class="badge bg-primary-subtle text-primary rounded-pill" style="font-size: 0.68rem;">{{ $warehouses->count() ?: 3 }} {{ $isHindi ? 'गोदाम' : 'Depots' }}</span>
+                                    </div>
+                                    <div class="about-stat-val tabular-nums">
+                                        {{ $totalCapacityQtl > 0 ? indian_number($totalCapacityQtl, 0) : '24,000' }}+
+                                    </div>
+                                    <div class="about-stat-lbl">{{ $isHindi ? 'क्विंटल गोदाम क्षमता' : 'Quintals Storage Capacity' }}</div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="about-stat-card">
+                                    <div class="d-flex align-items-center justify-content-between mb-2">
+                                        <div class="about-stat-icon bg-info-subtle text-info-emphasis mb-0">
+                                            <i class="bi bi-basket2-fill"></i>
+                                        </div>
+                                        <span class="badge bg-info-subtle text-info-emphasis rounded-pill" style="font-size: 0.68rem;">{{ $isHindi ? 'खरीफ व रबी' : 'Year-Round' }}</span>
+                                    </div>
+                                    <div class="about-stat-val tabular-nums">
+                                        {{ $crops->count() }} {{ $isHindi ? 'फसलें' : 'Crops' }}
+                                    </div>
+                                    <div class="about-stat-lbl">
+                                        {{ $varietiesCount > 0 ? ($isHindi ? "{$varietiesCount}+ प्रमाणित किस्में" : "{$varietiesCount}+ Traded Varieties") : ($isHindi ? 'प्रमुख अनाज व तिलहन' : 'Major Grains & Oilseeds') }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="about-stat-card">
+                                    <div class="d-flex align-items-center justify-content-between mb-2">
+                                        <div class="about-stat-icon bg-warning-subtle text-warning-emphasis mb-0">
+                                            <i class="bi bi-lightning-charge-fill"></i>
+                                        </div>
+                                        <span class="badge bg-warning-subtle text-warning-emphasis rounded-pill" style="font-size: 0.68rem;">{{ $isHindi ? 'गारंटीड' : 'Guaranteed' }}</span>
+                                    </div>
+                                    <div class="about-stat-val">
+                                        {{ $bonusEnabled ? '+' . $bonusRateFormatted . '%' : ($isHindi ? 'तुरंत' : 'Same-Day') }}
+                                    </div>
+                                    <div class="about-stat-lbl">
+                                        {{ $bonusEnabled ? ($isHindi ? 'देरी भुगतान पर अतिरिक्त बोनस' : 'Delayed Payment Bonus') : ($isHindi ? 'सीधा बैंक/नकद भुगतान' : 'Direct Bank Settlement') }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="rounded-3 bg-light border p-2 px-3 small d-flex align-items-center justify-content-between gap-2">
+                            <span class="text-muted">
+                                <i class="bi bi-clock-history text-success me-1"></i>{{ $isHindi ? 'धर्मकांटा समय:' : 'Weighbridge Hours:' }}
+                            </span>
+                            <strong class="text-dark">8:00 AM – 7:30 PM</strong>
                         </div>
                     </div>
-                    <div class="col-6">
-                        <div class="about-stat-card">
-                            <div class="about-stat-icon bg-primary-subtle text-primary">
-                                <i class="bi bi-layers-fill"></i>
-                            </div>
-                            <div class="about-stat-val tabular-nums">
-                                {{ $totalCapacityQtl > 0 ? indian_number($totalCapacityQtl, 0) : '24,000' }}+
-                            </div>
-                            <div class="about-stat-lbl">{{ $isHindi ? 'क्विंटल गोदाम क्षमता' : 'Quintals Storage Capacity' }}</div>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="about-stat-card">
-                            <div class="about-stat-icon bg-info-subtle text-info-emphasis">
-                                <i class="bi bi-basket2-fill"></i>
-                            </div>
-                            <div class="about-stat-val tabular-nums">
-                                {{ $crops->count() }} {{ $isHindi ? 'फसलें' : 'Crops' }}
-                            </div>
-                            <div class="about-stat-lbl">
-                                {{ $varietiesCount > 0 ? ($isHindi ? "{$varietiesCount}+ प्रमाणित किस्में" : "{$varietiesCount}+ Traded Varieties") : ($isHindi ? 'प्रमुख अनाज व तिलहन' : 'Major Grains & Oilseeds') }}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="about-stat-card">
-                            <div class="about-stat-icon bg-warning-subtle text-warning-emphasis">
-                                <i class="bi bi-lightning-charge-fill"></i>
-                            </div>
-                            <div class="about-stat-val">
-                                {{ $bonusEnabled ? '+' . $bonusRateFormatted . '%' : ($isHindi ? 'तुरंत' : 'Same-Day') }}
-                            </div>
-                            <div class="about-stat-lbl">
-                                {{ $bonusEnabled ? ($isHindi ? 'देरी भुगतान पर अतिरिक्त बोनस' : 'Delayed Payment Bonus') : ($isHindi ? 'सीधा बैंक/नकद भुगतान' : 'Direct Bank Settlement') }}
-                            </div>
-                        </div>
+
+                    <div class="card-footer bg-light border-top px-3 px-sm-4 py-2 d-flex justify-content-between align-items-center small">
+                        <span class="text-muted" style="font-size: 0.74rem;">
+                            <i class="bi bi-geo-alt-fill text-success me-1"></i>{{ setting('business.district', 'Chandauli') }}, {{ setting('business.state', 'UP') }}
+                        </span>
+                        <a href="{{ route('website.procurement') }}" class="fw-semibold text-primary text-decoration-none">
+                            {{ $isHindi ? 'फसल विक्रय प्रक्रिया →' : 'How to Sell →' }}
+                        </a>
                     </div>
                 </div>
             </div>
@@ -113,7 +182,7 @@
 {{-- Our Mission & The Kisan Promise --}}
 <section class="py-4 py-md-5 bg-white border-bottom">
     <div class="container py-2 py-md-3">
-        <div class="row g-4 g-lg-5 align-items-center">
+        <div class="row g-4 g-lg-5 align-items-start">
             <div class="col-12 col-lg-6">
                 <span class="about-section-eyebrow">
                     <i class="bi bi-compass me-1"></i>{{ $isHindi ? 'हमारा उद्देश्य एवं कार्यप्रणाली' : 'Our Mission & Approach' }}
@@ -164,13 +233,21 @@
             {{-- Right: Elevated Kisan Promise Card --}}
             <div class="col-12 col-lg-6">
                 <div class="card promise-card border-0 overflow-hidden">
-                    <div class="promise-header text-white py-3 px-4 d-flex justify-content-between align-items-center">
-                        <div class="d-flex align-items-center gap-2">
-                            <i class="bi bi-shield-check fs-4"></i>
-                            <span class="fw-bold">{{ $isHindi ? 'हमारा पक्का वादा (The Kisan Promise)' : 'The Kisan Promise' }}</span>
+                    <div class="promise-header text-white py-3 px-3 px-sm-4 d-flex justify-content-between align-items-center gap-3">
+                        <div class="d-flex align-items-center gap-3 min-w-0">
+                            <span class="ke-header-icon">
+                                <i class="bi bi-shield-fill-check"></i>
+                            </span>
+                            <div class="ke-header-text min-w-0">
+                                <div class="fw-bold text-white lh-sm">{{ $isHindi ? 'हमारा पक्का वादा (The Kisan Promise)' : 'The Kisan Promise' }}</div>
+                                <small class="text-white-50 d-block" style="font-size: 0.75rem;">
+                                    {{ $isHindi ? 'हर किसान और मिल खरीदार के लिए 4-स्तरीय गारंटी' : 'Our 4-point guarantee for every farmer & mill buyer' }}
+                                </small>
+                            </div>
                         </div>
-                        <span class="badge bg-white text-success rounded-pill px-2 py-1 small fw-bold">
-                            {{ $isHindi ? '100% पारदर्शी' : '100% Verified' }}
+                        <span class="ke-live-badge flex-shrink-0">
+                            <span class="live-pulse-dot"></span>
+                            <span>{{ $isHindi ? '100% पारदर्शी' : '100% Verified' }}</span>
                         </span>
                     </div>
                     <div class="card-body p-3 p-sm-4 bg-white">
@@ -283,7 +360,7 @@
 {{-- Trade Supply Chain Bridge + Godown Infrastructure --}}
 <section class="py-4 py-md-5 bg-white">
     <div class="container py-2 py-md-3">
-        <div class="row g-4 align-items-center mb-4 pb-2">
+        <div class="row g-4 g-lg-5 align-items-start mb-4 pb-2">
             <div class="col-12 col-lg-6">
                 <span class="about-section-eyebrow">{{ $isHindi ? 'मंडी एवं गोदाम नेटवर्क' : 'Storage & Logistics Network' }}</span>
                 <h2 class="h3 fw-bold mt-1 mb-2">{{ $isHindi ? 'सुरक्षित भंडारण एवं सीधा डिस्पैच नेटवर्क' : 'Verified Godowns & Direct Mill Dispatch' }}</h2>
@@ -370,8 +447,8 @@
         letter-spacing: 0.5px;
     }
     .about-hero-title {
-        font-size: clamp(1.7rem, 3.3vw, 2.55rem);
-        line-height: 1.22;
+        font-size: 1.9rem;
+        line-height: 1.24;
         letter-spacing: -0.02em;
     }
     .about-lead {
@@ -430,37 +507,37 @@
         }
     }
     .about-stat-card {
-        background: #ffffff;
-        border: 1px solid var(--ke-border);
-        border-radius: 16px;
-        padding: 1.15rem;
+        background: #f6fbf8;
+        border: 1px solid rgba(33, 134, 75, 0.16);
+        border-radius: 13px;
+        padding: 0.85rem 0.95rem;
         height: 100%;
-        box-shadow: 0 8px 22px rgba(21, 91, 54, 0.06);
-        transition: transform 0.2s ease;
+        transition: border-color 0.2s ease, background-color 0.2s ease;
     }
     .about-stat-card:hover {
-        transform: translateY(-3px);
+        background: #eef8f2;
+        border-color: rgba(33, 134, 75, 0.35);
     }
     .about-stat-icon {
-        width: 40px;
-        height: 40px;
+        width: 36px;
+        height: 36px;
         border-radius: 10px;
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        font-size: 1.2rem;
-        margin-bottom: 0.65rem;
+        font-size: 1.08rem;
+        margin-bottom: 0.5rem;
     }
     .about-stat-val {
-        font-size: 1.4rem;
+        font-size: 1.25rem;
         font-weight: 800;
         color: #1e293b;
         line-height: 1.15;
     }
     .about-stat-lbl {
-        font-size: 0.76rem;
-        color: #64748b;
-        margin-top: 0.2rem;
+        font-size: 0.74rem;
+        color: #5b6d62;
+        margin-top: 0.18rem;
         line-height: 1.3;
     }
     .promise-card {

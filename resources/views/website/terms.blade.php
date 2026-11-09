@@ -17,7 +17,7 @@
                     <i class="bi bi-file-earmark-ruled-fill text-success"></i>
                     <span>{{ $isHindi ? 'मंडी खरीद एवं थोक आपूर्ति नियम' : 'Standard Mandi & B2B Trade Governance' }}</span>
                 </div>
-                <h1 class="fw-bold text-dark mb-2" style="font-size: clamp(1.65rem, 3vw, 2.25rem); letter-spacing: -0.02em;">
+                <h1 class="fw-bold text-dark mb-2" style="font-size: 1.9rem; line-height: 1.24; letter-spacing: -0.02em;">
                     {{ $isHindi ? 'व्यापार की शर्तें (Terms of Trade)' : 'Commercial Terms of Trade' }}
                 </h1>
                 <p class="text-muted mb-0">

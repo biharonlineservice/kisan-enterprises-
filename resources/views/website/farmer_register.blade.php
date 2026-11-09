@@ -19,7 +19,7 @@
                     <i class="bi bi-person-check-fill text-success"></i>
                     <span>{{ $isHindi ? 'आधिकारिक किसान नामांकन पोर्टल' : 'Official Farmer Enrollment Portal' }}</span>
                 </div>
-                <h1 class="fw-bold text-dark mb-2" style="font-size: clamp(1.65rem, 3vw, 2.25rem); letter-spacing: -0.02em;">
+                <h1 class="fw-bold text-dark mb-2" style="font-size: 1.9rem; line-height: 1.24; letter-spacing: -0.02em;">
                     {{ $isHindi ? 'किसान ऑनलाइन पंजीकरण (Farmer ID)' : 'Farmer Online Registration' }}
                 </h1>
                 <p class="text-muted mb-0" style="max-width: 660px; font-size: 0.98rem;">

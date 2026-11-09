@@ -17,7 +17,7 @@
                     <i class="bi bi-shield-lock-fill text-success"></i>
                     <span>{{ $isHindi ? 'डेटा सुरक्षा एवं गोपनीयता मानक' : 'Data Protection & Governance' }}</span>
                 </div>
-                <h1 class="fw-bold text-dark mb-2" style="font-size: clamp(1.65rem, 3vw, 2.25rem); letter-spacing: -0.02em;">
+                <h1 class="fw-bold text-dark mb-2" style="font-size: 1.9rem; line-height: 1.24; letter-spacing: -0.02em;">
                     {{ $isHindi ? 'गोपनीयता नीति (Privacy Policy)' : 'Privacy Policy & Data Governance' }}
                 </h1>
                 <p class="text-muted mb-0">

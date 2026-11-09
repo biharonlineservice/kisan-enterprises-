@@ -306,18 +306,24 @@
             {{-- Right Column: Interactive Online Inquiry Form --}}
             <div class="col-12 col-lg-7">
                 <div class="card cnt-form-card border-0 rounded-4 overflow-hidden bg-white">
-                    <div class="card-header bg-white border-bottom p-3 p-sm-4">
-                        <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
-                            <div>
-                                <h3 class="h4 fw-bold text-dark mb-1 d-flex align-items-center gap-2">
-                                    <i class="bi bi-chat-left-text-fill text-success"></i>
+                    <div class="ke-card-header-dark py-3 px-3 px-sm-4 d-flex justify-content-between align-items-center gap-3">
+                        <div class="d-flex align-items-center gap-3 min-w-0">
+                            <span class="ke-header-icon">
+                                <i class="bi bi-chat-left-text-fill"></i>
+                            </span>
+                            <div class="ke-header-text min-w-0">
+                                <h3 class="h5 fw-bold text-white mb-0">
                                     {{ $isHindi ? 'हमें ऑनलाइन संदेश / पूछताछ भेजें' : 'Send Us an Inquiry' }}
                                 </h3>
-                                <p class="text-muted small mb-0">
-                                    {{ $isHindi ? 'नीचे अपना विवरण भरें — हमारी संबंधित मंडी टीम शीघ्र ही आपसे संपर्क करेगी।' : 'Fill out the details below and our trading desk will respond promptly.' }}
-                                </p>
+                                <small class="text-white-50 d-block" style="font-size: 0.76rem;">
+                                    {{ $isHindi ? 'नीचे अपना विवरण भरें — हमारी संबंधित मंडी टीम शीघ्र ही आपसे संपर्क करेगी।' : 'Fill out the details below and our trading desk will respond promptly' }}
+                                </small>
                             </div>
                         </div>
+                        <span class="ke-live-badge flex-shrink-0">
+                            <span class="live-pulse-dot"></span>
+                            <span>{{ $isHindi ? 'त्वरित उत्तर' : 'Fast Reply' }}</span>
+                        </span>
                     </div>
 
                     <div class="card-body p-3 p-sm-4 p-md-5">
@@ -523,8 +529,8 @@
         color: #1e8449;
     }
     .cnt-hero-title {
-        font-size: clamp(1.7rem, 3.3vw, 2.55rem);
-        line-height: 1.2;
+        font-size: 1.9rem;
+        line-height: 1.24;
         letter-spacing: -0.02em;
     }
     .cnt-lead {
